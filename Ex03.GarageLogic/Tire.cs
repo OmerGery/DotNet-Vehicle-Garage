@@ -11,6 +11,21 @@ namespace Ex03.GarageLogic
         private float m_CurrentPsiTirePressure;
         private float m_MaxPsiTirePressure;
 
+        public float MaxPsiTirePressure
+        {
+            get
+            {
+                return m_MaxPsiTirePressure;
+            }
+        }
+
+        public float CurrentPsiTirePressure
+        {
+            get
+            {
+                return m_CurrentPsiTirePressure;
+            }
+        }
         public void PumpTire(float i_PsiOfAirToAdd)
         {
             // CHECK STUFFFFFF EXCEPTION!!!!

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class Truck : FuelVehicle
+    public abstract class Truck : FuelVehicle
     {
-        private bool m_ContainsToxic;
-        private float m_MaxCarryWeight;
+        protected bool m_ContainsToxic;
+        protected float m_MaxCarryWeight;
     }
 }

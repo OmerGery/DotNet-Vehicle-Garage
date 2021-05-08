@@ -11,5 +11,19 @@ namespace Ex03.GarageLogic
         private string m_LicenseNumber;
         private float m_EnergyPercentageLeft;
         private List<Tire> m_Tires;
+        public string LicenseNumber
+        {
+            get
+            {
+                return m_LicenseNumber;
+            }
+        }
+        public List<Tire> Tires
+        {
+            get
+            {
+                return m_Tires;
+            }
+        }
     }
 }
