@@ -11,6 +11,11 @@ namespace Ex03.GarageLogic
         private float m_CurrentPsiTirePressure;
         private float m_MaxPsiTirePressure;
 
+        public Tire(string i_ManufacturerName, float i_MaxPsiTirePressure)
+        {
+            m_ManufacturerName = i_ManufacturerName;
+            m_MaxPsiTirePressure = m_CurrentPsiTirePressure = i_MaxPsiTirePressure;
+        }
         public float MaxPsiTirePressure
         {
             get
@@ -24,6 +29,10 @@ namespace Ex03.GarageLogic
             get
             {
                 return m_CurrentPsiTirePressure;
+            }
+            set
+            {
+                m_CurrentPsiTirePressure = value;
             }
         }
         public void PumpTire(float i_PsiOfAirToAdd)

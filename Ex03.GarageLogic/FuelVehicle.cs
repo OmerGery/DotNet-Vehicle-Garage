@@ -17,6 +17,12 @@ namespace Ex03.GarageLogic
 
         private float m_LitersOfFuelLeft;
         private float m_MaxFuelLitersCapacity;
+        private eFuelType m_fuelType;
+
+        //public FuelVehicle(eFuelType i_FuelType, float i_MaxFuelLitersCapacity) : base()
+        //{
+            
+        //}
         public void Refuel(float i_LitersOfFuelToAdd, eFuelType i_FuelType)
         {
             /// !!!! EXCEPTIONS 
