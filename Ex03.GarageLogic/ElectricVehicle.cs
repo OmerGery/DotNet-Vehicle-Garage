@@ -7,19 +7,20 @@ namespace Ex03.GarageLogic
 {
     public abstract class ElectricVehicle : Vehicle
     {
-        private float m_HoursOfBatteryLeft;
+        private float m_CurrentHoursOfBatteryLeft;
         private float m_MaxHoursOfBattery;
 
-        public ElectricVehicle(float i_MaxHoursOfBattery, string i_ModelName, string i_LicenseNumber, float i_EnergyPercentageLeft, int i_TirePressure, int i_AmountOfTire) : 
-            base(i_ModelName,  i_LicenseNumber, i_EnergyPercentageLeft, i_TirePressure,  i_AmountOfTire)
+        public ElectricVehicle(float i_MaxHoursOfBattery, string i_ModelName, string i_LicenseNumber, float i_HoursOfBatteryLeft, int i_TirePressure, int i_AmountOfTire) : 
+            base(i_ModelName,  i_LicenseNumber, (i_HoursOfBatteryLeft/i_MaxHoursOfBattery) * 100, i_TirePressure,  i_AmountOfTire)
         {
-
+            m_CurrentHoursOfBatteryLeft = i_HoursOfBatteryLeft;
+            m_MaxHoursOfBattery = i_MaxHoursOfBattery;
         }
 
         public void ChargeBattery(float i_HoursToCharge)
         {
             // EXCEPTION CHECK ! ! ! 
-            m_HoursOfBatteryLeft += i_HoursToCharge;
+            m_CurrentHoursOfBatteryLeft += i_HoursToCharge;
         }
 
     }

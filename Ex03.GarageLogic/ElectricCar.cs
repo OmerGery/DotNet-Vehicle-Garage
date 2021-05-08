@@ -12,8 +12,8 @@ namespace Ex03.GarageLogic
         private const float k_MaxHoursOfBattery = (float)3.2;
         private Car m_Car;
 
-        public ElectricCar(string i_ModelName, string i_LicenseNumber, float i_EnergyPercentageLeft)
-            : base(k_MaxHoursOfBattery, i_ModelName, i_LicenseNumber, i_EnergyPercentageLeft, k_PsiOfWheels, k_AmountOfWheels)
+        public ElectricCar(string i_ModelName, string i_LicenseNumber, float i_HoursOfBatteryLeft)
+            : base(k_MaxHoursOfBattery, i_ModelName, i_LicenseNumber, i_HoursOfBatteryLeft, k_PsiOfWheels, k_AmountOfWheels)
         {
 
         }
