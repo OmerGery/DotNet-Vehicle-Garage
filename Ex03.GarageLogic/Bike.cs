@@ -7,8 +7,6 @@ namespace Ex03.GarageLogic
 {
     public class Bike
     {
-
-
         private GarageEnums.eBikeLicenceType m_LicenceType;
         private int m_EngineCcVolume;
 
