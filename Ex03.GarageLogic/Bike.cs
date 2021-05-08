@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public abstract class Bike
     {
-        public enum eLicenceType
+        private enum eLicenceType
         {
             A,
             B1,
