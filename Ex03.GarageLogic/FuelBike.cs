@@ -11,9 +11,10 @@ namespace Ex03.GarageLogic
         private const int k_PsiOfWheels = 30;
         private Bike m_Bike;
 
-        //public FuelBike() : base(eFuelType.Octan98,k_AmountOfWheels,k_PsiOfWheels)
-        //{
-        //        m_Bike = new Bike
-        //}
+        public FuelBike(GarageEnums.eFuelType i_FuelType, float i_MaxFuelLitersCapacity, string i_ModelName, string i_LicenseNumber, float i_EnergyPercentageLeft) :
+            base(GarageEnums.eFuelType.Octan98, i_MaxFuelLitersCapacity,  i_ModelName,  i_LicenseNumber,  i_EnergyPercentageLeft,  k_PsiOfWheels, k_AmountOfWheels)
+        {
+            m_Bike = new Bike(GarageEnums.eBikeLicenceType.A, 125);
+        }
     }
 }

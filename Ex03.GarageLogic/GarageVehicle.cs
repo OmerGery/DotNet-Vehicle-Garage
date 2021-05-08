@@ -9,17 +9,12 @@ namespace Ex03.GarageLogic
     {
         private string m_OwnerName;
         private string m_PhoneNumber;
-        public enum eFixState
-        {
-            BeingFixed,
-            Fixed,
-            Payed
-        }
 
-        private eFixState m_FixState;
+
+        private GarageEnums.eFixState m_FixState;
         private Vehicle m_VehicleInGarage;
 
-        public eFixState FixState
+        public GarageEnums.eFixState FixState
         {
             get
             {

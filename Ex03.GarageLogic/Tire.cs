@@ -16,11 +16,27 @@ namespace Ex03.GarageLogic
             m_ManufacturerName = i_ManufacturerName;
             m_MaxPsiTirePressure = m_CurrentPsiTirePressure = i_MaxPsiTirePressure;
         }
+
+        public string ManufacturerName
+        {
+            get
+            {
+                return m_ManufacturerName;
+            }
+            set
+            {
+                m_ManufacturerName = value;
+            }
+        }
         public float MaxPsiTirePressure
         {
             get
             {
                 return m_MaxPsiTirePressure;
+            }
+            set
+            {
+                m_MaxPsiTirePressure = value;
             }
         }
 

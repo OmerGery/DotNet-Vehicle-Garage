@@ -5,6 +5,44 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
+    public class GarageEnums
+    {
+        public enum eFixState
+        {
+            BeingFixed,
+            Fixed,
+            Payed
+        }
+        public enum eFuelType
+        {
+            Soler,
+            Octan96,
+            Octan95,
+            Octan98
+        }
+        public enum eNumberOfDoors
+        {
+            Two = 2,
+            Three,
+            Four,
+            Five
+        }
+        public enum eColor
+        {
+            Red,
+            Silver,
+            White,
+            Black
+        }
+        public enum eBikeLicenceType
+        {
+            A,
+            B1,
+            AA,
+            BB
+        }
+
+    }
     public class Garage
     {
         private Dictionary <string,GarageVehicle> m_GarageVehicles;
@@ -15,7 +53,7 @@ namespace Ex03.GarageLogic
             m_GarageVehicles.Add(i_NewVehicle.VehicleInGarage.LicenseNumber, i_NewVehicle);
         }
 
-        public List<Vehicle> GetGarageVehiclesByFixState(GarageVehicle.eFixState i_FixState)
+        public List<Vehicle> GetGarageVehiclesByFixState(GarageEnums.eFixState i_FixState)
         {
             List<Vehicle> vechilesWithRequestedFixState = new List<Vehicle>();
             foreach (KeyValuePair<string, GarageVehicle> garageVehicle in m_GarageVehicles)
@@ -39,7 +77,7 @@ namespace Ex03.GarageLogic
 
             return allVehicles;
         }
-        public void ChangeVehicleState(string i_LicenseNumber , GarageVehicle.eFixState i_FixState)
+        public void ChangeVehicleState(string i_LicenseNumber , GarageEnums.eFixState i_FixState)
         {
             m_GarageVehicles[i_LicenseNumber].FixState = i_FixState;
         }
@@ -54,7 +92,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void RefuelVehicle(string i_LicenseNumber,FuelVehicle.eFuelType i_FuelType,float i_LitersOfFuelToAdd)
+        public void RefuelVehicle(string i_LicenseNumber,GarageEnums.eFuelType i_FuelType,float i_LitersOfFuelToAdd)
         {
             FuelVehicle vehicleToRefuel = m_GarageVehicles[i_LicenseNumber].VehicleInGarage as FuelVehicle;
             vehicleToRefuel.Refuel(i_LitersOfFuelToAdd, i_FuelType);

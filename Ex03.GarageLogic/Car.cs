@@ -5,22 +5,15 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public abstract class Car
+    public class Car
     {
-        private enum eColor
-        {
-            Red,
-            Silver,
-            White,
-            Black
-        }
+        private GarageEnums.eColor m_CarColor;
+        private GarageEnums.eNumberOfDoors m_NumberOfDoors;
 
-        private enum eNumberOfDoors
+        public Car(GarageEnums.eColor i_CarColor,GarageEnums.eNumberOfDoors i_NumberOfDoors)
         {
-            Two = 2,
-            Three,
-            Four,
-            Five
+            m_CarColor = i_CarColor;
+            m_NumberOfDoors = i_NumberOfDoors;
         }
     }
 }
