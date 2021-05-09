@@ -27,7 +27,9 @@ namespace Ex03.GarageLogic
         }
         public static ElectricBike ElectricBikeBuilder(GarageEnums.eBikeLicenceType i_BikeLicenseType, int i_EngineCcVolume, string i_ModelName, string i_LicenseNumber, float i_HoursOfBatteryLeft, string i_TireManufacturerName, int i_CurrentTirePressure)
         {
-            return new ElectricBike(i_BikeLicenseType, i_EngineCcVolume, i_ModelName, i_LicenseNumber, i_HoursOfBatteryLeft, i_TireManufacturerName, i_CurrentTirePressure);
+            return new ElectricBike(
+                i_BikeLicenseType, i_EngineCcVolume, 
+                i_ModelName, i_LicenseNumber, i_TireManufacturerName, i_CurrentTirePressure, i_HoursOfBatteryLeft);
         }
         public static FuelBike FuelBikeBuilder(GarageEnums.eFuelType i_FuelType, GarageEnums.eBikeLicenceType i_BikeLicenseType, int i_EngineCcVolume, string i_ModelName, string i_LicenseNumber, float i_HoursOfBatteryLeft, string i_TireManufacturerName, int i_CurrentTirePressure)
         {

@@ -47,12 +47,26 @@ namespace Ex03.GarageLogic
     {
         private Dictionary <string,GarageVehicle> m_GarageVehicles;
 
+        public Garage()
+        {
+            m_GarageVehicles = new Dictionary<string, GarageVehicle>();
+        }
         public void AddVehicle(GarageVehicle i_NewVehicle)
         {
             // to add exception , to check
             m_GarageVehicles.Add(i_NewVehicle.VehicleInGarage.LicenseNumber, i_NewVehicle);
         }
 
+        public void AddElectricBike(string i_OwnerPhone, string i_OwnerName, float i_HoursOfBatteryLeft,int i_EngineVolume,GarageEnums.eBikeLicenceType i_LicenseType, 
+                                    string i_LicenseNumber, string i_ModelName, string i_WheelManufacturer, int i_CurrentPsi)//, float i_MaxPsi)
+        {
+            ElectricBike bikeToAdd = VehicleBuilder.ElectricBikeBuilder(
+                i_LicenseType,
+                i_EngineVolume, i_ModelName, i_LicenseNumber, i_HoursOfBatteryLeft, i_WheelManufacturer,
+                i_CurrentPsi);
+            GarageVehicle bikeAsGarageVehicle = new GarageVehicle(i_OwnerName, i_OwnerPhone, bikeToAdd);
+            AddVehicle(bikeAsGarageVehicle);
+        }
         public List<Vehicle> GetGarageVehiclesByFixState(GarageEnums.eFixState i_FixState)
         {
             List<Vehicle> vechilesWithRequestedFixState = new List<Vehicle>();

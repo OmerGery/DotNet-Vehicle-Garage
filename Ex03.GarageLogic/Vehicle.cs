@@ -12,14 +12,14 @@ namespace Ex03.GarageLogic
         private float m_EnergyPercentageLeft;
         private List<Tire> m_Tires;
 
-        public Vehicle(string i_ModelName, string i_LicenseNumber, float i_EnergyPercentageLeft, string i_TireManufacturerName, int i_CurrentTirePressure, int i_TirePressure, int i_AmountOfTires)
+        public Vehicle(string i_ModelName, string i_LicenseNumber, float i_EnergyPercentageLeft, string i_TireManufacturerName, int i_CurrentTirePressure, int i_MaxTirePressure, int i_AmountOfTires)
         {
             m_Tires = new List<Tire>(i_AmountOfTires);
-            foreach(var tire in m_Tires)
+            for(int i=0;i<i_AmountOfTires;i++)
             {
-                tire.MaxPsiTirePressure = i_TirePressure;
-                tire.CurrentPsiTirePressure = i_CurrentTirePressure;
-                tire.ManufacturerName = i_TireManufacturerName;
+                Tire tireToAdd = new Tire(i_TireManufacturerName, i_MaxTirePressure);
+                tireToAdd.CurrentPsiTirePressure = i_CurrentTirePressure;
+                m_Tires.Add(tireToAdd);
             }
 
             m_ModelName = i_ModelName;
