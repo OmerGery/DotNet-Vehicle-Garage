@@ -52,15 +52,17 @@ namespace Ex03.ConsoleUI
         public static void AddElectricBike(Garage i_Garage)
         {
             string licenseNumber, modelName, wheelManufacturer,ownerPhone,ownerName;
-            int engineVolume,currentPsi, maxPsi;
+            int engineVolume, currentPsi;
             GarageEnums.eBikeLicenceType licenseType;
             GetGeneralVehicleDetails(
                 out ownerPhone,
                 out ownerName, out licenseNumber, out modelName, out wheelManufacturer, out currentPsi);//,out maxPsi);
             GetBikeDetails(out engineVolume, out licenseType);
-            i_Garage.AddElectricBike(ownerPhone, ownerName,
-                50, engineVolume,
-                licenseType, licenseNumber, modelName, wheelManufacturer, currentPsi); //,maxPsi);
+            ElectricBike bikeToAdd = VehicleBuilder.ElectricBikeBuilder(
+                licenseType,
+                engineVolume, modelName, licenseNumber, 1, wheelManufacturer,
+                currentPsi);
+            i_Garage.AddVehicle(ownerPhone,ownerName, bikeToAdd);
         }
 
         public static void DisplayMenu()
