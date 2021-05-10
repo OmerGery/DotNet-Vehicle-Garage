@@ -53,7 +53,10 @@ namespace Ex03.GarageLogic
         }
         public void PumpTire(float i_PsiOfAirToAdd)
         {
-            // CHECK STUFFFFFF EXCEPTION!!!!
+            if(i_PsiOfAirToAdd + m_CurrentPsiTirePressure > m_MaxPsiTirePressure)
+            {
+                //throw new ValueOutOfRangeException(Exception as, m_MaxPsiTirePressure, 0);
+            }
             m_CurrentPsiTirePressure += i_PsiOfAirToAdd;
         }
     }
