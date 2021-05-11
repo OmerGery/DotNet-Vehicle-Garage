@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -79,23 +80,40 @@ namespace Ex03.ConsoleUI
 
         public void ChargeVehicle()
         {
+            bool isValid = false;
             string licenseNumber;
             float minutesToCharge;
             Console.WriteLine(@"please enter license number and minutes to charge");
-
-            try
+            while(!isValid)
             {
-                licenseNumber = Console.ReadLine();
-                float.TryParse(Console.ReadLine(), out minutesToCharge);
-                m_Garage.ChargeVehicle(licenseNumber, minutesToCharge);
-            }
-            catch(ValueOutOfRangeException e)
-            {
-                Console.WriteLine(e);
-                throw;
+                isValid = true;
+                try
+                {
+                    licenseNumber = Console.ReadLine();
+                    float.TryParse(Console.ReadLine(), out minutesToCharge);
+                    m_Garage.ChargeVehicle(licenseNumber, minutesToCharge / 60);
+                }
+                catch(ValueOutOfRangeException rangeException)
+                {
+                    Console.WriteLine(
+                        @"The amount of minutes to charge you can select is between {0} and {1} , please try again.",
+                        rangeException.MinValue*60,
+                        rangeException.MaxValue*60);
+                    isValid = false;
+                }
+                catch(FormatException formatException)
+                {
+                    Console.WriteLine("Format Exception");
+                    isValid = false;
+                }
+                catch(ArgumentException argumentException)
+                {
+                    Console.WriteLine("Argu exception");
+                    isValid = false;
+                }
             }
 
-            
+
         }
 
         public void DisplayMenu()

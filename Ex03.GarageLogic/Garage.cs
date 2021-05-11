@@ -102,9 +102,9 @@ namespace Ex03.GarageLogic
             FuelVehicle vehicleToRefuel = m_GarageVehicles[i_LicenseNumber].VehicleInGarage as FuelVehicle;
             vehicleToRefuel.Refuel(i_LitersOfFuelToAdd, i_FuelType);
         }
-        public void ChargeVehicle(string i_LicenseNumber,float i_MinutesToCharge)
+        public void ChargeVehicle(string i_LicenseNumber,float i_HoursToCharge)
         {
-            float hoursToCharge = i_MinutesToCharge / 60;
+            float hoursToCharge = i_HoursToCharge;
             ElectricVehicle vehicleToChrage = m_GarageVehicles[i_LicenseNumber].VehicleInGarage as ElectricVehicle;
             vehicleToChrage.ChargeBattery(hoursToCharge);
         }
