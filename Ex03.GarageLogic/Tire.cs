@@ -55,7 +55,7 @@ namespace Ex03.GarageLogic
         {
             if(i_PsiOfAirToAdd + m_CurrentPsiTirePressure > m_MaxPsiTirePressure)
             {
-                //throw new ValueOutOfRangeException(Exception as, m_MaxPsiTirePressure, 0);
+                throw new ValueOutOfRangeException( 0, m_MaxPsiTirePressure - m_CurrentPsiTirePressure);
             }
             m_CurrentPsiTirePressure += i_PsiOfAirToAdd;
         }

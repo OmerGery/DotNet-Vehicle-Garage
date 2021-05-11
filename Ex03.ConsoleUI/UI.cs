@@ -9,7 +9,13 @@ namespace Ex03.ConsoleUI
 {
     public class UI
     {
-        public static void GetLicenseNumberAndModelNameFromUser(out string o_LicenseNumber, out string o_ModelName)
+        private Garage m_Garage;
+
+        public UI()
+        {
+            m_Garage = new Garage();
+        }
+        public void GetLicenseNumberAndModelNameFromUser(out string o_LicenseNumber, out string o_ModelName)
         {
             Console.WriteLine("Please enter the vehicle license number:");
             o_LicenseNumber = Console.ReadLine();
@@ -17,7 +23,7 @@ namespace Ex03.ConsoleUI
             o_ModelName = Console.ReadLine();
         }
 
-        public static void GetWheelInformation(out string o_Manufacturer, out int o_CurrentPsi)//, out int o_MaxPsi)
+        public void GetWheelInformation(out string o_Manufacturer, out int o_CurrentPsi)//, out int o_MaxPsi)
         {
             Console.WriteLine("Please enter the wheel manufacturer name:");
             o_Manufacturer = Console.ReadLine();
@@ -27,21 +33,21 @@ namespace Ex03.ConsoleUI
             //int.TryParse(Console.ReadLine(), out o_MaxPsi);
         }
 
-        public static void GetOwnerDetails(out string o_OwnerPhone, out string o_OwnerName)
+        public void GetOwnerDetails(out string o_OwnerPhone, out string o_OwnerName)
         {
             Console.WriteLine("Please enter the owner phone number:");
             o_OwnerPhone = Console.ReadLine();
             Console.WriteLine("Please enter the owner name:");
             o_OwnerName = Console.ReadLine();
         }
-        public static void GetGeneralVehicleDetails(out string o_OwnerPhone,out string o_OwnerName, out string o_LicenseNumber, out string o_ModelName, out string o_WheelManufacturer, out int o_CurrentPsi)//, out int o_MaxPsi)
+        public void GetGeneralVehicleDetails(out string o_OwnerPhone,out string o_OwnerName, out string o_LicenseNumber, out string o_ModelName, out string o_WheelManufacturer, out int o_CurrentPsi)//, out int o_MaxPsi)
         {
             GetOwnerDetails(out o_OwnerPhone,out o_OwnerName);
             GetLicenseNumberAndModelNameFromUser(out o_LicenseNumber, out o_ModelName);
             GetWheelInformation(out o_WheelManufacturer, out o_CurrentPsi);
         }
 
-        public static void GetBikeDetails(out int o_EngineVolume,out GarageEnums.eBikeLicenceType o_LicenseType)
+        public void GetBikeDetails(out int o_EngineVolume,out GarageEnums.eBikeLicenceType o_LicenseType)
         {
             Console.WriteLine("Please enter the engine volume:");
             int.TryParse(Console.ReadLine(), out o_EngineVolume);
@@ -49,7 +55,7 @@ namespace Ex03.ConsoleUI
             //GarageEnums.eBikeLicenceType.TryParse(Console.ReadLine(), out o_LicenseType);
             o_LicenseType = GarageEnums.eBikeLicenceType.A;
         }
-        public static void AddElectricBike(Garage i_Garage)
+        public void AddElectricBike()
         {
             string licenseNumber, modelName, wheelManufacturer,ownerPhone,ownerName;
             int engineVolume, currentPsi;
@@ -62,10 +68,37 @@ namespace Ex03.ConsoleUI
                 licenseType,
                 engineVolume, modelName, licenseNumber, 1, wheelManufacturer,
                 currentPsi);
-            i_Garage.AddVehicle(ownerPhone,ownerName, bikeToAdd);
+            m_Garage.AddVehicle(ownerPhone,ownerName, bikeToAdd);
         }
 
-        public static void DisplayMenu()
+        public void RefuelVehicle()
+        {
+            //string i_LicenseNumber, GarageEnums.eFuelType i_FuelType,float i_LitersOfFuelToAd
+            //Console.ReadLine()
+        }
+
+        public void ChargeVehicle()
+        {
+            string licenseNumber;
+            float minutesToCharge;
+            Console.WriteLine(@"please enter license number and minutes to charge");
+
+            try
+            {
+                licenseNumber = Console.ReadLine();
+                float.TryParse(Console.ReadLine(), out minutesToCharge);
+                m_Garage.ChargeVehicle(licenseNumber, minutesToCharge);
+            }
+            catch(ValueOutOfRangeException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            
+        }
+
+        public void DisplayMenu()
         {
             Console.WriteLine(@"The Garage Menu:
 For Adding Electric Bike : Press 1
