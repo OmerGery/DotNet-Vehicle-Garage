@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ValueOutOfRangeException.cs" />
+    <Compile Include="VehicleOwner.cs" />
     <Compile Include="Vehicles\Bike.cs" />
     <Compile Include="Vehicles\Car.cs" />
     <Compile Include="Vehicles\Electric\ElectricBike.cs" />

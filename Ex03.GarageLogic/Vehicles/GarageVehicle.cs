@@ -7,15 +7,13 @@ namespace Ex03.GarageLogic
 {
     public class GarageVehicle
     {
-        private string m_OwnerName;
-        private string m_PhoneNumber;
+        private VehicleOwner m_Owner;
         private GarageEnums.eFixState m_FixState;
         private Vehicle m_VehicleInGarage;
 
         public GarageVehicle(string i_OwnerName, string i_PhoneNumber, Vehicle i_VehicleInGarage)
         {
-            m_OwnerName = i_OwnerName;
-            m_PhoneNumber = i_PhoneNumber;
+            m_Owner = new VehicleOwner(i_OwnerName, i_PhoneNumber);
             m_FixState = GarageEnums.eFixState.BeingFixed;
             m_VehicleInGarage = i_VehicleInGarage;
         }
