@@ -56,8 +56,11 @@ namespace Ex03.ConsoleUI
             //GarageEnums.eBikeLicenceType.TryParse(Console.ReadLine(), out o_LicenseType);
             o_LicenseType = GarageEnums.eBikeLicenceType.A;
         }
-        public void AddElectricBike()
+        public void AddVehicle()
         {
+            VehicleBuilder.eVehicleType i_TypeSelected;
+            i_TypeSelected = VehicleBuilder.eVehicleType.ElectricBike;
+            
             string licenseNumber, modelName, wheelManufacturer,ownerPhone,ownerName;
             int engineVolume, currentPsi;
             GarageEnums.eBikeLicenceType licenseType;
@@ -65,11 +68,18 @@ namespace Ex03.ConsoleUI
                 out ownerPhone,
                 out ownerName, out licenseNumber, out modelName, out wheelManufacturer, out currentPsi);//,out maxPsi);
             GetBikeDetails(out engineVolume, out licenseType);
-            ElectricBike bikeToAdd = VehicleBuilder.ElectricBikeBuilder(
+            List<VehicleParam> paramerList = VehicleBuilder.GetParams(i_TypeSelected);
+            Dictionary<string, VehicleParam> paramsDictionary = new Dictionary<string, VehicleParam>();
+            foreach(VehicleParam param in paramerList)
+            {
+                Console.WriteLine("Please enter {0}", param.FriendlyName);
+                paramsDictionary[param.Name] = param;
+            }
+            Vehicle vehicleToAdd = VehicleBuilder.BuildVehicle(i_TypeSelected, Parameters);
                 licenseType,
                 engineVolume, modelName, licenseNumber, 1, wheelManufacturer,
                 currentPsi);
-            m_Garage.AddVehicle(ownerPhone,ownerName, bikeToAdd);
+                m_Garage.AddVehicle(ownerPhone,ownerName, bikeToAdd);
         }
 
         public void RefuelVehicle()
@@ -137,11 +147,6 @@ namespace Ex03.ConsoleUI
         {
             AddVehicle = 1,
             ChangeVehicleStatus
-        }
-
-        private void AddVehicle()
-        {
-            // mitragshim mize
         }
         private void ChangeVehicleStatus()
         {

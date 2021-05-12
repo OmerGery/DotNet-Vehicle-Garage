@@ -17,6 +17,10 @@ namespace Ex03.GarageLogic
         {
             m_Truck = new Truck(i_ContainsToxic, i_MaxCarryWeight);
         }
+        public override List<VehicleParam> GetParams()
+        {
+            return new List<VehicleParam>() { new VehicleParam() { Name = "m_ContainsToxic", FriendlyName = "Contains Toxic", Type = typeof(bool) } };
+        }
 
     }
 }

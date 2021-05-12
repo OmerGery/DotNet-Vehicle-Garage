@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
             get { return m_MaxValue; }
         }
         private float m_MinValue;
-        public float MinValue   
+        public float MinValue
         {
             get { return m_MinValue; }
         }

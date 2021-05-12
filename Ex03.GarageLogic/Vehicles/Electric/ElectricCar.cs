@@ -17,5 +17,9 @@ namespace Ex03.GarageLogic
         {
             m_Car = new Car(GarageEnums.eColor.Black, GarageEnums.eNumberOfDoors.Five);
         }
+        public static List<VehicleParam> GetParams()
+        {
+            return new List<VehicleParam>() { new VehicleParam() { Name = "m_ContainsToxic", FriendlyName = "Contains Toxic", Type = typeof(bool) } };
+        }
     }
 }

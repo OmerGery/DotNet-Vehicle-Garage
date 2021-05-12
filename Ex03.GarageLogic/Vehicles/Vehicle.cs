@@ -27,6 +27,7 @@ namespace Ex03.GarageLogic
             m_LicenseNumber = i_LicenseNumber;
 
         }
+
         public string LicenseNumber
         {
             get

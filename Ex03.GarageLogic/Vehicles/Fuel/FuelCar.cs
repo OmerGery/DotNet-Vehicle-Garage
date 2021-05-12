@@ -18,5 +18,9 @@ namespace Ex03.GarageLogic
         {
             m_Car = new Car(i_CarColor,i_NumberOfDoors);
         }
+        public override List<VehicleParam> GetParams()
+        {
+            return new List<VehicleParam>() { new VehicleParam() { Name = "m_ContainsToxic", FriendlyName = "Contains Toxic", Type = typeof(bool) } };
+        }
     }
 }

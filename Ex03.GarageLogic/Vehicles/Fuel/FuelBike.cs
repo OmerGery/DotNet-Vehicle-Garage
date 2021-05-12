@@ -17,5 +17,9 @@ namespace Ex03.GarageLogic
         {
             m_Bike = new Bike(i_BikeLicenseType, i_EngineCcVolume);
         }
+        public override List<VehicleParam> GetParams()
+        {
+            return new List<VehicleParam>() { new VehicleParam() { Name = "m_ContainsToxic", FriendlyName = "Contains Toxic", Type = typeof(bool) } };
+        }
     }
 }

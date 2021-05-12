@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Ex03.GarageLogic;
-
+﻿
 namespace Ex03.ConsoleUI
 {
     class Program
@@ -18,4 +13,7 @@ namespace Ex03.ConsoleUI
             //ui.ChargeVehicle();
         }
     }
+
+
+
 }
