@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
             switch(i_SelectedType)
             {
                 case eVehicleType.ElectricBike:
-                    newVehicle = new ElectricBike(i_Parameters);
+         //           newVehicle = new ElectricBike(i_Parameters);
                     break;
                 case eVehicleType.ElectricCar:
                     break;
@@ -37,8 +37,8 @@ namespace Ex03.GarageLogic
             List<VehicleParam> paramaters = new List<VehicleParam>(); 
             switch (i_SelectedType)
             {
-                case eVehicleType.ElectricBike:
-                    paramaters = ElectricBike.GetParams();
+                case eVehicleType.FuelTruck:
+                    paramaters = Truck.GetParams();
                     break;
                 case eVehicleType.ElectricCar:
                     break;

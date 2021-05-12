@@ -48,38 +48,33 @@ namespace Ex03.ConsoleUI
             GetWheelInformation(out o_WheelManufacturer, out o_CurrentPsi);
         }
 
-        public void GetBikeDetails(out int o_EngineVolume,out GarageEnums.eBikeLicenceType o_LicenseType)
-        {
-            Console.WriteLine("Please enter the engine volume:");
-            int.TryParse(Console.ReadLine(), out o_EngineVolume);
-            Console.WriteLine("Please enter the license type (A/AA/B1/BB");
-            //GarageEnums.eBikeLicenceType.TryParse(Console.ReadLine(), out o_LicenseType);
-            o_LicenseType = GarageEnums.eBikeLicenceType.A;
-        }
         public void AddVehicle()
         {
             VehicleBuilder.eVehicleType i_TypeSelected;
-            i_TypeSelected = VehicleBuilder.eVehicleType.ElectricBike;
-            
             string licenseNumber, modelName, wheelManufacturer,ownerPhone,ownerName;
             int engineVolume, currentPsi;
-            GarageEnums.eBikeLicenceType licenseType;
             GetGeneralVehicleDetails(
                 out ownerPhone,
                 out ownerName, out licenseNumber, out modelName, out wheelManufacturer, out currentPsi);//,out maxPsi);
-            GetBikeDetails(out engineVolume, out licenseType);
+            // select type
+            i_TypeSelected = VehicleBuilder.eVehicleType.FuelTruck;
             List<VehicleParam> paramerList = VehicleBuilder.GetParams(i_TypeSelected);
             Dictionary<string, VehicleParam> paramsDictionary = new Dictionary<string, VehicleParam>();
             foreach(VehicleParam param in paramerList)
             {
-                Console.WriteLine("Please enter {0}", param.FriendlyName);
-                paramsDictionary[param.Name] = param;
+                Console.WriteLine("Please enter {0}", param.m_FriendlyName);
+                //string userInput = Console.ReadLine();
+
+                param.m_Value = Console.ReadLine();
+                paramsDictionary.Add(param.m_Name,param);
             }
-            Vehicle vehicleToAdd = VehicleBuilder.BuildVehicle(i_TypeSelected, Parameters);
-                licenseType,
-                engineVolume, modelName, licenseNumber, 1, wheelManufacturer,
-                currentPsi);
-                m_Garage.AddVehicle(ownerPhone,ownerName, bikeToAdd);
+
+            //}
+            //Vehicle vehicleToAdd = VehicleBuilder.BuildVehicle(i_TypeSelected, paramerList);
+            //    licenseType,
+            //    engineVolume, modelName, licenseNumber, 1, wheelManufacturer,
+            //    currentPsi);
+            //    m_Garage.AddVehicle(ownerPhone,ownerName, bikeToAdd);
         }
 
         public void RefuelVehicle()
@@ -174,8 +169,7 @@ namespace Ex03.ConsoleUI
                 }
                 catch (ArgumentException argumentException)
                 {
-                    isValid = false;
-                    Console.WriteLine("Please select a number between 1 and 3");
+                    invalidMenuOptionSelection(out isValid);
                 }
             }
 
@@ -208,8 +202,7 @@ namespace Ex03.ConsoleUI
                 }
                 catch (ArgumentException argumentException)
                 {
-                    isValid = false;
-                    Console.WriteLine("Please select an option from the menu.");
+                    invalidMenuOptionSelection(out isValid);
                 }
             }
 
@@ -244,8 +237,7 @@ namespace Ex03.ConsoleUI
                 }
                 catch (ArgumentException argumentException)
                 {
-                    isValid = false;
-                    Console.WriteLine("Please select an option from the menu.");
+                    invalidMenuOptionSelection(out isValid);
                 }
             }
 
