@@ -116,11 +116,195 @@ namespace Ex03.ConsoleUI
 
         }
 
-        public void DisplayMenu()
+        private enum eMainMenuOptions
         {
-            Console.WriteLine(@"The Garage Menu:
-For Adding Electric Bike : Press 1
-For  Other stuff..... there is time");
+            GarageMenu = 1,
+            VehicleMaintenance,
+            DisplayVehicleDetails
+        }
+        private enum eDisplayMenuOptions
+        {
+            DisplayAllVehicles = 1,
+            DisplayCertainVehicle,
+        }
+        private enum eMaintenanceMenu
+        {
+            RefuelVehicle = 1,
+            ChargeVehicle,
+            PumpVehicleTires
+        }
+        private enum eGarageMenu
+        {
+            AddVehicle = 1,
+            ChangeVehicleStatus
+        }
+
+        private void AddVehicle()
+        {
+            // mitragshim mize
+        }
+        private void ChangeVehicleStatus()
+        {
+            // mitragshim mize
+        }
+
+        private void PumpVehicleTires()
+        {
+
+        }
+        public void GarageMenu()
+        {
+            eGarageMenu UserSelection = eGarageMenu.AddVehicle;
+            bool isValid = false;
+            while (!isValid)
+            {
+                isValid = true;
+                Console.WriteLine(
+                    @"The Garage Menu:
+1:Add vehicle.
+2:Change vehicle status");
+                try
+                {
+                    eGarageMenu.TryParse(Console.ReadLine(), out UserSelection);
+                }
+                catch (ArgumentException argumentException)
+                {
+                    isValid = false;
+                    Console.WriteLine("Please select a number between 1 and 3");
+                }
+            }
+
+            switch (UserSelection)
+            {
+                case eGarageMenu.AddVehicle:
+                    AddVehicle();
+                    break;
+                case eGarageMenu.ChangeVehicleStatus:
+                    ChangeVehicleStatus();
+                    break;
+            }
+        }
+
+        public void VehicleMaintenance()
+        {
+            eMaintenanceMenu UserSelection = eMaintenanceMenu.ChargeVehicle;
+            bool isValid = false;
+            while (!isValid)
+            {
+                isValid = true;
+                Console.WriteLine(
+                    @"The Maintenance Menu:
+1: Refuel a vehicle,
+2: Charge a vehicle,
+3: Pump  vehicle tires");
+                try
+                {
+                    eGarageMenu.TryParse(Console.ReadLine(), out UserSelection);
+                }
+                catch (ArgumentException argumentException)
+                {
+                    isValid = false;
+                    Console.WriteLine("Please select an option from the menu.");
+                }
+            }
+
+            switch (UserSelection)
+            {
+                case eMaintenanceMenu.RefuelVehicle:
+                    AddVehicle();
+                    break;
+                case eMaintenanceMenu.ChargeVehicle:
+                    ChangeVehicleStatus();
+                    break;
+                case eMaintenanceMenu.PumpVehicleTires:
+                    PumpVehicleTires();
+                    break;
+            }
+        }
+
+        public void DisplayDetailsMenu()
+        {
+            eDisplayMenuOptions UserSelection = eDisplayMenuOptions.DisplayAllVehicles;
+            bool isValid = false;
+            while (!isValid)
+            {
+                isValid = true;
+                Console.WriteLine(
+                    @"The Display Menu:
+1:Display all vehicles.
+2:Display details about a certain vehicle.");
+                try
+                {
+                    eDisplayMenuOptions.TryParse(Console.ReadLine(), out UserSelection);
+                }
+                catch (ArgumentException argumentException)
+                {
+                    isValid = false;
+                    Console.WriteLine("Please select an option from the menu.");
+                }
+            }
+
+            switch (UserSelection)
+            {
+                case eDisplayMenuOptions.DisplayAllVehicles:
+                    //DisplayAllVehicles();
+                    break;
+                case eDisplayMenuOptions.DisplayCertainVehicle:
+                    //DisplayCertainVehicle();
+                    break;
+            }
+        }
+
+        private void invalidMenuOptionSelection(out bool o_Validity)
+        {
+            Console.Clear();
+            o_Validity = false;
+            Console.WriteLine("Please select an option from the menu.");
+        }
+
+
+        public void DisplayMainMenu()
+        {
+            int amountOfOptions = Enum.GetNames(typeof(eMainMenuOptions)).Length;
+            eMainMenuOptions UserSelection = eMainMenuOptions.GarageMenu;
+            bool isValid = false;
+            while(!isValid)
+            {
+                isValid = true;
+                Console.WriteLine(
+                    @"The Garage Menu:
+1:Garage actions menu(add/change status of vehicle).
+2:Preform a maintenance action.
+3:Display details about a vehicle.");
+                try
+                {
+                    UserSelection = (eMainMenuOptions)Enum.Parse(typeof(eMainMenuOptions), Console.ReadLine());
+                    if((int)UserSelection < 1 || (int)UserSelection > amountOfOptions)
+                        throw new ValueOutOfRangeException(1, amountOfOptions);
+                }
+                catch(ArgumentException argumentException)
+                {
+                    invalidMenuOptionSelection(out isValid);
+                    
+                }
+                catch(ValueOutOfRangeException valueOutOfRangeException)
+                {
+                    invalidMenuOptionSelection(out isValid);
+                }
+            }
+
+            switch(UserSelection)
+            {
+                case eMainMenuOptions.GarageMenu:
+                    GarageMenu();
+                    break;
+                case eMainMenuOptions.DisplayVehicleDetails:
+                    DisplayDetailsMenu();
+                    break;
+                case eMainMenuOptions.VehicleMaintenance:
+                    VehicleMaintenance();
+                    break;
+            }
         }
     }
 }

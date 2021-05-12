@@ -12,10 +12,10 @@ namespace Ex03.ConsoleUI
         {
 
             UI ui = new UI();
-            ui.DisplayMenu();
-            Console.WriteLine("You are adding e-bike , Please enter details for electric bike");
-            ui.AddElectricBike();
-            ui.ChargeVehicle();
+            ui.DisplayMainMenu();
+            //Console.WriteLine("You are adding e-bike , Please enter details for electric bike");
+            //ui.AddElectricBike();
+            //ui.ChargeVehicle();
         }
     }
 }
