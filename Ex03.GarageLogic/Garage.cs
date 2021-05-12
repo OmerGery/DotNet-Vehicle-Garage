@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
+using Microsoft.Win32;
 
 namespace Ex03.GarageLogic
 {
@@ -9,7 +11,7 @@ namespace Ex03.GarageLogic
     {
         public enum eFixState
         {
-            BeingFixed,
+            BeingFixed = 1,
             Fixed,
             Payed
         }
@@ -89,6 +91,7 @@ namespace Ex03.GarageLogic
 
         public void PumpVehicle(string i_LicenseNumber)
         {
+            checkLicenseNumberValidity(i_LicenseNumber);
             List<Tire> tiresToPump = m_GarageVehicles[i_LicenseNumber].VehicleInGarage.Tires;
             foreach(Tire tire in tiresToPump)
             {
@@ -111,7 +114,16 @@ namespace Ex03.GarageLogic
 
         public GarageVehicle GetVehicleDetails(string i_LicenseNumber)
         {
+            checkLicenseNumberValidity(i_LicenseNumber);
             return m_GarageVehicles[i_LicenseNumber];
+        }
+
+        private void checkLicenseNumberValidity(string i_LicenseNumber)
+        {
+            if (!m_GarageVehicles.ContainsKey(i_LicenseNumber))
+            {
+                throw new ArgumentException();
+            }
         }
 
     }

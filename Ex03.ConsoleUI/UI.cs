@@ -10,6 +10,8 @@ namespace Ex03.ConsoleUI
 {
     public class UI
     {
+        private bool m_quitFlag;
+
         private Garage m_Garage;
 
         public UI()
@@ -24,14 +26,12 @@ namespace Ex03.ConsoleUI
             o_ModelName = Console.ReadLine();
         }
 
-        public void GetWheelInformation(out string o_Manufacturer, out int o_CurrentPsi)//, out int o_MaxPsi)
+        public void GetWheelInformation(out string o_Manufacturer, out int o_CurrentPsi)
         {
             Console.WriteLine("Please enter the wheel manufacturer name:");
             o_Manufacturer = Console.ReadLine();
             Console.WriteLine("Please enter the current PSI of the wheels:");
             int.TryParse(Console.ReadLine(), out o_CurrentPsi);
-            //Console.WriteLine("Please enter the max PSI of the wheels:");
-            //int.TryParse(Console.ReadLine(), out o_MaxPsi);
         }
 
         public void GetOwnerDetails(out string o_OwnerPhone, out string o_OwnerName)
@@ -48,6 +48,14 @@ namespace Ex03.ConsoleUI
             GetWheelInformation(out o_WheelManufacturer, out o_CurrentPsi);
         }
 
+        public string GetVehicleLicenseNumber()
+        {
+            Console.WriteLine("Please Enter the vehicle's license number");
+            string licenseNumber = Console.ReadLine();
+
+            return licenseNumber;
+        }
+
         public void AddVehicle()
         {
             VehicleBuilder.eVehicleType i_TypeSelected;
@@ -55,12 +63,12 @@ namespace Ex03.ConsoleUI
             int engineVolume, currentPsi;
             GetGeneralVehicleDetails(
                 out ownerPhone,
-                out ownerName, out licenseNumber, out modelName, out wheelManufacturer, out currentPsi);//,out maxPsi);
+                out ownerName, out licenseNumber, out modelName, out wheelManufacturer, out currentPsi);
             // select type
             i_TypeSelected = VehicleBuilder.eVehicleType.FuelTruck;
-            List<VehicleParam> paramerList = VehicleBuilder.GetParams(i_TypeSelected);
+            List<VehicleParam> parametersList = VehicleBuilder.GetParams(i_TypeSelected);
             Dictionary<string, VehicleParam> paramsDictionary = new Dictionary<string, VehicleParam>();
-            foreach(VehicleParam param in paramerList)
+            foreach(VehicleParam param in parametersList)
             {
                 Console.WriteLine("Please enter {0}", param.m_FriendlyName);
                 //string userInput = Console.ReadLine();
@@ -79,6 +87,7 @@ namespace Ex03.ConsoleUI
 
         public void RefuelVehicle()
         {
+            Console.WriteLine("kelev");
             //string i_LicenseNumber, GarageEnums.eFuelType i_FuelType,float i_LitersOfFuelToAd
             //Console.ReadLine()
         }
@@ -113,195 +122,149 @@ namespace Ex03.ConsoleUI
                 }
                 catch(ArgumentException argumentException)
                 {
-                    Console.WriteLine("Argu exception");
+                    Console.WriteLine("Argument exception");
                     isValid = false;
                 }
             }
-
-
         }
 
         private enum eMainMenuOptions
         {
-            GarageMenu = 1,
-            VehicleMaintenance,
-            DisplayVehicleDetails
-        }
-        private enum eDisplayMenuOptions
-        {
-            DisplayAllVehicles = 1,
-            DisplayCertainVehicle,
-        }
-        private enum eMaintenanceMenu
-        {
-            RefuelVehicle = 1,
-            ChargeVehicle,
-            PumpVehicleTires
-        }
-        private enum eGarageMenu
-        {
             AddVehicle = 1,
-            ChangeVehicleStatus
+            DisplayVehiclesDetails,
+            ChangeVehicleStatus,
+            PumpVehicleTires,
+            RefuelVehicle,
+            ChargeVehicle,
+            DisplayCertainVehicle,
+            Quit
         }
+
         private void ChangeVehicleStatus()
         {
-            // mitragshim mize
+            int amountOfOptions = Enum.GetNames(typeof(GarageEnums.eFixState)).Length;
+            GarageEnums.eFixState newFixState;
+            Console.WriteLine("Please Enter the vehicle's license number");
+            string licenseNumber = Console.ReadLine();
+            Console.WriteLine("Please Enter the vehicle's new fix state out of the following options");
+            foreach (string fixState in GarageEnums.eFixState.GetNames(typeof(GarageEnums.eFixState)))
+            {
+                Console.WriteLine("For {0} enter {1:D}", fixState,
+                    Enum.Parse(typeof(GarageEnums.eFixState), fixState));
+            }
+
+            GarageEnums.eFixState.TryParse(Console.ReadLine(), out newFixState);
+            if ((int)newFixState < 1 || (int)newFixState > amountOfOptions)
+                throw new ValueOutOfRangeException(1, amountOfOptions);
+
         }
 
         private void PumpVehicleTires()
         {
-
+            m_Garage.PumpVehicle(GetVehicleLicenseNumber());
         }
-        public void GarageMenu()
+        private void DisplayMenuOptions()
         {
-            eGarageMenu UserSelection = eGarageMenu.AddVehicle;
-            bool isValid = false;
-            while (!isValid)
+            Console.WriteLine(
+                @"Please choose an option from the menu");
+            foreach (string menuOption in eMainMenuOptions.GetNames(typeof(eMainMenuOptions)))
             {
-                isValid = true;
-                Console.WriteLine(
-                    @"The Garage Menu:
-1:Add vehicle.
-2:Change vehicle status");
-                try
-                {
-                    eGarageMenu.TryParse(Console.ReadLine(), out UserSelection);
-                }
-                catch (ArgumentException argumentException)
-                {
-                    invalidMenuOptionSelection(out isValid);
-                }
-            }
-
-            switch (UserSelection)
-            {
-                case eGarageMenu.AddVehicle:
-                    AddVehicle();
-                    break;
-                case eGarageMenu.ChangeVehicleStatus:
-                    ChangeVehicleStatus();
-                    break;
+                Console.WriteLine("To {0} enter {1:D}", menuOption,
+                    Enum.Parse(typeof(eMainMenuOptions), menuOption));
             }
         }
 
-        public void VehicleMaintenance()
-        {
-            eMaintenanceMenu UserSelection = eMaintenanceMenu.ChargeVehicle;
-            bool isValid = false;
-            while (!isValid)
-            {
-                isValid = true;
-                Console.WriteLine(
-                    @"The Maintenance Menu:
-1: Refuel a vehicle,
-2: Charge a vehicle,
-3: Pump  vehicle tires");
-                try
-                {
-                    eGarageMenu.TryParse(Console.ReadLine(), out UserSelection);
-                }
-                catch (ArgumentException argumentException)
-                {
-                    invalidMenuOptionSelection(out isValid);
-                }
-            }
-
-            switch (UserSelection)
-            {
-                case eMaintenanceMenu.RefuelVehicle:
-                    AddVehicle();
-                    break;
-                case eMaintenanceMenu.ChargeVehicle:
-                    ChangeVehicleStatus();
-                    break;
-                case eMaintenanceMenu.PumpVehicleTires:
-                    PumpVehicleTires();
-                    break;
-            }
-        }
-
-        public void DisplayDetailsMenu()
-        {
-            eDisplayMenuOptions UserSelection = eDisplayMenuOptions.DisplayAllVehicles;
-            bool isValid = false;
-            while (!isValid)
-            {
-                isValid = true;
-                Console.WriteLine(
-                    @"The Display Menu:
-1:Display all vehicles.
-2:Display details about a certain vehicle.");
-                try
-                {
-                    eDisplayMenuOptions.TryParse(Console.ReadLine(), out UserSelection);
-                }
-                catch (ArgumentException argumentException)
-                {
-                    invalidMenuOptionSelection(out isValid);
-                }
-            }
-
-            switch (UserSelection)
-            {
-                case eDisplayMenuOptions.DisplayAllVehicles:
-                    //DisplayAllVehicles();
-                    break;
-                case eDisplayMenuOptions.DisplayCertainVehicle:
-                    //DisplayCertainVehicle();
-                    break;
-            }
-        }
-
-        private void invalidMenuOptionSelection(out bool o_Validity)
-        {
-            Console.Clear();
-            o_Validity = false;
-            Console.WriteLine("Please select an option from the menu.");
-        }
-
-
-        public void DisplayMainMenu()
+        private eMainMenuOptions getUserMenuSelection()
         {
             int amountOfOptions = Enum.GetNames(typeof(eMainMenuOptions)).Length;
-            eMainMenuOptions UserSelection = eMainMenuOptions.GarageMenu;
-            bool isValid = false;
-            while(!isValid)
+            eMainMenuOptions userSelection = (eMainMenuOptions)Enum.Parse(typeof(eMainMenuOptions), Console.ReadLine());
+            if ((int)userSelection < 1 || (int)userSelection > amountOfOptions)
+                throw new ValueOutOfRangeException(1, amountOfOptions);
+
+            return userSelection;
+        }
+
+        public void DisplayVehiclesDetails()
+        {
+            Console.WriteLine("kelev");
+        }
+
+        public void DisplayCertainVehicle()
+        {
+            
+            GarageVehicle vehicle = m_Garage.GetVehicleDetails(GetVehicleLicenseNumber());
+
+            string vechileDetails = string.Format(
+                @"License number:  {0}
+Model Name: {1}
+
+...
+...
+", vehicle.VehicleInGarage.LicenseNumber);
+            //Owner's Name:  {2}
+            //Fix state in the garage: { 3}
+            //Tires model: { 4}
+            //Tires Psi: { 5}
+        }
+        public void DisplayMainMenu()
+        {
+            while(!m_quitFlag)
             {
-                isValid = true;
-                Console.WriteLine(
-                    @"The Garage Menu:
-1:Garage actions menu(add/change status of vehicle).
-2:Preform a maintenance action.
-3:Display details about a vehicle.");
                 try
                 {
-                    UserSelection = (eMainMenuOptions)Enum.Parse(typeof(eMainMenuOptions), Console.ReadLine());
-                    if((int)UserSelection < 1 || (int)UserSelection > amountOfOptions)
-                        throw new ValueOutOfRangeException(1, amountOfOptions);
+                    DisplayMenuOptions();
+                    eMainMenuOptions userSelection = getUserMenuSelection();
+                    switch(userSelection)
+                    {
+                        case eMainMenuOptions.AddVehicle:
+                            AddVehicle();
+                            break;
+                        case eMainMenuOptions.DisplayVehiclesDetails:
+                            DisplayVehiclesDetails();
+                            break;
+                        case eMainMenuOptions.ChangeVehicleStatus:
+                            ChangeVehicleStatus();
+                            break;
+                        case eMainMenuOptions.PumpVehicleTires:
+                            PumpVehicleTires();
+                            break;
+                        case eMainMenuOptions.RefuelVehicle:
+                            RefuelVehicle();
+                            break;
+                        case eMainMenuOptions.ChargeVehicle:
+                            ChargeVehicle();
+                            break;
+                        case eMainMenuOptions.DisplayCertainVehicle:
+                            DisplayCertainVehicle();
+                            break;
+                        case eMainMenuOptions.Quit:
+                            m_quitFlag = true;
+                            break;
+                    }
                 }
+                catch(FormatException formatException)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please select a valid option");
+                }
+
                 catch(ArgumentException argumentException)
                 {
-                    invalidMenuOptionSelection(out isValid);
-                    
+                    Console.Clear();
+                    Console.WriteLine("Please select a valid option");
                 }
                 catch(ValueOutOfRangeException valueOutOfRangeException)
                 {
-                    invalidMenuOptionSelection(out isValid);
+                    Console.Clear();
+                    Console.WriteLine(valueOutOfRangeException.Message);
                 }
-            }
-
-            switch(UserSelection)
-            {
-                case eMainMenuOptions.GarageMenu:
-                    GarageMenu();
-                    break;
-                case eMainMenuOptions.DisplayVehicleDetails:
-                    DisplayDetailsMenu();
-                    break;
-                case eMainMenuOptions.VehicleMaintenance:
-                    VehicleMaintenance();
-                    break;
             }
         }
     }
 }
+
+
+
+
+
+
