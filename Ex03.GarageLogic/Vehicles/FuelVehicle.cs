@@ -18,13 +18,13 @@ namespace Ex03.GarageLogic
             }
             set
             {
-                if (value + m_LitersOfFuelLeft > m_MaxFuelLitersCapacity ||  value < 0)
+                if (value  > m_MaxFuelLitersCapacity ||  value < 0)
                 { 
-                    throw new ValueOutOfRangeException(0, m_MaxFuelLitersCapacity - m_LitersOfFuelLeft);
+                    throw new ValueOutOfRangeException(0, m_MaxFuelLitersCapacity);
                 }
                 else
                 {
-                    m_MaxFuelLitersCapacity += value;
+                    m_MaxFuelLitersCapacity = value;
                 }
             }
         }
