@@ -49,6 +49,15 @@ namespace Ex03.GarageLogic
     {
         private Dictionary <string,GarageVehicle> m_GarageVehicles;
 
+        public List<GarageVehicle> GarageVehicles
+        {
+            get
+            {
+                List<GarageVehicle> garageVehiclesList = new List<GarageVehicle>(m_GarageVehicles.Keys.Count);
+                return garageVehiclesList;
+            }
+        }
+
         public Garage()
         {
             m_GarageVehicles = new Dictionary<string, GarageVehicle>();
@@ -60,30 +69,20 @@ namespace Ex03.GarageLogic
             m_GarageVehicles.Add(newVehicle.VehicleInGarage.LicenseNumber, newVehicle);
         }
 
-        public List<Vehicle> GetGarageVehiclesByFixState(GarageEnums.eFixState i_FixState)
+        public List<GarageVehicle> GetGarageVehiclesByFixState(GarageEnums.eFixState i_FixState)
         {
-            List<Vehicle> vechilesWithRequestedFixState = new List<Vehicle>();
+            List<GarageVehicle> vechilesWithRequestedFixState = new List<GarageVehicle>();
             foreach (KeyValuePair<string, GarageVehicle> garageVehicle in m_GarageVehicles)
             {
                 if(garageVehicle.Value.FixState == i_FixState)
                 {
-                    vechilesWithRequestedFixState.Add(garageVehicle.Value.VehicleInGarage);
+                    vechilesWithRequestedFixState.Add(garageVehicle.Value);
                 }
             }
 
             return vechilesWithRequestedFixState;
         }
 
-        public List<Vehicle> GetAllGarageVehicles()
-        {
-            List<Vehicle> allVehicles = new List<Vehicle>();
-            foreach (KeyValuePair<string, GarageVehicle> garageVehicle in m_GarageVehicles)
-            {
-                allVehicles.Add(garageVehicle.Value.VehicleInGarage);
-            }
-
-            return allVehicles;
-        }
         public void ChangeVehicleState(string i_LicenseNumber , GarageEnums.eFixState i_FixState)
         {
             checkLicenseNumberValidity(i_LicenseNumber);
@@ -121,7 +120,7 @@ namespace Ex03.GarageLogic
             checkLicenseNumberValidity(i_LicenseNumber);
             if (!(m_GarageVehicles[i_LicenseNumber].VehicleInGarage is ElectricVehicle))
             {
-                throw new ArgumentException("This is not a fuel vehicle.");
+                throw new ArgumentException("This is not an electric vehicle.");
             }
             ElectricVehicle vehicleToChrage = m_GarageVehicles[i_LicenseNumber].VehicleInGarage as ElectricVehicle;
             vehicleToChrage.CurrentHoursOfBatteryLeft += i_HoursToCharge;
@@ -137,9 +136,8 @@ namespace Ex03.GarageLogic
         {
             if (!m_GarageVehicles.ContainsKey(i_LicenseNumber))
             {
-                throw new ArgumentException();
+                throw new ArgumentException("this vehicle doesn't exist in the garage");
             }
         }
-
     }
 }

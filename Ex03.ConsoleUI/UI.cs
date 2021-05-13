@@ -159,35 +159,48 @@ namespace Ex03.ConsoleUI
 
         public void DisplayVehiclesLicenseNumbers()
         {
+            List<GarageVehicle> garageVehiclesToDisplay = new List<GarageVehicle>();
             Console.WriteLine(@"Do you want to filter the license numbers?");
             DisplayEnumOptions<eVehicleDisplayOptions>();
             eVehicleDisplayOptions userSelection = (eVehicleDisplayOptions)GetEnumChoiceFromUser<eVehicleDisplayOptions>();
             switch(userSelection)
             {
                 case eVehicleDisplayOptions.NoFilter:
-                    //
+                    garageVehiclesToDisplay = m_Garage.GarageVehicles;
                     break;
                 case eVehicleDisplayOptions.WithFilter:
-                    DisplayVehiclesLicenseNumbers();
+                    DisplayEnumOptions<GarageEnums.eFixState>();
+                    GarageEnums.eFixState fixState = (GarageEnums.eFixState)GetEnumChoiceFromUser<GarageEnums.eFixState>();
+                    garageVehiclesToDisplay = m_Garage.GetGarageVehiclesByFixState(fixState);
                     break;
+            }
+            PrintGarageVechilesLicenseNumbers(garageVehiclesToDisplay);
+        }
+
+        private void PrintGarageVechilesLicenseNumbers(List<GarageVehicle> i_GarageGarageVehicles)
+        {
+            foreach(GarageVehicle garageVehicle in i_GarageGarageVehicles)
+            {
+                Console.WriteLine(garageVehicle.VehicleInGarage.LicenseNumber);
             }
         }
 
         public void DisplayCertainVehicle()
         {
-            GarageVehicle vehicle = m_Garage.GetVehicleDetails(GetVehicleLicenseNumber());
+            string licenseNumber = GetVehicleLicenseNumber();
+            GarageVehicle vehicle = m_Garage.GetVehicleDetails(licenseNumber);
 
             string vechileDetails = string.Format(
                 @"License number:  {0}
 Model Name: {1}
-
-...
-...
-", vehicle.VehicleInGarage.LicenseNumber);
-            //Owner's Name:  {2}
-            //Fix state in the garage: { 3}
-            //Tires model: { 4}
-            //Tires Psi: { 5}
+Owner's Name:  {2}"
+//            Fix state in the garage: { 3}
+//            Tires model: { 4}
+//            Tires Psi: { 5}
+//...
+//...
+, vehicle.VehicleInGarage.LicenseNumber, "m", vehicle.Owner);
+            
         }
         public void DisplayMainMenu()
         {
@@ -198,9 +211,11 @@ Model Name: {1}
                 {
                     DisplayEnumOptions<eMainMenuOptions>();
                     eMainMenuOptions userSelection = (eMainMenuOptions)GetEnumChoiceFromUser<eMainMenuOptions>();
-                    switch(userSelection)
+                    Console.Clear();
+                    switch (userSelection)
                     {
                         case eMainMenuOptions.AddVehicle:
+
                             AddVehicle();
                             break;
                         case eMainMenuOptions.DisplayVehiclesDetails:
@@ -225,6 +240,7 @@ Model Name: {1}
                             m_quitFlag = true;
                             break;
                     }
+                    
                 }
                 catch(FormatException formatException)
                 {
@@ -235,7 +251,7 @@ Model Name: {1}
                 catch(ArgumentException argumentException)
                 {
                     Console.Clear();
-                    Console.WriteLine("Please select a valid option");
+                    Console.WriteLine(argumentException.Message);
                 }
                 catch(ValueOutOfRangeException valueOutOfRangeException)
                 {
