@@ -8,8 +8,17 @@ namespace Ex03.GarageLogic
     public class GarageVehicle
     {
         private VehicleOwner m_Owner;
+        public VehicleOwner Owner
+        {
+            get
+            {
+                return m_Owner;
+            }
+        }
         private GarageEnums.eFixState m_FixState;
         private Vehicle m_VehicleInGarage;
+
+
 
         public GarageVehicle(string i_OwnerName, string i_PhoneNumber, Vehicle i_VehicleInGarage)
         {
