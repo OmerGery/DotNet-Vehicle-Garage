@@ -48,17 +48,15 @@ namespace Ex03.GarageLogic
             }
             set
             {
-                m_CurrentPsiTirePressure = value;
+
+                if (value + m_CurrentPsiTirePressure > m_MaxPsiTirePressure || value < 0)
+                {
+                    throw new ValueOutOfRangeException(0, m_MaxPsiTirePressure - m_CurrentPsiTirePressure);
+                }
+                m_CurrentPsiTirePressure += value;
             }
         }
-        public void PumpTire(float i_PsiOfAirToAdd)
-        {
-            if(i_PsiOfAirToAdd + m_CurrentPsiTirePressure > m_MaxPsiTirePressure)
-            {
-                throw new ValueOutOfRangeException( 0, m_MaxPsiTirePressure - m_CurrentPsiTirePressure);
-            }
-            m_CurrentPsiTirePressure += i_PsiOfAirToAdd;
-        }
+        
     }
 }
 

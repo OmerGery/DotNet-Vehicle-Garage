@@ -10,26 +10,41 @@ namespace Ex03.GarageLogic
 
 
         private float m_LitersOfFuelLeft;
+        public float LitersOfFuelLeft
+        {
+            get
+            {
+                return m_LitersOfFuelLeft;
+            }
+            set
+            {
+                if (value + m_LitersOfFuelLeft > m_MaxFuelLitersCapacity ||  value < 0)
+                { 
+                    throw new ValueOutOfRangeException(0, m_MaxFuelLitersCapacity - m_LitersOfFuelLeft);
+                }
+                else
+                {
+                    m_MaxFuelLitersCapacity += value;
+                }
+            }
+        }
         private float m_MaxFuelLitersCapacity;
-        private GarageEnums.eFuelType m_fuelType;
+        private GarageEnums.eFuelType m_FuelType;
 
+        public GarageEnums.eFuelType FuelType
+        {
+            get
+            {
+                return m_FuelType;
+            }
+        }
         public FuelVehicle(GarageEnums.eFuelType i_FuelType, float i_MaxFuelLitersCapacity, string i_ModelName, string i_LicenseNumber, float i_LitersOfFuelLeft, string i_TireManufacturerName, int i_CurrentTirePressure, int i_MaxTirePressure, int i_AmountOfTire) : 
             base(i_ModelName, i_LicenseNumber, (i_LitersOfFuelLeft / i_MaxFuelLitersCapacity) * 100, i_TireManufacturerName, i_CurrentTirePressure, i_MaxTirePressure, i_AmountOfTire)
         {
             m_LitersOfFuelLeft = i_MaxFuelLitersCapacity;
             m_MaxFuelLitersCapacity = i_MaxFuelLitersCapacity;
-            m_fuelType = i_FuelType;
+            m_FuelType = i_FuelType;
         }
-        public void Refuel(float i_LitersOfFuelToAdd, GarageEnums.eFuelType i_FuelType)
-        {
-            if(i_LitersOfFuelToAdd + m_LitersOfFuelLeft > m_MaxFuelLitersCapacity)
-            {
-                throw new ValueOutOfRangeException(0, m_MaxFuelLitersCapacity - m_LitersOfFuelLeft);
-            }
-            else
-            {
-                m_MaxFuelLitersCapacity += i_LitersOfFuelToAdd;
-            }
-        }
+        
     }
 }

@@ -86,6 +86,7 @@ namespace Ex03.GarageLogic
         }
         public void ChangeVehicleState(string i_LicenseNumber , GarageEnums.eFixState i_FixState)
         {
+            checkLicenseNumberValidity(i_LicenseNumber);
             m_GarageVehicles[i_LicenseNumber].FixState = i_FixState;
         }
 
@@ -96,20 +97,34 @@ namespace Ex03.GarageLogic
             foreach(Tire tire in tiresToPump)
             {
                 float psiToAdd = tire.MaxPsiTirePressure - tire.CurrentPsiTirePressure;
-                tire.PumpTire(psiToAdd);
+                tire.CurrentPsiTirePressure += psiToAdd;
             }
         }
 
         public void RefuelVehicle(string i_LicenseNumber,GarageEnums.eFuelType i_FuelType,float i_LitersOfFuelToAdd)
         {
+            checkLicenseNumberValidity(i_LicenseNumber);
+            if (!(m_GarageVehicles[i_LicenseNumber].VehicleInGarage is FuelVehicle))
+            {
+                throw new ArgumentException("This is not a fuel vehicle.");
+            }
             FuelVehicle vehicleToRefuel = m_GarageVehicles[i_LicenseNumber].VehicleInGarage as FuelVehicle;
-            vehicleToRefuel.Refuel(i_LitersOfFuelToAdd, i_FuelType);
+            if(vehicleToRefuel.FuelType != i_FuelType)
+            {
+                throw new ArgumentException("Wrong fuel type");
+            }
+
+            vehicleToRefuel.LitersOfFuelLeft += i_LitersOfFuelToAdd;
         }
         public void ChargeVehicle(string i_LicenseNumber,float i_HoursToCharge)
         {
-            float hoursToCharge = i_HoursToCharge;
+            checkLicenseNumberValidity(i_LicenseNumber);
+            if (!(m_GarageVehicles[i_LicenseNumber].VehicleInGarage is ElectricVehicle))
+            {
+                throw new ArgumentException("This is not a fuel vehicle.");
+            }
             ElectricVehicle vehicleToChrage = m_GarageVehicles[i_LicenseNumber].VehicleInGarage as ElectricVehicle;
-            vehicleToChrage.ChargeBattery(hoursToCharge);
+            vehicleToChrage.CurrentHoursOfBatteryLeft += i_HoursToCharge;
         }
 
         public GarageVehicle GetVehicleDetails(string i_LicenseNumber)

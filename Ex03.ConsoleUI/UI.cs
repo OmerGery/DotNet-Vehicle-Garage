@@ -11,8 +11,19 @@ namespace Ex03.ConsoleUI
     public class UI
     {
         private bool m_quitFlag;
-
         private Garage m_Garage;
+
+        private enum eMainMenuOptions
+        {
+            AddVehicle = 1,
+            DisplayVehiclesDetails,
+            ChangeVehicleStatus,
+            PumpVehicleTires,
+            RefuelVehicle,
+            ChargeVehicle,
+            DisplayCertainVehicle,
+            Quit
+        }
 
         public UI()
         {
@@ -85,125 +96,60 @@ namespace Ex03.ConsoleUI
             //    m_Garage.AddVehicle(ownerPhone,ownerName, bikeToAdd);
         }
 
-        public void DisplayEnumChoiceOptionsToUser<T>()
+        public static void DisplayEnumOptions<T>()
         {
-            T selectedOption;
-            Console.WriteLine("Please Enter the" + nameof(T) +  "out of the following options");
             foreach (string options in Enum.GetNames(typeof(T)))
             {
-                Console.WriteLine("For {0} enter {1:D}", options,
+                Console.WriteLine("For {0} press {1:D}", options,
                     Enum.Parse(typeof(T), options));
             }
+        }
+
+        public int GetEnumChoiceFromUser<T>()
+        {
+            int amountOfOptions = Enum.GetNames(typeof(T)).Length;
+            int.TryParse(Console.ReadLine(), out int userRequestedFuelType);
+            if(userRequestedFuelType < 1 || userRequestedFuelType > amountOfOptions)
+            {
+                throw new ValueOutOfRangeException(1, amountOfOptions);
+            }
+
+            return userRequestedFuelType;
         }
 
         public void RefuelVehicle()
         {
             string licenseNumber = GetVehicleLicenseNumber();
-            GarageEnums.eFuelType userRequestedFuelType;
-            int amountOfOptions = Enum.GetNames(typeof(GarageEnums.eFixState)).Length;
-            DisplayEnumChoiceOptionsToUser<GarageEnums.eFuelType>();
-
-            GarageEnums.eFixState.TryParse(Console.ReadLine(), out userRequestedFuelType);
-            if ((int)userRequestedFuelType < 1 || (int)userRequestedFuelType > amountOfOptions)
-                throw new ValueOutOfRangeException(1, amountOfOptions);
+            Console.WriteLine("Please choose fuel type out of the following options");
+            DisplayEnumOptions<GarageEnums.eFuelType>();
+            GarageEnums.eFuelType userRequestedFuelType = (GarageEnums.eFuelType) GetEnumChoiceFromUser<GarageEnums.eFuelType>();
 
             Console.WriteLine("Please enter how many liters of fuel you would like to add");
-            float litersOfFuelToAdd;
-            float.TryParse(Console.ReadLine(), out litersOfFuelToAdd);
+            float.TryParse(Console.ReadLine(), out float litersOfFuelToAdd);
 
             m_Garage.RefuelVehicle(licenseNumber, userRequestedFuelType , litersOfFuelToAdd);
         }
 
         public void ChargeVehicle()
         {
-            bool isValid = false;
-            string licenseNumber;
-            float minutesToCharge;
             Console.WriteLine(@"please enter license number and minutes to charge");
-            while(!isValid)
-            {
-                isValid = true;
-                try
-                {
-                    licenseNumber = Console.ReadLine();
-                    float.TryParse(Console.ReadLine(), out minutesToCharge);
-                    m_Garage.ChargeVehicle(licenseNumber, minutesToCharge / 60);
-                }
-                catch(ValueOutOfRangeException rangeException)
-                {
-                    Console.WriteLine(
-                        @"The amount of minutes to charge you can select is between {0} and {1} , please try again.",
-                        rangeException.MinValue*60,
-                        rangeException.MaxValue*60);
-                    isValid = false;
-                }
-                catch(FormatException formatException)
-                {
-                    Console.WriteLine("Format Exception");
-                    isValid = false;
-                }
-                catch(ArgumentException argumentException)
-                {
-                    Console.WriteLine("Argument exception");
-                    isValid = false;
-                }
-            }
-        }
-
-        private enum eMainMenuOptions
-        {
-            AddVehicle = 1,
-            DisplayVehiclesDetails,
-            ChangeVehicleStatus,
-            PumpVehicleTires,
-            RefuelVehicle,
-            ChargeVehicle,
-            DisplayCertainVehicle,
-            Quit
+            string licenseNumber = GetVehicleLicenseNumber();
+            float.TryParse(Console.ReadLine(), out float minutesToCharge);
+            m_Garage.ChargeVehicle(licenseNumber, minutesToCharge / 60);
         }
 
         private void ChangeVehicleStatus()
         {
-            int amountOfOptions = Enum.GetNames(typeof(GarageEnums.eFixState)).Length;
-            GarageEnums.eFixState newFixState;
-            Console.WriteLine("Please Enter the vehicle's license number");
-            string licenseNumber = Console.ReadLine();
+            string licenseNumber = GetVehicleLicenseNumber();
             Console.WriteLine("Please Enter the vehicle's new fix state out of the following options");
-            foreach (string fixState in GarageEnums.eFixState.GetNames(typeof(GarageEnums.eFixState)))
-            {
-                Console.WriteLine("For {0} enter {1:D}", fixState,
-                    Enum.Parse(typeof(GarageEnums.eFixState), fixState));
-            }
-
-            GarageEnums.eFixState.TryParse(Console.ReadLine(), out newFixState);
-            if ((int)newFixState < 1 || (int)newFixState > amountOfOptions)
-                throw new ValueOutOfRangeException(1, amountOfOptions);
-
+            DisplayEnumOptions<GarageEnums.eFixState>();
+            GarageEnums.eFixState newFixState = (GarageEnums.eFixState)GetEnumChoiceFromUser<GarageEnums.eFixState>();
         }
 
         private void PumpVehicleTires()
         {
-            m_Garage.PumpVehicle(GetVehicleLicenseNumber());
-        }
-        private void DisplayMenuOptions()
-        {
-            Console.WriteLine(
-                @"Please choose an option from the menu");
-            foreach (string menuOption in eMainMenuOptions.GetNames(typeof(eMainMenuOptions)))
-            {
-                Console.WriteLine("To {0} enter {1:D}", menuOption,
-                    Enum.Parse(typeof(eMainMenuOptions), menuOption));
-            }
-        }
-
-        private eMainMenuOptions getUserMenuSelection()
-        {
-            int amountOfOptions = Enum.GetNames(typeof(eMainMenuOptions)).Length;
-            eMainMenuOptions userSelection = (eMainMenuOptions)Enum.Parse(typeof(eMainMenuOptions), Console.ReadLine());
-            if ((int)userSelection < 1 || (int)userSelection > amountOfOptions)
-                throw new ValueOutOfRangeException(1, amountOfOptions);
-
-            return userSelection;
+            string licenseNumber = GetVehicleLicenseNumber();
+            m_Garage.PumpVehicle(licenseNumber);
         }
 
         public void DisplayVehiclesDetails()
@@ -213,7 +159,6 @@ namespace Ex03.ConsoleUI
 
         public void DisplayCertainVehicle()
         {
-            
             GarageVehicle vehicle = m_Garage.GetVehicleDetails(GetVehicleLicenseNumber());
 
             string vechileDetails = string.Format(
@@ -232,10 +177,11 @@ Model Name: {1}
         {
             while(!m_quitFlag)
             {
+                Console.WriteLine(@"Please choose an option from the menu");
                 try
                 {
-                    DisplayMenuOptions();
-                    eMainMenuOptions userSelection = getUserMenuSelection();
+                    DisplayEnumOptions<eMainMenuOptions>();
+                    eMainMenuOptions userSelection = (eMainMenuOptions)GetEnumChoiceFromUser<eMainMenuOptions>();
                     switch(userSelection)
                     {
                         case eMainMenuOptions.AddVehicle:
@@ -284,9 +230,3 @@ Model Name: {1}
         }
     }
 }
-
-
-
-
-
-
