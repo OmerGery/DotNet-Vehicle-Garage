@@ -66,7 +66,7 @@ namespace Ex03.GarageLogic
         {
             // to add exception , to check
             GarageVehicle newVehicle = new GarageVehicle(i_OwnerName, i_OwnerPhone, i_NewVehicle);
-            m_GarageVehicles.Add(newVehicle.VehicleInGarage.LicenseNumber, newVehicle);
+            m_GarageVehicles.Add(i_NewVehicle.LicenseNumber, newVehicle);
         }
 
         public List<GarageVehicle> GetGarageVehiclesByFixState(GarageEnums.eFixState i_FixState)

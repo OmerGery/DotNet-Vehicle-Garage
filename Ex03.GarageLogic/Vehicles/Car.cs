@@ -12,8 +12,8 @@ namespace Ex03.GarageLogic
 
         public Car(Dictionary<string, VehicleParam> i_Parameters)
         {
-            m_CarColor = (GarageEnums.eColor)i_Parameters["m_CarColor"].m_Value;
-            m_NumberOfDoors = (GarageEnums.eNumberOfDoors)i_Parameters["m_NumberOfDoors"].m_Value; ;
+            m_CarColor = (GarageEnums.eColor)i_Parameters["m_CarColor"].Value;
+            m_NumberOfDoors = (GarageEnums.eNumberOfDoors)i_Parameters["m_NumberOfDoors"].Value; ;
         }
         public static List<VehicleParam> GetParams()
         {

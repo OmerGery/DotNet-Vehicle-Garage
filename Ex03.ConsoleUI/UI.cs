@@ -61,10 +61,19 @@ namespace Ex03.ConsoleUI
             Dictionary<string, VehicleParam> paramsDictionary = new Dictionary<string, VehicleParam>();
             foreach(VehicleParam param in parametersList)
             {
-                Console.WriteLine("Please enter {0}", param.m_FriendlyName);
-                //string userInput = Console.ReadLine();
-                param.m_Value = Console.ReadLine();
-                paramsDictionary.Add(param.m_Name,param);
+                Console.WriteLine("Please enter {0}", param.FriendlyName);
+                if (param.Type.IsEnum)
+                {
+                    Console.WriteLine("Options: " + string.Join(",",Enum.GetNames(param.Type)));
+                    string userInput = Console.ReadLine();
+                    param.Value = Enum.Parse(param.Type, userInput);
+                }
+                else
+                {
+                    string userInput = Console.ReadLine();
+                    param.Value = Convert.ChangeType(userInput, param.Type);
+                }
+                paramsDictionary.Add(param.Name, param);
             }
             Vehicle vehicleToAdd = VehicleBuilder.BuildVehicle(userRequestedVehicleType, paramsDictionary);
             m_Garage.AddVehicle(ownerPhone,ownerName,vehicleToAdd);

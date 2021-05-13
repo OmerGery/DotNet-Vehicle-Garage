@@ -19,8 +19,9 @@ namespace Ex03.GarageLogic
         }
 
         public static List<VehicleParam> GetParams()
-        {
+        {   
             List<VehicleParam> parmatersList = new List<VehicleParam>();
+
             parmatersList.AddRange(Vehicle.GetParams());
             parmatersList.AddRange(ElectricVehicle.GetParams());
             parmatersList.AddRange(Car.GetParams());

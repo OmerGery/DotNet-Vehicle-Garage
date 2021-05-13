@@ -18,13 +18,13 @@ namespace Ex03.GarageLogic
 
             for (int i = 0; i < i_AmountOfTires; i++)
             {
-                Tire tireToAdd = new Tire((string)i_Parameters["m_TireManufacturerName"].m_Value, i_MaxTirePressure);
-                tireToAdd.CurrentPsiTirePressure = (float)i_Parameters["m_CurrentPsiTirePressure"].m_Value;
+                Tire tireToAdd = new Tire((string)i_Parameters["m_TireManufacturerName"].Value, (float)i_Parameters["m_CurrentPsiTirePressure"].Value,  i_MaxTirePressure);
+                tireToAdd.CurrentPsiTirePressure = (float)i_Parameters["m_CurrentPsiTirePressure"].Value;
                 m_Tires.Add(tireToAdd);
             }
 
-            m_ModelName = (string)i_Parameters["m_ModelName"].m_Value;
-            m_LicenseNumber = (string)i_Parameters["m_LicenseNumber"].m_Value;
+            m_ModelName = (string)i_Parameters["m_ModelName"].Value;
+            m_LicenseNumber = (string)i_Parameters["m_LicenseNumber"].Value;
 
         }
 

@@ -11,10 +11,11 @@ namespace Ex03.GarageLogic
         private float m_CurrentPsiTirePressure;
         private float m_MaxPsiTirePressure;
 
-        public Tire(string i_ManufacturerName, float i_MaxPsiTirePressure)
+        public Tire(string i_ManufacturerName, float i_CurrentPsiTirePressure, float i_MaxPsiTirePressure)
         {
             m_ManufacturerName = i_ManufacturerName;
-            m_MaxPsiTirePressure = m_CurrentPsiTirePressure = i_MaxPsiTirePressure;
+            m_CurrentPsiTirePressure = i_CurrentPsiTirePressure;
+            m_MaxPsiTirePressure = i_MaxPsiTirePressure;
         }
 
         public string ManufacturerName
@@ -49,11 +50,11 @@ namespace Ex03.GarageLogic
             set
             {
 
-                if (value + m_CurrentPsiTirePressure > m_MaxPsiTirePressure || value < 0)
+                if (value > m_MaxPsiTirePressure || value < 0)
                 {
-                    throw new ValueOutOfRangeException(0, m_MaxPsiTirePressure - m_CurrentPsiTirePressure);
+                    throw new ValueOutOfRangeException(0, m_MaxPsiTirePressure);
                 }
-                m_CurrentPsiTirePressure += value;
+                m_CurrentPsiTirePressure = value;
             }
         }
         

@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
     {
         public enum eVehicleType
         {
-            ElectricCar,
+            ElectricCar=1,
             FuelCar,
             ElectricBike,
             FuelBike,
@@ -27,6 +27,16 @@ namespace Ex03.GarageLogic
                     newVehicle = new FuelTruck(i_Parameters);
                     break;
                 case eVehicleType.ElectricCar:
+                    newVehicle = new ElectricCar(i_Parameters);
+                    break;
+                case eVehicleType.ElectricBike:
+                    newVehicle = new ElectricBike(i_Parameters);
+                    break;
+                case eVehicleType.FuelBike:
+                    newVehicle = new FuelBike(i_Parameters);
+                    break;
+                case eVehicleType.FuelCar:
+                    newVehicle = new FuelCar(i_Parameters);
                     break;
             }
 
@@ -38,10 +48,20 @@ namespace Ex03.GarageLogic
             List<VehicleParam> paramaters = new List<VehicleParam>(); 
             switch (i_SelectedType)
             {
+                case eVehicleType.ElectricCar:
+                    paramaters = ElectricCar.GetParams();
+                    break;
+                case eVehicleType.ElectricBike:
+                    paramaters = ElectricBike.GetParams();
+                    break;
                 case eVehicleType.FuelTruck:
                     paramaters = FuelTruck.GetParams();
                     break;
-                case eVehicleType.ElectricCar:
+                case eVehicleType.FuelBike:
+                    paramaters = FuelBike.GetParams();
+                    break;
+                case eVehicleType.FuelCar:
+                    paramaters = FuelCar.GetParams();
                     break;
             }
 

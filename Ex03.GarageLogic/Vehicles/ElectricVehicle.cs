@@ -41,7 +41,7 @@ namespace Ex03.GarageLogic
         public ElectricVehicle(Dictionary<string, VehicleParam> i_Parameters, float i_MaxHoursOfBattery,int i_MaxTirePressure, int i_AmountOfTire) : 
             base(i_Parameters, i_MaxTirePressure, i_AmountOfTire)
         {
-            m_CurrentHoursOfBatteryLeft = (float)i_Parameters["m_CurrentHoursOfBatteryLeft"].m_Value;
+            m_CurrentHoursOfBatteryLeft = (float)i_Parameters["m_CurrentHoursOfBatteryLeft"].Value;
             m_MaxHoursOfBattery = i_MaxHoursOfBattery;
         }
         public static List<VehicleParam> GetParams()

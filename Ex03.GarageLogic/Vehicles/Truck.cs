@@ -12,8 +12,8 @@ namespace Ex03.GarageLogic
 
         public Truck(Dictionary<string, VehicleParam> i_Parameters)
         {
-             m_ContainsToxic = (bool)i_Parameters["m_ContainsToxic"].m_Value;
-             m_MaxCarryWeight = (float)i_Parameters["m_MaxCarryWeight"].m_Value;
+             m_ContainsToxic = (bool)i_Parameters["m_ContainsToxic"].Value;
+             m_MaxCarryWeight = (float)i_Parameters["m_MaxCarryWeight"].Value;
         }
         public static List<VehicleParam> GetParams()
         {

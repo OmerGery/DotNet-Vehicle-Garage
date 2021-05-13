@@ -42,8 +42,8 @@ namespace Ex03.GarageLogic
             base(i_Parameters, i_MaxTirePressure, i_AmountOfWheels)
         {
             m_MaxFuelLitersCapacity = i_MaxLitersOfFuel;
-            m_LitersOfFuelLeft = (float)i_Parameters["m_LitersOfFuelLeft"].m_Value;
-            m_FuelType = (GarageEnums.eFuelType)i_Parameters["m_FuelType"].m_Value;
+            m_LitersOfFuelLeft = (float)i_Parameters["m_LitersOfFuelLeft"].Value;
+            m_FuelType = (GarageEnums.eFuelType)i_Parameters["m_FuelType"].Value;
         }
 
         public override float EnergyOfPrecentageLeft

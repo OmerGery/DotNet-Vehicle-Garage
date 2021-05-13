@@ -4,10 +4,42 @@ namespace Ex03.GarageLogic
 {
     public class VehicleParam
     {
-        public string m_Name { get; set; }
-        public string m_FriendlyName { get; set; }
-        public object m_Value { get; set; }
-        public Type m_Type { get; set; }
+        private string m_Name;
+        public string Name
+        {
+            get
+            {
+                return m_Name;
+            }
+        }
+        private string m_FriendlyName;
+        public string FriendlyName
+        {
+            get
+            {
+                return m_FriendlyName;
+            }
+        }
+        private object m_Value;
+        public object Value
+        {
+            get
+            {
+                return m_Value;
+            }
+            set
+            {
+                m_Value = value;
+            }
+        }
+        private Type m_Type;
+        public Type Type
+        {
+            get
+            {
+                return m_Type;
+            }
+        }
 
         public VehicleParam(string i_Name,string i_FriendlyName, Type i_Type )
         {
