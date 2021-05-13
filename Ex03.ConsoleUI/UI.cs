@@ -74,7 +74,7 @@ namespace Ex03.ConsoleUI
         public void AddVehicle()
         {
             string licenseNumber, modelName, wheelManufacturer, ownerPhone, ownerName;
-            int engineVolume, currentPsi;
+            int currentPsi;
             Console.WriteLine("Please choose fuel type out of the following options");
             DisplayEnumOptions<VehicleBuilder.eVehicleType>();
             VehicleBuilder.eVehicleType userRequestedVehicleType = (VehicleBuilder.eVehicleType)GetEnumChoiceFromUser<VehicleBuilder.eVehicleType>();
@@ -88,7 +88,9 @@ namespace Ex03.ConsoleUI
                 param.m_Value = Console.ReadLine();
                 paramsDictionary.Add(param.m_Name,param);
             }
-
+            Vehicle vehicleToAdd = VehicleBuilder.BuildVehicle(userRequestedVehicleType, paramsDictionary, 
+                licenseNumber, modelName, wheelManufacturer, ownerPhone, ownerName , currentPsi);
+            m_Garage.AddVehicle(ownerPhone,ownerName,vehicleToAdd);
 
         }
 

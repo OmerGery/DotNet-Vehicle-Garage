@@ -10,10 +10,11 @@ namespace Ex03.GarageLogic
         protected bool m_ContainsToxic;
         protected float m_MaxCarryWeight;
 
-        public Truck(bool i_ContainsToxic , float i_MaxCarryWeight)
+        public Truck(Dictionary<string, VehicleParam> i_UniqueParameters)
         {
-            m_ContainsToxic = i_ContainsToxic;
-            m_MaxCarryWeight = i_MaxCarryWeight;
+            bool.TryParse(i_UniqueParameters["m_ContainsToxic"].m_Value,out m_ContainsToxic);
+            // m_ContainsToxic =(bool) i_UniqueParameters["m_ContainsToxic"].m_Value;
+            float.TryParse(i_UniqueParameters["m_MaxCarryWeight"].m_Value, out m_MaxCarryWeight);
         }
         public static List<VehicleParam> GetParams()
         {

@@ -17,13 +17,15 @@ namespace Ex03.GarageLogic
             FuelTruck
         }
 
-        public static Vehicle BuildVehicle(eVehicleType i_SelectedType , Dictionary<string,VehicleParam> i_Parameters)
+
+        public static Vehicle BuildVehicle(eVehicleType i_SelectedType , Dictionary<string,VehicleParam> i_UniqueParameters, string i_LicenseNumber, 
+        string i_ModelName, string i_WheelManufacturer, string i_OwnerPhone, string i_OwnerName,int i_CurrentPsi)
         {
             Vehicle newVehicle = null;
             switch(i_SelectedType)
             {
-                case eVehicleType.ElectricBike:
-         //           newVehicle = new ElectricBike(i_Parameters);
+                case eVehicleType.FuelTruck:
+                    newVehicle = new FuelTruck(i_UniqueParameters,i_LicenseNumber,i_ModelName,i_WheelManufacturer,i_OwnerPhone,i_OwnerName,i_CurrentPsi);
                     break;
                 case eVehicleType.ElectricCar:
                     break;
