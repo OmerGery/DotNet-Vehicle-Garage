@@ -9,11 +9,11 @@ namespace Ex03.GarageLogic
         public object m_Value { get; set; }
         public Type m_Type { get; set; }
 
-        public VehicleParam(string i_Name,string i_FriendlyName,object i_Value, Type i_Type )
+        public VehicleParam(string i_Name,string i_FriendlyName, Type i_Type )
         {
             m_Name = i_Name;
             m_FriendlyName = i_FriendlyName;
-            m_Value = i_Value;
+            m_Value = null;
             m_Type = i_Type;
         }
     }

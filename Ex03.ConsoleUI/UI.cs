@@ -68,37 +68,28 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("Please Enter the vehicle's license number");
             string licenseNumber = Console.ReadLine();
-
             return licenseNumber;
         }
 
         public void AddVehicle()
         {
-            VehicleBuilder.eVehicleType i_TypeSelected;
-            string licenseNumber, modelName, wheelManufacturer,ownerPhone,ownerName;
+            string licenseNumber, modelName, wheelManufacturer, ownerPhone, ownerName;
             int engineVolume, currentPsi;
-            GetGeneralVehicleDetails(
-                out ownerPhone,
-                out ownerName, out licenseNumber, out modelName, out wheelManufacturer, out currentPsi);
-            // select type
-            i_TypeSelected = VehicleBuilder.eVehicleType.FuelTruck;
-            List<VehicleParam> parametersList = VehicleBuilder.GetParams(i_TypeSelected);
+            Console.WriteLine("Please choose fuel type out of the following options");
+            DisplayEnumOptions<VehicleBuilder.eVehicleType>();
+            VehicleBuilder.eVehicleType userRequestedVehicleType = (VehicleBuilder.eVehicleType)GetEnumChoiceFromUser<VehicleBuilder.eVehicleType>();
+            GetGeneralVehicleDetails(out ownerPhone, out ownerName, out licenseNumber, out modelName, out wheelManufacturer, out currentPsi);
+            List<VehicleParam> parametersList = VehicleBuilder.GetParams(userRequestedVehicleType);
             Dictionary<string, VehicleParam> paramsDictionary = new Dictionary<string, VehicleParam>();
             foreach(VehicleParam param in parametersList)
             {
                 Console.WriteLine("Please enter {0}", param.m_FriendlyName);
                 //string userInput = Console.ReadLine();
-                
                 param.m_Value = Console.ReadLine();
                 paramsDictionary.Add(param.m_Name,param);
             }
 
-            //}
-            //Vehicle vehicleToAdd = VehicleBuilder.BuildVehicle(i_TypeSelected, paramerList);
-            //    licenseType,
-            //    engineVolume, modelName, licenseNumber, 1, wheelManufacturer,
-            //    currentPsi);
-            //    m_Garage.AddVehicle(ownerPhone,ownerName, bikeToAdd);
+
         }
 
         public static void DisplayEnumOptions<T>()
