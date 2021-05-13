@@ -15,6 +15,7 @@ namespace Ex03.GarageLogic
             Fixed,
             Payed
         }
+
         public enum eFuelType
         {
             Soler = 1,
@@ -22,6 +23,7 @@ namespace Ex03.GarageLogic
             Octan95,
             Octan98
         }
+
         public enum eNumberOfDoors
         {
             Two = 2,
@@ -29,6 +31,7 @@ namespace Ex03.GarageLogic
             Four,
             Five
         }
+
         public enum eColor
         {
             Red,
@@ -36,6 +39,7 @@ namespace Ex03.GarageLogic
             White,
             Black
         }
+
         public enum eBikeLicenceType
         {
             A,

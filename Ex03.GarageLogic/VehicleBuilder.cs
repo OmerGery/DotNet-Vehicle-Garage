@@ -17,7 +17,6 @@ namespace Ex03.GarageLogic
             FuelTruck
         }
 
-
         public static Vehicle BuildVehicle(eVehicleType i_SelectedType , Dictionary<string,VehicleParam> i_Parameters)
         {
             Vehicle newVehicle = null;

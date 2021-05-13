@@ -169,17 +169,14 @@ namespace Ex03.ConsoleUI
             string licenseNumber = GetVehicleLicenseNumber();
             GarageVehicle vehicle = m_Garage.GetVehicleDetails(licenseNumber);
 
-            string vechileDetails = string.Format(
-                @"License number:  {0}
-Model Name: {1}
-Owner's Name:  {2}"
-//            Fix state in the garage: { 3}
-//            Tires model: { 4}
-//            Tires Psi: { 5}
-//...
-//...
-, vehicle.VehicleInGarage.LicenseNumber, "m", vehicle.Owner);
-            
+//            string vechileDetails = string.Format(
+//                @"License number:  {0}
+//Model Name: {1}
+//Owner's Name:  {2}
+//           Fix state in the garage: {3}
+//            Tires model: {4}
+//           Tires Psi: {5} "
+//, vehicle.VehicleInGarage.LicenseNumber, , vehicle.Owner);
         }
         public void DisplayMainMenu()
         {
@@ -221,18 +218,18 @@ Owner's Name:  {2}"
                     }
                     
                 }
-                catch(FormatException formatException)
+                catch (FormatException formatException)
                 {
                     Console.Clear();
                     Console.WriteLine("Please select a valid option");
                 }
 
-                catch(ArgumentException argumentException)
+                catch (ArgumentException argumentException)
                 {
                     Console.Clear();
                     Console.WriteLine(argumentException.Message);
                 }
-                catch(ValueOutOfRangeException valueOutOfRangeException)
+                catch (ValueOutOfRangeException valueOutOfRangeException)
                 {
                     Console.Clear();
                     Console.WriteLine(valueOutOfRangeException.Message);

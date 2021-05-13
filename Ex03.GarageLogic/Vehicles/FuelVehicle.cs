@@ -61,8 +61,6 @@ namespace Ex03.GarageLogic
                            new VehicleParam("m_LitersOfFuelLeft", "Liters of Fuel Left", typeof(float)),
                            new VehicleParam("m_FuelType", "Fuel Type", typeof(GarageEnums.eFuelType)),
                        };
-
         }
-
     }
 }
