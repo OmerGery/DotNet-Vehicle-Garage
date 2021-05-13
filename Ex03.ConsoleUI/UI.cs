@@ -24,6 +24,11 @@ namespace Ex03.ConsoleUI
             DisplayCertainVehicle,
             Quit
         }
+        private enum eVehicleDisplayOptions
+        {
+            NoFilter = 1,
+            WithFilter
+        }
 
         public UI()
         {
@@ -152,9 +157,20 @@ namespace Ex03.ConsoleUI
             m_Garage.PumpVehicle(licenseNumber);
         }
 
-        public void DisplayVehiclesDetails()
+        public void DisplayVehiclesLicenseNumbers()
         {
-            Console.WriteLine("kelev");
+            Console.WriteLine(@"Do you want to filter the license numbers?");
+            DisplayEnumOptions<eVehicleDisplayOptions>();
+            eVehicleDisplayOptions userSelection = (eVehicleDisplayOptions)GetEnumChoiceFromUser<eVehicleDisplayOptions>();
+            switch(userSelection)
+            {
+                case eVehicleDisplayOptions.NoFilter:
+                    //
+                    break;
+                case eVehicleDisplayOptions.WithFilter:
+                    DisplayVehiclesLicenseNumbers();
+                    break;
+            }
         }
 
         public void DisplayCertainVehicle()
@@ -188,7 +204,7 @@ Model Name: {1}
                             AddVehicle();
                             break;
                         case eMainMenuOptions.DisplayVehiclesDetails:
-                            DisplayVehiclesDetails();
+                            DisplayVehiclesLicenseNumbers();
                             break;
                         case eMainMenuOptions.ChangeVehicleStatus:
                             ChangeVehicleStatus();
