@@ -85,11 +85,33 @@ namespace Ex03.ConsoleUI
             //    m_Garage.AddVehicle(ownerPhone,ownerName, bikeToAdd);
         }
 
+        public void DisplayEnumChoiceOptionsToUser<T>()
+        {
+            T selectedOption;
+            Console.WriteLine("Please Enter the" + nameof(T) +  "out of the following options");
+            foreach (string options in Enum.GetNames(typeof(T)))
+            {
+                Console.WriteLine("For {0} enter {1:D}", options,
+                    Enum.Parse(typeof(T), options));
+            }
+        }
+
         public void RefuelVehicle()
         {
-            Console.WriteLine("kelev");
-            //string i_LicenseNumber, GarageEnums.eFuelType i_FuelType,float i_LitersOfFuelToAd
-            //Console.ReadLine()
+            string licenseNumber = GetVehicleLicenseNumber();
+            GarageEnums.eFuelType userRequestedFuelType;
+            int amountOfOptions = Enum.GetNames(typeof(GarageEnums.eFixState)).Length;
+            DisplayEnumChoiceOptionsToUser<GarageEnums.eFuelType>();
+
+            GarageEnums.eFixState.TryParse(Console.ReadLine(), out userRequestedFuelType);
+            if ((int)userRequestedFuelType < 1 || (int)userRequestedFuelType > amountOfOptions)
+                throw new ValueOutOfRangeException(1, amountOfOptions);
+
+            Console.WriteLine("Please enter how many liters of fuel you would like to add");
+            float litersOfFuelToAdd;
+            float.TryParse(Console.ReadLine(), out litersOfFuelToAdd);
+
+            m_Garage.RefuelVehicle(licenseNumber, userRequestedFuelType , litersOfFuelToAdd);
         }
 
         public void ChargeVehicle()
