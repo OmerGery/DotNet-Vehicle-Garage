@@ -18,14 +18,13 @@ namespace Ex03.GarageLogic
         }
 
 
-        public static Vehicle BuildVehicle(eVehicleType i_SelectedType , Dictionary<string,VehicleParam> i_UniqueParameters, string i_LicenseNumber, 
-        string i_ModelName, string i_WheelManufacturer, string i_OwnerPhone, string i_OwnerName,int i_CurrentPsi)
+        public static Vehicle BuildVehicle(eVehicleType i_SelectedType , Dictionary<string,VehicleParam> i_Parameters)
         {
             Vehicle newVehicle = null;
             switch(i_SelectedType)
             {
                 case eVehicleType.FuelTruck:
-                    newVehicle = new FuelTruck(i_UniqueParameters,i_LicenseNumber,i_ModelName,i_WheelManufacturer,i_OwnerPhone,i_OwnerName,i_CurrentPsi);
+                    newVehicle = new FuelTruck(i_Parameters);
                     break;
                 case eVehicleType.ElectricCar:
                     break;
@@ -40,7 +39,7 @@ namespace Ex03.GarageLogic
             switch (i_SelectedType)
             {
                 case eVehicleType.FuelTruck:
-                    paramaters = Truck.GetParams();
+                    paramaters = FuelTruck.GetParams();
                     break;
                 case eVehicleType.ElectricCar:
                     break;

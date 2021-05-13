@@ -12,22 +12,26 @@ namespace Ex03.GarageLogic
         private float m_EnergyPercentageLeft;
         private List<Tire> m_Tires;
 
-        public Vehicle(string i_ModelName, string i_LicenseNumber, float i_EnergyPercentageLeft, string i_TireManufacturerName, int i_CurrentTirePressure, int i_MaxTirePressure, int i_AmountOfTires)
+        public Vehicle(Dictionary<string, VehicleParam> i_Parameters, int i_MaxTirePressure, int i_AmountOfTires)
         {
             m_Tires = new List<Tire>(i_AmountOfTires);
-            for(int i=0;i<i_AmountOfTires;i++)
+
+            for (int i = 0; i < i_AmountOfTires; i++)
             {
-                Tire tireToAdd = new Tire(i_TireManufacturerName, i_MaxTirePressure);
-                tireToAdd.CurrentPsiTirePressure = i_CurrentTirePressure;
+                Tire tireToAdd = new Tire((string)i_Parameters["m_TireManufacturerName"].m_Value, i_MaxTirePressure);
+                tireToAdd.CurrentPsiTirePressure = (float)i_Parameters["m_CurrentPsiTirePressure"].m_Value;
                 m_Tires.Add(tireToAdd);
             }
 
-            m_ModelName = i_ModelName;
-            m_EnergyPercentageLeft = i_EnergyPercentageLeft;
-            m_LicenseNumber = i_LicenseNumber;
+            m_ModelName = (string)i_Parameters["m_ModelName"].m_Value;
+            m_LicenseNumber = (string)i_Parameters["m_LicenseNumber"].m_Value;
 
         }
 
+        public abstract float EnergyOfPrecentageLeft
+        {
+            get;
+        }
         public string LicenseNumber
         {
             get
@@ -41,6 +45,18 @@ namespace Ex03.GarageLogic
             {
                 return m_Tires;
             }
+        }
+
+        public static List<VehicleParam> GetParams()
+        {
+            return new List<VehicleParam>()
+           {
+               new VehicleParam("m_ModelName", "Model Name", typeof(string)),
+               new VehicleParam("m_LicenseNumber", "License Number", typeof(string)),
+               new VehicleParam("m_TireManufacturerName", "Name of The Tires Manufacturer", typeof(string)),
+               new VehicleParam("m_CurrentPsiTirePressure", "Current PSI pressure of tires", typeof(float)),
+           };
+
         }
     }
 }

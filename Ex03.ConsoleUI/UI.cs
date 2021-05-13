@@ -34,21 +34,6 @@ namespace Ex03.ConsoleUI
         {
             m_Garage = new Garage();
         }
-        public void GetLicenseNumberAndModelNameFromUser(out string o_LicenseNumber, out string o_ModelName)
-        {
-            Console.WriteLine("Please enter the vehicle license number:");
-            o_LicenseNumber = Console.ReadLine();
-            Console.WriteLine("Please enter the vehicle model name:");
-            o_ModelName = Console.ReadLine();
-        }
-
-        public void GetWheelInformation(out string o_Manufacturer, out int o_CurrentPsi)
-        {
-            Console.WriteLine("Please enter the wheel manufacturer name:");
-            o_Manufacturer = Console.ReadLine();
-            Console.WriteLine("Please enter the current PSI of the wheels:");
-            int.TryParse(Console.ReadLine(), out o_CurrentPsi);
-        }
 
         public void GetOwnerDetails(out string o_OwnerPhone, out string o_OwnerName)
         {
@@ -57,28 +42,21 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Please enter the owner name:");
             o_OwnerName = Console.ReadLine();
         }
-        public void GetGeneralVehicleDetails(out string o_OwnerPhone,out string o_OwnerName, out string o_LicenseNumber, out string o_ModelName, out string o_WheelManufacturer, out int o_CurrentPsi)//, out int o_MaxPsi)
-        {
-            GetOwnerDetails(out o_OwnerPhone,out o_OwnerName);
-            GetLicenseNumberAndModelNameFromUser(out o_LicenseNumber, out o_ModelName);
-            GetWheelInformation(out o_WheelManufacturer, out o_CurrentPsi);
-        }
 
         public string GetVehicleLicenseNumber()
         {
             Console.WriteLine("Please Enter the vehicle's license number");
             string licenseNumber = Console.ReadLine();
+
             return licenseNumber;
         }
 
         public void AddVehicle()
         {
-            string licenseNumber, modelName, wheelManufacturer, ownerPhone, ownerName;
-            int currentPsi;
-            Console.WriteLine("Please choose fuel type out of the following options");
+            GetOwnerDetails(out string ownerPhone, out string ownerName);
+            Console.WriteLine("Please choose the vehicle type out of the following options");
             DisplayEnumOptions<VehicleBuilder.eVehicleType>();
             VehicleBuilder.eVehicleType userRequestedVehicleType = (VehicleBuilder.eVehicleType)GetEnumChoiceFromUser<VehicleBuilder.eVehicleType>();
-            GetGeneralVehicleDetails(out ownerPhone, out ownerName, out licenseNumber, out modelName, out wheelManufacturer, out currentPsi);
             List<VehicleParam> parametersList = VehicleBuilder.GetParams(userRequestedVehicleType);
             Dictionary<string, VehicleParam> paramsDictionary = new Dictionary<string, VehicleParam>();
             foreach(VehicleParam param in parametersList)
@@ -88,8 +66,7 @@ namespace Ex03.ConsoleUI
                 param.m_Value = Console.ReadLine();
                 paramsDictionary.Add(param.m_Name,param);
             }
-            Vehicle vehicleToAdd = VehicleBuilder.BuildVehicle(userRequestedVehicleType, paramsDictionary, 
-                licenseNumber, modelName, wheelManufacturer, ownerPhone, ownerName , currentPsi);
+            Vehicle vehicleToAdd = VehicleBuilder.BuildVehicle(userRequestedVehicleType, paramsDictionary);
             m_Garage.AddVehicle(ownerPhone,ownerName,vehicleToAdd);
 
         }

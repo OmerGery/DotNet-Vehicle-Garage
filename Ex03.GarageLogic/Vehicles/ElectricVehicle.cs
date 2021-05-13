@@ -27,14 +27,29 @@ namespace Ex03.GarageLogic
                 }
             }
         }
+
         private float m_MaxHoursOfBattery;
 
-        public ElectricVehicle(float i_MaxHoursOfBattery, string i_ModelName, string i_LicenseNumber, float i_HoursOfBatteryLeft, string i_TireManufacturerName, int i_CurrentTirePressure, int i_TirePressure, int i_AmountOfTire) : 
-            base(i_ModelName,  i_LicenseNumber, (i_HoursOfBatteryLeft/i_MaxHoursOfBattery) * 100,i_TireManufacturerName,i_CurrentTirePressure, i_TirePressure,  i_AmountOfTire)
+        public override float EnergyOfPrecentageLeft
         {
-            m_CurrentHoursOfBatteryLeft = i_HoursOfBatteryLeft;
-            m_MaxHoursOfBattery = i_MaxHoursOfBattery;
+            get
+            {
+                return m_CurrentHoursOfBatteryLeft * 100 / m_MaxHoursOfBattery;
+            }
         }
 
+        public ElectricVehicle(Dictionary<string, VehicleParam> i_Parameters, float i_MaxHoursOfBattery,int i_MaxTirePressure, int i_AmountOfTire) : 
+            base(i_Parameters, i_MaxTirePressure, i_AmountOfTire)
+        {
+            m_CurrentHoursOfBatteryLeft = (float)i_Parameters["m_CurrentHoursOfBatteryLeft"].m_Value;
+            m_MaxHoursOfBattery = i_MaxHoursOfBattery;
+        }
+        public static List<VehicleParam> GetParams()
+        {
+            return new List<VehicleParam>()
+                       {
+                           new VehicleParam("m_CurrentHoursOfBatteryLeft", "Hours of Battery Left", typeof(float))
+                       };
+        }
     }
 }

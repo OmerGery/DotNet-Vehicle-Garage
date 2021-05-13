@@ -7,14 +7,22 @@ namespace Ex03.GarageLogic
 {
     public class Bike
     {
-        private GarageEnums.eBikeLicenceType m_LicenceType;
+        private GarageEnums.eBikeLicenceType m_LicenseType;
         private int m_EngineCcVolume;
 
-        public Bike(GarageEnums.eBikeLicenceType i_LicenceType,int i_EngineCcVolume)
+        public Bike(Dictionary<string, VehicleParam> i_Parameters)
         {
-            m_LicenceType = i_LicenceType;
-            m_EngineCcVolume = i_EngineCcVolume;
+            m_LicenseType = (GarageEnums.eBikeLicenceType)i_Parameters["m_LicenseType"].m_Value;
+            m_EngineCcVolume = (int)i_Parameters["m_EngineCcVolume"].m_Value;
         }
 
+        public static List<VehicleParam> GetParams()
+        {
+            return new List<VehicleParam>()
+                       {
+                           new VehicleParam("m_LicenseType", "Kind of Bike License", typeof(GarageEnums.eBikeLicenceType)),
+                           new VehicleParam("m_EngineCcVolume", "Engine Volume", typeof(int))
+                       };
+        }
     }
 }

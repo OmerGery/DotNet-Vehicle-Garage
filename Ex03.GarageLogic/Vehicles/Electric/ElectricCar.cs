@@ -12,14 +12,20 @@ namespace Ex03.GarageLogic
         private const float k_MaxHoursOfBattery = (float)3.2;
         private Car m_Car;
 
-        public ElectricCar(string i_ModelName, string i_LicenseNumber, float i_HoursOfBatteryLeft, string i_TireManufacturerName, int i_CurrentTirePressure)
-            : base(k_MaxHoursOfBattery, i_ModelName, i_LicenseNumber, i_HoursOfBatteryLeft, i_TireManufacturerName, i_CurrentTirePressure, k_MaxPsiOfWheels, k_AmountOfWheels)
+        public ElectricCar(Dictionary<string, VehicleParam> i_Parameters)
+            : base(i_Parameters, k_MaxHoursOfBattery, k_MaxPsiOfWheels, k_AmountOfWheels)
         {
-            m_Car = new Car(GarageEnums.eColor.Black, GarageEnums.eNumberOfDoors.Five);
+            m_Car = new Car(i_Parameters);
         }
-        //public static List<VehicleParam> GetParams()
-        //{
-        //    return new List<VehicleParam>() { new VehicleParam() { Name = "m_ContainsToxic", FriendlyName = "Contains Toxic", Type = typeof(bool) } };
-        //}
+
+        public static List<VehicleParam> GetParams()
+        {
+            List<VehicleParam> parmatersList = new List<VehicleParam>();
+            parmatersList.AddRange(Vehicle.GetParams());
+            parmatersList.AddRange(ElectricVehicle.GetParams());
+            parmatersList.AddRange(Car.GetParams());
+
+            return parmatersList;
+        }
     }
 }

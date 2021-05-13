@@ -9,17 +9,22 @@ namespace Ex03.GarageLogic
     {
         private const int k_AmountOfWheels = 2;
         private const int k_MaxPsiOfWheels = 30;
-        private const float k_FuelTankInLiters = (float)6;
+        private const float k_MaxFuelTankInLiters = (float)6;
         private Bike m_Bike;
 
-        public FuelBike(GarageEnums.eFuelType i_FuelType, GarageEnums.eBikeLicenceType i_BikeLicenseType,int i_EngineCcVolume, string i_ModelName, string i_LicenseNumber, float i_EnergyPercentageLeft, string i_TireManufacturerName, int i_CurrentTirePressure) :
-            base(i_FuelType, k_FuelTankInLiters,  i_ModelName,  i_LicenseNumber,  i_EnergyPercentageLeft, i_TireManufacturerName, i_CurrentTirePressure, k_MaxPsiOfWheels, k_AmountOfWheels)
+        public FuelBike(Dictionary<string, VehicleParam> i_Parameters) :
+            base(i_Parameters, k_MaxFuelTankInLiters, k_MaxPsiOfWheels, k_AmountOfWheels)
         {
-            m_Bike = new Bike(i_BikeLicenseType, i_EngineCcVolume);
+            m_Bike = new Bike(i_Parameters);
         }
-        //public static List<VehicleParam> GetParams()
-        //{
-        //    return new List<VehicleParam>() { new VehicleParam() { Name = "m_ContainsToxic", FriendlyName = "Contains Toxic", Type = typeof(bool) } };
-        //}
+        public static List<VehicleParam> GetParams()
+        {
+            List<VehicleParam> parmatersList = new List<VehicleParam>();
+            parmatersList.AddRange(Vehicle.GetParams());
+            parmatersList.AddRange(FuelVehicle.GetParams());
+            parmatersList.AddRange(Bike.GetParams());
+
+            return parmatersList;
+        }
     }
 }
