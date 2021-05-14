@@ -18,7 +18,7 @@ namespace Ex03.ConsoleUI
         private enum eMainMenuOptions
         {
             AddVehicle = 1,
-            DisplayVehiclesDetails,
+            DisplayVehiclesLicenseNumbers,
             ChangeVehicleStatus,
             PumpVehicleTires,
             RefuelVehicle,
@@ -114,8 +114,8 @@ namespace Ex03.ConsoleUI
 
             Console.WriteLine("Please enter how many liters of fuel you would like to add");
             float.TryParse(Console.ReadLine(), out float litersOfFuelToAdd);
-
             m_Garage.RefuelVehicle(licenseNumber, userRequestedFuelType, litersOfFuelToAdd);
+            Console.WriteLine("Vehicle has been refuled");
         }
 
         public void ChargeVehicle()
@@ -124,6 +124,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Please enter how many minutes to charge:");
             float.TryParse(Console.ReadLine(), out float minutesToCharge);
             m_Garage.ChargeVehicle(licenseNumber, minutesToCharge / 60);
+            Console.WriteLine("Vehicle has been recharged");
         }
 
         private void ChangeVehicleStatus()
@@ -133,18 +134,20 @@ namespace Ex03.ConsoleUI
             DisplayEnumOptions<GarageEnums.eFixState>();
             GarageEnums.eFixState newFixState = (GarageEnums.eFixState)GetEnumChoiceFromUser<GarageEnums.eFixState>();
             m_Garage.ChangeVehicleState(licenseNumber, newFixState);
+            Console.WriteLine("Vehicle status was changed");
         }
 
         private void PumpVehicleTires()
         {
             string licenseNumber = GetVehicleLicenseNumber();
             m_Garage.PumpVehicle(licenseNumber);
+            Console.WriteLine("All vehicle tires were inflated");
         }
 
         public void DisplayVehiclesLicenseNumbers()
         {
             List<GarageVehicle> garageVehiclesToDisplay = new List<GarageVehicle>();
-            Console.WriteLine(@"Do you want to filter the license numbers?");
+            Console.WriteLine(@"Do you want to filter the license numbers by fix state?");
             DisplayEnumOptions<eVehicleDisplayOptions>();
             eVehicleDisplayOptions userSelection = (eVehicleDisplayOptions)GetEnumChoiceFromUser<eVehicleDisplayOptions>();
             switch(userSelection)
@@ -194,7 +197,7 @@ namespace Ex03.ConsoleUI
                         case eMainMenuOptions.AddVehicle:
                             AddVehicle();
                             break;
-                        case eMainMenuOptions.DisplayVehiclesDetails:
+                        case eMainMenuOptions.DisplayVehiclesLicenseNumbers:
                             DisplayVehiclesLicenseNumbers();
                             break;
                         case eMainMenuOptions.ChangeVehicleStatus:
@@ -211,6 +214,7 @@ namespace Ex03.ConsoleUI
                             break;
                         case eMainMenuOptions.DisplayCertainVehicle:
                             DisplayCertainVehicle();
+                            Thread.Sleep(k_SleepTime);
                             break;
                         case eMainMenuOptions.Quit:
                             m_quitFlag = true;
