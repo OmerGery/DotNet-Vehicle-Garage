@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic
     {
         private const int k_AmountOfWheels = 16;
         private const int k_MaxPsiOfWheels = 26;
-        private const float k_MaxLitersOfFuel = (float)120;
+        private const float k_MaxLitersOfFuel = 120;
         private const GarageEnums.eFuelType k_FuelType = GarageEnums.eFuelType.Soler;
         public Truck m_Truck;
 
