@@ -23,8 +23,17 @@ namespace Ex03.GarageLogic
                 {
                     throw new ValueOutOfRangeException(0, m_MaxHoursOfBattery - m_CurrentHoursOfBatteryLeft, "Battery Amount");
                 }
+
                 m_CurrentHoursOfBatteryLeft = value;
             }
+        }
+
+        public static new List<VehicleParam> GetParams()
+        {
+            return new List<VehicleParam>()
+                       {
+                           new VehicleParam("m_CurrentHoursOfBatteryLeft", "Hours of Battery Left", typeof(float))
+                       };
         }
 
         public override string ToString()
@@ -52,14 +61,6 @@ m_MaxHoursOfBattery);
         {
             m_MaxHoursOfBattery = i_MaxHoursOfBattery;
             CurrentHoursOfBatteryLeft = (float)i_Parameters["m_CurrentHoursOfBatteryLeft"].Value;
-        }
-
-        public static List<VehicleParam> GetParams()
-        {
-            return new List<VehicleParam>()
-                       {
-                           new VehicleParam("m_CurrentHoursOfBatteryLeft", "Hours of Battery Left", typeof(float))
-                       };
         }
     }
 }

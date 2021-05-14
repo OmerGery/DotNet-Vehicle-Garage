@@ -9,16 +9,17 @@ namespace Ex03.GarageLogic
     {
         private const int k_AmountOfWheels = 2;
         private const int k_MaxPsiOfWheels = 30;
-        private const float k_MaxFuelTankInLiters = (float)6;
+        private const float k_MaxFuelTankInLiters = 6;
+        private const GarageEnums.eFuelType k_FuelType = GarageEnums.eFuelType.Octan98;
         private Bike m_Bike;
 
         public FuelBike(Dictionary<string, VehicleParam> i_Parameters) :
-            base(i_Parameters, k_MaxFuelTankInLiters, k_MaxPsiOfWheels, k_AmountOfWheels)
+            base(i_Parameters, k_MaxFuelTankInLiters, k_MaxPsiOfWheels, k_AmountOfWheels,k_FuelType)
         {
             m_Bike = new Bike(i_Parameters);
         }
 
-        public static List<VehicleParam> GetParams()
+        public static new List<VehicleParam> GetParams()
         {
             List<VehicleParam> parmatersList = new List<VehicleParam>();
             parmatersList.AddRange(Vehicle.GetParams());

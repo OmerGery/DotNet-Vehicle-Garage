@@ -52,7 +52,8 @@ namespace Ex03.GarageLogic
         {
             string details = string.Format(
 @"Vehicle fix state: {0}
-", m_FixState);
+",
+m_FixState);
             details += m_Owner.ToString() + VehicleInGarage.ToString();
             return details;
         }

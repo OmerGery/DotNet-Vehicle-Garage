@@ -64,7 +64,8 @@ namespace Ex03.GarageLogic
 @"Model Name: {0}
 License Number: {1}
 Amount Of Wheels: {2} 
-", m_ModelName,
+",
+m_ModelName,
 m_LicenseNumber,
 m_Tires.Count);
             details += m_Tires[0].ToString();

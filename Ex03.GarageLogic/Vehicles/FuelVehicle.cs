@@ -9,6 +9,7 @@ namespace Ex03.GarageLogic
     {
         private float m_LitersOfFuelLeft;
         private float m_MaxFuelLitersCapacity;
+        private GarageEnums.eFuelType m_FuelType;
 
         public float LitersOfFuelLeft
         {
@@ -28,8 +29,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-        private GarageEnums.eFuelType m_FuelType;
-
         public GarageEnums.eFuelType FuelType
         {
             get
@@ -38,12 +37,12 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public FuelVehicle(Dictionary<string, VehicleParam> i_Parameters, float i_MaxLitersOfFuel, int i_MaxTirePressure, int i_AmountOfWheels) : 
+        public FuelVehicle(Dictionary<string, VehicleParam> i_Parameters, float i_MaxLitersOfFuel, int i_MaxTirePressure, int i_AmountOfWheels,GarageEnums.eFuelType i_FuelType) : 
             base(i_Parameters, i_MaxTirePressure, i_AmountOfWheels)
         {
             m_MaxFuelLitersCapacity = i_MaxLitersOfFuel;
             LitersOfFuelLeft = (float)i_Parameters["m_LitersOfFuelLeft"].Value;
-            m_FuelType = (GarageEnums.eFuelType)i_Parameters["m_FuelType"].Value;
+            m_FuelType = i_FuelType;
         }
 
         public override float EnergyOfPrecentageLeft
@@ -54,12 +53,11 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public static List<VehicleParam> GetParams()
+        public static new List<VehicleParam> GetParams()
         {
             return new List<VehicleParam>()
                        {
                            new VehicleParam("m_LitersOfFuelLeft", "Liters of Fuel Left", typeof(float)),
-                           new VehicleParam("m_FuelType", "Fuel Type", typeof(GarageEnums.eFuelType)),
                        };
         }
 
