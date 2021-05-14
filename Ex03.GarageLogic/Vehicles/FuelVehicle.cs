@@ -10,6 +10,8 @@ namespace Ex03.GarageLogic
 
 
         private float m_LitersOfFuelLeft;
+        private float m_MaxFuelLitersCapacity;
+
         public float LitersOfFuelLeft
         {
             get
@@ -18,14 +20,15 @@ namespace Ex03.GarageLogic
             }
             set
             {
-                if (value  > m_MaxFuelLitersCapacity ||  value < 0)
-                { 
+                if(value > m_MaxFuelLitersCapacity || value < 0)
+                {
                     throw new ValueOutOfRangeException(0, m_MaxFuelLitersCapacity, "Fuel's liters capacity");
                 }
-                m_MaxFuelLitersCapacity = value;
+
+                m_LitersOfFuelLeft = value;
             }
         }
-        private float m_MaxFuelLitersCapacity;
+
         private GarageEnums.eFuelType m_FuelType;
 
         public GarageEnums.eFuelType FuelType
@@ -58,6 +61,18 @@ namespace Ex03.GarageLogic
                            new VehicleParam("m_LitersOfFuelLeft", "Liters of Fuel Left", typeof(float)),
                            new VehicleParam("m_FuelType", "Fuel Type", typeof(GarageEnums.eFuelType)),
                        };
+        }
+
+        public override string ToString()
+        {
+            string baseDetails = base.ToString();
+            string details = string.Format(
+@"Liters of Fuel Left: {0}
+Liters of Fuel Maximum capacity: {1}
+",
+                m_LitersOfFuelLeft,
+                m_MaxFuelLitersCapacity);
+            return baseDetails + details;
         }
     }
 }

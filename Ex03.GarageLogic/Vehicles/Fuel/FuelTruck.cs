@@ -23,6 +23,13 @@ namespace Ex03.GarageLogic
             parmatersList.AddRange(Truck.GetParams());
             return parmatersList;
         }
+        public override string ToString()
+        {
+            string baseDetails = base.ToString();
+            string truckDetails = m_Truck.ToString();
+            string details = baseDetails + truckDetails;
+            return details;
+        }
 
     }
 }

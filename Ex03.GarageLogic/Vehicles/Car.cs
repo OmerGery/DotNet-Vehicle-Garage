@@ -23,5 +23,15 @@ namespace Ex03.GarageLogic
                            new VehicleParam("m_NumberOfDoors", "Number of Doors", typeof(GarageEnums.eNumberOfDoors))
                        };
         }
+
+        public override string ToString()
+        {
+            string details = string.Format(
+@"Car Color: {0}
+Number of Doors: {1}",
+m_CarColor,
+m_NumberOfDoors);
+            return details;
+        }
     }
 }

@@ -35,6 +35,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GarageEnums.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="VehicleOwner.cs" />
     <Compile Include="VehicleParam.cs" />

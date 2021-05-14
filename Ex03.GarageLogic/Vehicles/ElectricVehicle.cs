@@ -31,7 +31,7 @@ namespace Ex03.GarageLogic
             string baseDetails = base.ToString();
             string details = string.Format(
 @"Hours Of Battery Left: {0}
-Max Hours Of Battery {1}
+Max Hours Of Battery: {1}
 ",
 m_CurrentHoursOfBatteryLeft,
 m_MaxHoursOfBattery);

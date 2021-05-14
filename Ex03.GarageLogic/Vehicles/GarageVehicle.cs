@@ -50,7 +50,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             string details = string.Format(
-@"Vehicle fix state:{0}
+@"Vehicle fix state: {0}
 ", m_FixState);
             details += m_Owner.ToString() + VehicleInGarage.ToString();
             return details;

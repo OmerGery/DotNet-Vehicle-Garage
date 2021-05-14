@@ -28,5 +28,12 @@ namespace Ex03.GarageLogic
 
             return parmatersList;
         }
+        public override string ToString()
+        {
+            string baseDetails = base.ToString();
+            string carDetails = m_Car.ToString();
+            string details = baseDetails + carDetails;
+            return details;
+        }
     }
 }

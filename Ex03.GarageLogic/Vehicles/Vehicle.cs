@@ -62,8 +62,8 @@ namespace Ex03.GarageLogic
         {
             string details = string.Format(
 @"Model Name: {0}
-License Number {1}
-Amount Of Wheels {2} 
+License Number: {1}
+Amount Of Wheels: {2} 
 ",m_ModelName,
 m_LicenseNumber,
 m_Tires.Count);

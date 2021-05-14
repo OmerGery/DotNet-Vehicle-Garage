@@ -4,15 +4,16 @@ using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
     public class UI
     {
+        private const int k_SleepTime = 3000;
         private bool m_quitFlag;
         private Garage m_Garage;
-
         private enum eMainMenuOptions
         {
             AddVehicle = 1,
@@ -75,9 +76,10 @@ namespace Ex03.ConsoleUI
                 }
                 paramsDictionary.Add(param.Name, param);
             }
+
             Vehicle vehicleToAdd = VehicleBuilder.BuildVehicle(userRequestedVehicleType, paramsDictionary);
             m_Garage.AddVehicle(ownerPhone,ownerName,vehicleToAdd);
-
+            Console.WriteLine("Vehicle was added to the garage");
         }
 
         public static void DisplayEnumOptions<T>()
@@ -171,20 +173,22 @@ namespace Ex03.ConsoleUI
             GarageVehicle vehicle = m_Garage.GetVehicleDetails(licenseNumber);
             Console.WriteLine(vehicle.ToString());
         }
+
         public void DisplayMainMenu()
         {
             while(!m_quitFlag)
             {
+                Console.Clear();
                 Console.WriteLine(@"Please choose an option from the menu");
                 try
                 {
                     DisplayEnumOptions<eMainMenuOptions>();
                     eMainMenuOptions userSelection = (eMainMenuOptions)GetEnumChoiceFromUser<eMainMenuOptions>();
                     Console.Clear();
+
                     switch (userSelection)
                     {
                         case eMainMenuOptions.AddVehicle:
-
                             AddVehicle();
                             break;
                         case eMainMenuOptions.DisplayVehiclesDetails:
@@ -209,24 +213,23 @@ namespace Ex03.ConsoleUI
                             m_quitFlag = true;
                             break;
                     }
-                    
                 }
                 catch (FormatException formatException)
                 {
-                    Console.Clear();
                     Console.WriteLine("Please select a valid option");
                 }
 
                 catch (ArgumentException argumentException)
                 {
-                    Console.Clear();
                     Console.WriteLine(argumentException.Message);
                 }
+
                 catch (ValueOutOfRangeException valueOutOfRangeException)
                 {
-                    Console.Clear();
                     Console.WriteLine(valueOutOfRangeException.Message);
                 }
+
+                Thread.Sleep(k_SleepTime);
             }
         }
     }

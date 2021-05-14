@@ -57,9 +57,9 @@
         public override string ToString()
         {
             return string.Format(
-@"Wheel Manufacturer Name:{0} 
-Current Psi Tire Pressure:{1}
-Max Psi Tire Pressure:{2}
+@"Wheel Manufacturer Name: {0} 
+Current Psi Tire Pressure: {1}
+Max Psi Tire Pressure: {2}
 ",
 m_ManufacturerName,
 m_CurrentPsiTirePressure,

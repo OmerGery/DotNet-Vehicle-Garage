@@ -24,6 +24,17 @@ namespace Ex03.GarageLogic
                        };
         }
 
+        public override string ToString()
+        {
+            string details = string.Format(
+@"Toxic Contents: {0}
+Maximum Carry Weight: {1}",
+m_ContainsToxic,
+m_MaxCarryWeight);
+
+            return details;
+        }
+
     }
 
 }
