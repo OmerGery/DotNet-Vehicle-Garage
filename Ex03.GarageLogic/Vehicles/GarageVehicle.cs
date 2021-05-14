@@ -46,5 +46,14 @@ namespace Ex03.GarageLogic
                 return m_VehicleInGarage;
             }
         }
+
+        public override string ToString()
+        {
+            string details = string.Format(
+@"Vehicle fix state:{0}
+", m_FixState);
+            details += m_Owner.ToString() + VehicleInGarage.ToString();
+            return details;
+        }
     }
 }

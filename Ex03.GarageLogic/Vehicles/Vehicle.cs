@@ -9,7 +9,6 @@ namespace Ex03.GarageLogic
     {
         private string m_ModelName;
         private string m_LicenseNumber;
-        private float m_EnergyPercentageLeft;
         private List<Tire> m_Tires;
 
         public Vehicle(Dictionary<string, VehicleParam> i_Parameters, int i_MaxTirePressure, int i_AmountOfTires)
@@ -57,6 +56,19 @@ namespace Ex03.GarageLogic
                new VehicleParam("m_CurrentPsiTirePressure", "Current PSI pressure of tires", typeof(float)),
            };
 
+        }
+
+        public override string ToString()
+        {
+            string details = string.Format(
+@"Model Name: {0}
+License Number {1}
+Amount Of Wheels {2} 
+",m_ModelName,
+m_LicenseNumber,
+m_Tires.Count);
+            details += m_Tires[0].ToString();
+            return details;
         }
     }
 }

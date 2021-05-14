@@ -95,7 +95,7 @@ namespace Ex03.ConsoleUI
             int.TryParse(Console.ReadLine(), out int userRequestedFuelType);
             if(userRequestedFuelType < 1 || userRequestedFuelType > amountOfOptions)
             {
-                throw new ValueOutOfRangeException(1, amountOfOptions);
+                throw new ValueOutOfRangeException(1, amountOfOptions, "options");
             }
 
             return userRequestedFuelType;
@@ -116,8 +116,8 @@ namespace Ex03.ConsoleUI
 
         public void ChargeVehicle()
         {
-            Console.WriteLine(@"please enter license number and minutes to charge");
             string licenseNumber = GetVehicleLicenseNumber();
+            Console.WriteLine("Please enter how many minutes to charge:");
             float.TryParse(Console.ReadLine(), out float minutesToCharge);
             m_Garage.ChargeVehicle(licenseNumber, minutesToCharge / 60);
         }
@@ -128,6 +128,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Please Enter the vehicle's new fix state out of the following options");
             DisplayEnumOptions<GarageEnums.eFixState>();
             GarageEnums.eFixState newFixState = (GarageEnums.eFixState)GetEnumChoiceFromUser<GarageEnums.eFixState>();
+            m_Garage.ChangeVehicleState(licenseNumber,newFixState);
         }
 
         private void PumpVehicleTires()
@@ -145,7 +146,7 @@ namespace Ex03.ConsoleUI
             switch(userSelection)
             {
                 case eVehicleDisplayOptions.NoFilter:
-                    garageVehiclesToDisplay = m_Garage.GarageVehicles;
+                    garageVehiclesToDisplay = m_Garage.GetAllGarageVehicles();
                     break;
                 case eVehicleDisplayOptions.WithFilter:
                     DisplayEnumOptions<GarageEnums.eFixState>();
@@ -168,15 +169,7 @@ namespace Ex03.ConsoleUI
         {
             string licenseNumber = GetVehicleLicenseNumber();
             GarageVehicle vehicle = m_Garage.GetVehicleDetails(licenseNumber);
-
-//            string vechileDetails = string.Format(
-//                @"License number:  {0}
-//Model Name: {1}
-//Owner's Name:  {2}
-//           Fix state in the garage: {3}
-//            Tires model: {4}
-//           Tires Psi: {5} "
-//, vehicle.VehicleInGarage.LicenseNumber, , vehicle.Owner);
+            Console.WriteLine(vehicle.ToString());
         }
         public void DisplayMainMenu()
         {

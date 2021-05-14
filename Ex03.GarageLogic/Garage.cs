@@ -53,22 +53,18 @@ namespace Ex03.GarageLogic
     {
         private Dictionary <string,GarageVehicle> m_GarageVehicles;
 
-        public List<GarageVehicle> GarageVehicles
-        {
-            get
-            {
-                List<GarageVehicle> garageVehiclesList = new List<GarageVehicle>(m_GarageVehicles.Keys.Count);
-                return garageVehiclesList;
-            }
-        }
-
         public Garage()
         {
             m_GarageVehicles = new Dictionary<string, GarageVehicle>();
         }
         public void AddVehicle(string i_OwnerPhone,string i_OwnerName,Vehicle i_NewVehicle)
         {
-            // to add exception , to check
+            string newVehicleLicenseNumber = i_NewVehicle.LicenseNumber;
+            if(m_GarageVehicles.ContainsKey(newVehicleLicenseNumber))
+            {
+                m_GarageVehicles[newVehicleLicenseNumber].FixState = GarageEnums.eFixState.BeingFixed;
+                throw new ArgumentException("Vehicle Already exist - Moved the vehicle to being fixed state.");
+            }
             GarageVehicle newVehicle = new GarageVehicle(i_OwnerName, i_OwnerPhone, i_NewVehicle);
             m_GarageVehicles.Add(i_NewVehicle.LicenseNumber, newVehicle);
         }
@@ -84,6 +80,15 @@ namespace Ex03.GarageLogic
                 }
             }
 
+            return vechilesWithRequestedFixState;
+        }
+        public List<GarageVehicle> GetAllGarageVehicles()
+        {
+            List<GarageVehicle> vechilesWithRequestedFixState = new List<GarageVehicle>();
+            foreach(KeyValuePair<string, GarageVehicle> garageVehicle in m_GarageVehicles)
+            {
+                vechilesWithRequestedFixState.Add(garageVehicle.Value);
+            }
             return vechilesWithRequestedFixState;
         }
 

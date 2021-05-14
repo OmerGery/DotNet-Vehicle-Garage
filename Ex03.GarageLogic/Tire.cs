@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public class Tire
     {
@@ -17,6 +12,7 @@ namespace Ex03.GarageLogic
             m_CurrentPsiTirePressure = i_CurrentPsiTirePressure;
             m_MaxPsiTirePressure = i_MaxPsiTirePressure;
         }
+        
 
         public string ManufacturerName
         {
@@ -52,12 +48,23 @@ namespace Ex03.GarageLogic
 
                 if (value > m_MaxPsiTirePressure || value < 0)
                 {
-                    throw new ValueOutOfRangeException(0, m_MaxPsiTirePressure);
+                    throw new ValueOutOfRangeException(0, m_MaxPsiTirePressure , "Tire Psi");
                 }
                 m_CurrentPsiTirePressure = value;
             }
         }
-        
+
+        public override string ToString()
+        {
+            return string.Format(
+@"Wheel Manufacturer Name:{0} 
+Current Psi Tire Pressure:{1}
+Max Psi Tire Pressure:{2}
+",
+m_ManufacturerName,
+m_CurrentPsiTirePressure,
+m_MaxPsiTirePressure);
+        }
     }
 }
 

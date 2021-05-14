@@ -48,5 +48,6 @@ namespace Ex03.GarageLogic
             m_Value = null;
             m_Type = i_Type;
         }
+
     }
 }

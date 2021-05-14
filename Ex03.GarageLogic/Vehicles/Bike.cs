@@ -9,7 +9,6 @@ namespace Ex03.GarageLogic
     {
         private GarageEnums.eBikeLicenceType m_LicenseType;
         private int m_EngineCcVolume;
-
         public Bike(Dictionary<string, VehicleParam> i_Parameters)
         {
             m_LicenseType = (GarageEnums.eBikeLicenceType)i_Parameters["m_LicenseType"].Value;
@@ -23,6 +22,16 @@ namespace Ex03.GarageLogic
                            new VehicleParam("m_LicenseType", "Kind of Bike License", typeof(GarageEnums.eBikeLicenceType)),
                            new VehicleParam("m_EngineCcVolume", "Engine Volume", typeof(int))
                        };
+        }
+
+        public override string ToString()
+        {
+            string details = string.Format(
+@"Engine Volume: {0} cc
+License Type: {1}",
+m_EngineCcVolume,
+m_LicenseType);
+            return details;
         }
     }
 }

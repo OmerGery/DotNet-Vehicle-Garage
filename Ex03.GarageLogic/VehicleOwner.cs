@@ -29,5 +29,16 @@ namespace Ex03.GarageLogic
             m_OwnerName = i_OwnerName;
             m_PhoneNumber = i_PhoneNumber;
         }
+
+        public override string ToString()
+        {
+            string details = string.Format(
+@"Owner Name: {0}
+Phone Number: {1}
+",
+                m_OwnerName,
+                m_PhoneNumber);
+            return details;
+        }
     }
 }

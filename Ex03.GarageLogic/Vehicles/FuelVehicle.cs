@@ -20,12 +20,9 @@ namespace Ex03.GarageLogic
             {
                 if (value  > m_MaxFuelLitersCapacity ||  value < 0)
                 { 
-                    throw new ValueOutOfRangeException(0, m_MaxFuelLitersCapacity);
+                    throw new ValueOutOfRangeException(0, m_MaxFuelLitersCapacity, "Fuel's liters capacity");
                 }
-                else
-                {
-                    m_MaxFuelLitersCapacity = value;
-                }
+                m_MaxFuelLitersCapacity = value;
             }
         }
         private float m_MaxFuelLitersCapacity;
@@ -42,7 +39,7 @@ namespace Ex03.GarageLogic
             base(i_Parameters, i_MaxTirePressure, i_AmountOfWheels)
         {
             m_MaxFuelLitersCapacity = i_MaxLitersOfFuel;
-            m_LitersOfFuelLeft = (float)i_Parameters["m_LitersOfFuelLeft"].Value;
+            LitersOfFuelLeft = (float)i_Parameters["m_LitersOfFuelLeft"].Value;
             m_FuelType = (GarageEnums.eFuelType)i_Parameters["m_FuelType"].Value;
         }
 

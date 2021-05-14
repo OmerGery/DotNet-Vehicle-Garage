@@ -1,7 +1,5 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -23,7 +21,6 @@ namespace Ex03.GarageLogic
             parmatersList.AddRange(Vehicle.GetParams());
             parmatersList.AddRange(FuelVehicle.GetParams());
             parmatersList.AddRange(Truck.GetParams());
-
             return parmatersList;
         }
 
