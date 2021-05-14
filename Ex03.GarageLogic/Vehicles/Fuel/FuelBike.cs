@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
         private Bike m_Bike;
 
         public FuelBike(Dictionary<string, VehicleParam> i_Parameters) :
-            base(i_Parameters, k_MaxFuelTankInLiters, k_MaxPsiOfWheels, k_AmountOfWheels,k_FuelType)
+            base(i_Parameters, k_MaxFuelTankInLiters, k_MaxPsiOfWheels, k_AmountOfWheels, k_FuelType)
         {
             m_Bike = new Bike(i_Parameters);
         }

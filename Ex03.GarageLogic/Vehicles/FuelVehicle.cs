@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public FuelVehicle(Dictionary<string, VehicleParam> i_Parameters, float i_MaxLitersOfFuel, int i_MaxTirePressure, int i_AmountOfWheels,GarageEnums.eFuelType i_FuelType) : 
+        public FuelVehicle(Dictionary<string, VehicleParam> i_Parameters, float i_MaxLitersOfFuel, int i_MaxTirePressure, int i_AmountOfWheels, GarageEnums.eFuelType i_FuelType) : 
             base(i_Parameters, i_MaxTirePressure, i_AmountOfWheels)
         {
             m_MaxFuelLitersCapacity = i_MaxLitersOfFuel;
@@ -71,6 +71,11 @@ Liters of Fuel Maximum capacity: {1}
                 m_LitersOfFuelLeft,
                 m_MaxFuelLitersCapacity);
             return baseDetails + details;
+        }
+
+        public void Refuel(float i_LitersOfFuelToAdd)
+        {
+            LitersOfFuelLeft += i_LitersOfFuelToAdd;
         }
     }
 }

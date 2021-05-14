@@ -57,6 +57,11 @@
             }
         }
 
+        public void PumpTire(float i_PsiToAdd)
+        {
+            CurrentPsiTirePressure += i_PsiToAdd;
+        }
+
         public override string ToString()
         {
             return string.Format(

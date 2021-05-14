@@ -67,37 +67,41 @@ namespace Ex03.GarageLogic
             foreach(Tire tire in tiresToPump)
             {
                 float psiToAdd = tire.MaxPsiTirePressure - tire.CurrentPsiTirePressure;
-                tire.CurrentPsiTirePressure += psiToAdd;
+                tire.PumpTire(psiToAdd);
             }
         }
 
         public void RefuelVehicle(string i_LicenseNumber, GarageEnums.eFuelType i_FuelType, float i_LitersOfFuelToAdd)
         {
             checkLicenseNumberValidity(i_LicenseNumber);
-            if (!(m_GarageVehicles[i_LicenseNumber].VehicleInGarage is FuelVehicle))
+            Vehicle vehicleToRefuel = m_GarageVehicles[i_LicenseNumber].VehicleInGarage;
+            if (vehicleToRefuel is FuelVehicle fuelVehicleToRefuel)
+            {
+                if (fuelVehicleToRefuel.FuelType != i_FuelType)
+                {
+                    throw new ArgumentException("Wrong fuel type");
+                }
+
+                fuelVehicleToRefuel.Refuel(i_LitersOfFuelToAdd);
+            }
+            else
             {
                 throw new ArgumentException("This is not a fuel vehicle.");
             }
-
-            FuelVehicle vehicleToRefuel = m_GarageVehicles[i_LicenseNumber].VehicleInGarage as FuelVehicle;
-            if(vehicleToRefuel.FuelType != i_FuelType)
-            {
-                throw new ArgumentException("Wrong fuel type");
-            }
-
-            vehicleToRefuel.LitersOfFuelLeft += i_LitersOfFuelToAdd;
         }
 
         public void ChargeVehicle(string i_LicenseNumber, float i_HoursToCharge)
         {
             checkLicenseNumberValidity(i_LicenseNumber);
-            if (!(m_GarageVehicles[i_LicenseNumber].VehicleInGarage is ElectricVehicle))
+            Vehicle vehicleToCharge = m_GarageVehicles[i_LicenseNumber].VehicleInGarage;
+            if (vehicleToCharge is ElectricVehicle electricVehicleToCharge)
+            {
+                electricVehicleToCharge.ChargeBattery(i_HoursToCharge);
+            }
+            else
             {
                 throw new ArgumentException("This is not an electric vehicle.");
             }
-
-            ElectricVehicle vehicleToChrage = m_GarageVehicles[i_LicenseNumber].VehicleInGarage as ElectricVehicle;
-            vehicleToChrage.CurrentHoursOfBatteryLeft += i_HoursToCharge;
         }
 
         public GarageVehicle GetVehicleDetails(string i_LicenseNumber)

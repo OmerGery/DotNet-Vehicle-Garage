@@ -36,6 +36,11 @@ namespace Ex03.GarageLogic
                        };
         }
 
+        public void ChargeBattery(float i_HoursOfBatteryToCharge)
+        {
+            CurrentHoursOfBatteryLeft += i_HoursOfBatteryToCharge;
+        }
+
         public override string ToString()
         {
             string baseDetails = base.ToString();
