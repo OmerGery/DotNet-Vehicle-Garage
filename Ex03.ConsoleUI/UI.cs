@@ -14,6 +14,7 @@ namespace Ex03.ConsoleUI
         private const int k_SleepTime = 3000;
         private bool m_quitFlag;
         private Garage m_Garage;
+
         private enum eMainMenuOptions
         {
             AddVehicle = 1,
@@ -25,6 +26,7 @@ namespace Ex03.ConsoleUI
             DisplayCertainVehicle,
             Quit
         }
+
         private enum eVehicleDisplayOptions
         {
             NoFilter = 1,
@@ -34,6 +36,14 @@ namespace Ex03.ConsoleUI
         public UI()
         {
             m_Garage = new Garage();
+        }
+
+        public static void DisplayEnumOptions<T>()
+        {
+            foreach (string options in Enum.GetNames(typeof(T)))
+            {
+                Console.WriteLine("For {0} press {1:D}", options, Enum.Parse(typeof(T), options));
+            }
         }
 
         public void GetOwnerDetails(out string o_OwnerPhone, out string o_OwnerName)
@@ -60,12 +70,12 @@ namespace Ex03.ConsoleUI
             VehicleBuilder.eVehicleType userRequestedVehicleType = (VehicleBuilder.eVehicleType)GetEnumChoiceFromUser<VehicleBuilder.eVehicleType>();
             List<VehicleParam> parametersList = VehicleBuilder.GetParams(userRequestedVehicleType);
             Dictionary<string, VehicleParam> paramsDictionary = new Dictionary<string, VehicleParam>();
-            foreach(VehicleParam param in parametersList)
+            foreach (VehicleParam param in parametersList)
             {
                 Console.WriteLine("Please enter {0}", param.FriendlyName);
                 if (param.Type.IsEnum)
                 {
-                    Console.WriteLine("Options: " + string.Join(",",Enum.GetNames(param.Type)));
+                    Console.WriteLine("Options: " + string.Join(",", Enum.GetNames(param.Type)));
                     string userInput = Console.ReadLine();
                     param.Value = Enum.Parse(param.Type, userInput);
                 }
@@ -74,28 +84,20 @@ namespace Ex03.ConsoleUI
                     string userInput = Console.ReadLine();
                     param.Value = Convert.ChangeType(userInput, param.Type);
                 }
+
                 paramsDictionary.Add(param.Name, param);
             }
 
             Vehicle vehicleToAdd = VehicleBuilder.BuildVehicle(userRequestedVehicleType, paramsDictionary);
-            m_Garage.AddVehicle(ownerPhone,ownerName,vehicleToAdd);
+            m_Garage.AddVehicle(ownerPhone, ownerName, vehicleToAdd);
             Console.WriteLine("Vehicle was added to the garage");
-        }
-
-        public static void DisplayEnumOptions<T>()
-        {
-            foreach (string options in Enum.GetNames(typeof(T)))
-            {
-                Console.WriteLine("For {0} press {1:D}", options,
-                    Enum.Parse(typeof(T), options));
-            }
         }
 
         public int GetEnumChoiceFromUser<T>()
         {
             int amountOfOptions = Enum.GetNames(typeof(T)).Length;
             int.TryParse(Console.ReadLine(), out int userRequestedFuelType);
-            if(userRequestedFuelType < 1 || userRequestedFuelType > amountOfOptions)
+            if (userRequestedFuelType < 1 || userRequestedFuelType > amountOfOptions)
             {
                 throw new ValueOutOfRangeException(1, amountOfOptions, "options");
             }
@@ -113,7 +115,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Please enter how many liters of fuel you would like to add");
             float.TryParse(Console.ReadLine(), out float litersOfFuelToAdd);
 
-            m_Garage.RefuelVehicle(licenseNumber, userRequestedFuelType , litersOfFuelToAdd);
+            m_Garage.RefuelVehicle(licenseNumber, userRequestedFuelType, litersOfFuelToAdd);
         }
 
         public void ChargeVehicle()
@@ -130,7 +132,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Please Enter the vehicle's new fix state out of the following options");
             DisplayEnumOptions<GarageEnums.eFixState>();
             GarageEnums.eFixState newFixState = (GarageEnums.eFixState)GetEnumChoiceFromUser<GarageEnums.eFixState>();
-            m_Garage.ChangeVehicleState(licenseNumber,newFixState);
+            m_Garage.ChangeVehicleState(licenseNumber, newFixState);
         }
 
         private void PumpVehicleTires()
@@ -156,12 +158,13 @@ namespace Ex03.ConsoleUI
                     garageVehiclesToDisplay = m_Garage.GetGarageVehiclesByFixState(fixState);
                     break;
             }
+
             PrintGarageVechilesLicenseNumbers(garageVehiclesToDisplay);
         }
 
         private void PrintGarageVechilesLicenseNumbers(List<GarageVehicle> i_GarageGarageVehicles)
         {
-            foreach(GarageVehicle garageVehicle in i_GarageGarageVehicles)
+            foreach (GarageVehicle garageVehicle in i_GarageGarageVehicles)
             {
                 Console.WriteLine(garageVehicle.VehicleInGarage.LicenseNumber);
             }
@@ -218,12 +221,10 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Please select a valid option");
                 }
-
                 catch (ArgumentException argumentException)
                 {
                     Console.WriteLine(argumentException.Message);
                 }
-
                 catch (ValueOutOfRangeException valueOutOfRangeException)
                 {
                     Console.WriteLine(valueOutOfRangeException.Message);

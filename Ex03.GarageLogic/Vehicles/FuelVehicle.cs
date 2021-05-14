@@ -7,8 +7,6 @@ namespace Ex03.GarageLogic
 {
     public abstract class FuelVehicle : Vehicle
     {
-
-
         private float m_LitersOfFuelLeft;
         private float m_MaxFuelLitersCapacity;
 
@@ -18,6 +16,7 @@ namespace Ex03.GarageLogic
             {
                 return m_LitersOfFuelLeft;
             }
+
             set
             {
                 if(value > m_MaxFuelLitersCapacity || value < 0)
@@ -38,7 +37,8 @@ namespace Ex03.GarageLogic
                 return m_FuelType;
             }
         }
-        public FuelVehicle(Dictionary<string, VehicleParam> i_Parameters, float i_MaxLitersOfFuel, int i_MaxTirePressure,int i_AmountOfWheels) : 
+
+        public FuelVehicle(Dictionary<string, VehicleParam> i_Parameters, float i_MaxLitersOfFuel, int i_MaxTirePressure, int i_AmountOfWheels) : 
             base(i_Parameters, i_MaxTirePressure, i_AmountOfWheels)
         {
             m_MaxFuelLitersCapacity = i_MaxLitersOfFuel;

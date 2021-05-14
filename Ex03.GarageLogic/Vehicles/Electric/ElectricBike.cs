@@ -9,8 +9,9 @@ namespace Ex03.GarageLogic
     {
         private const int k_AmountOfWheels = 2;
         private const int k_MaxPsiOfWheels = 30;
-        private const float k_MaxHoursOfBattery =(float) 1.8;
+        private const float k_MaxHoursOfBattery = (float)1.8;
         private Bike m_Bike;
+
         public ElectricBike(Dictionary<string, VehicleParam> i_Parameters)
             : base(i_Parameters, k_MaxHoursOfBattery, k_MaxPsiOfWheels, k_AmountOfWheels)
         {
@@ -26,6 +27,7 @@ namespace Ex03.GarageLogic
 
             return parmatersList;
         }
+
         public override string ToString()
         {
             string baseDetails = base.ToString();

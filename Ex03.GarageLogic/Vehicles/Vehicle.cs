@@ -24,13 +24,13 @@ namespace Ex03.GarageLogic
 
             m_ModelName = (string)i_Parameters["m_ModelName"].Value;
             m_LicenseNumber = (string)i_Parameters["m_LicenseNumber"].Value;
-
         }
 
         public abstract float EnergyOfPrecentageLeft
         {
             get;
         }
+
         public string LicenseNumber
         {
             get
@@ -38,6 +38,7 @@ namespace Ex03.GarageLogic
                 return m_LicenseNumber;
             }
         }
+
         public List<Tire> Tires
         {
             get
@@ -55,7 +56,6 @@ namespace Ex03.GarageLogic
                new VehicleParam("m_TireManufacturerName", "Name of The Tires Manufacturer", typeof(string)),
                new VehicleParam("m_CurrentPsiTirePressure", "Current PSI pressure of tires", typeof(float)),
            };
-
         }
 
         public override string ToString()
@@ -64,7 +64,7 @@ namespace Ex03.GarageLogic
 @"Model Name: {0}
 License Number: {1}
 Amount Of Wheels: {2} 
-",m_ModelName,
+", m_ModelName,
 m_LicenseNumber,
 m_Tires.Count);
             details += m_Tires[0].ToString();

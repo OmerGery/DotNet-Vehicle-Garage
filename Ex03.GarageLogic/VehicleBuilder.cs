@@ -10,14 +10,14 @@ namespace Ex03.GarageLogic
     {
         public enum eVehicleType
         {
-            ElectricCar=1,
+            ElectricCar = 1,
             FuelCar,
             ElectricBike,
             FuelBike,
             FuelTruck
         }
 
-        public static Vehicle BuildVehicle(eVehicleType i_SelectedType , Dictionary<string,VehicleParam> i_Parameters)
+        public static Vehicle BuildVehicle(eVehicleType i_SelectedType, Dictionary<string, VehicleParam> i_Parameters)
         {
             Vehicle newVehicle = null;
             switch(i_SelectedType)

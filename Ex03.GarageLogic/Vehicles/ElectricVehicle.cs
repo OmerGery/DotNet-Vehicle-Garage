@@ -16,6 +16,7 @@ namespace Ex03.GarageLogic
             {
                 return m_CurrentHoursOfBatteryLeft;
             }
+
             set
             {
                 if (value > m_MaxHoursOfBattery || value < 0)
@@ -38,7 +39,6 @@ m_MaxHoursOfBattery);
             return baseDetails + details;
         }
 
-
         public override float EnergyOfPrecentageLeft
         {
             get
@@ -47,12 +47,13 @@ m_MaxHoursOfBattery);
             }
         }
 
-        public ElectricVehicle(Dictionary<string, VehicleParam> i_Parameters, float i_MaxHoursOfBattery,int i_MaxTirePressure, int i_AmountOfTire) : 
+        public ElectricVehicle(Dictionary<string, VehicleParam> i_Parameters, float i_MaxHoursOfBattery, int i_MaxTirePressure, int i_AmountOfTire) : 
             base(i_Parameters, i_MaxTirePressure, i_AmountOfTire)
         {
             m_MaxHoursOfBattery = i_MaxHoursOfBattery;
             CurrentHoursOfBatteryLeft = (float)i_Parameters["m_CurrentHoursOfBatteryLeft"].Value;
         }
+
         public static List<VehicleParam> GetParams()
         {
             return new List<VehicleParam>()

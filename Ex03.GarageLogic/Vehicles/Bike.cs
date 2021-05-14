@@ -9,6 +9,7 @@ namespace Ex03.GarageLogic
     {
         private GarageEnums.eBikeLicenceType m_LicenseType;
         private int m_EngineCcVolume;
+
         public Bike(Dictionary<string, VehicleParam> i_Parameters)
         {
             m_LicenseType = (GarageEnums.eBikeLicenceType)i_Parameters["m_LicenseType"].Value;

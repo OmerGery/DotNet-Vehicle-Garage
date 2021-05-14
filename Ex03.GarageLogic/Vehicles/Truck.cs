@@ -15,6 +15,7 @@ namespace Ex03.GarageLogic
              m_ContainsToxic = (bool)i_Parameters["m_ContainsToxic"].Value;
              m_MaxCarryWeight = (float)i_Parameters["m_MaxCarryWeight"].Value;
         }
+
         public static List<VehicleParam> GetParams()
         {
             return new List<VehicleParam>()
@@ -34,7 +35,5 @@ m_MaxCarryWeight);
 
             return details;
         }
-
     }
-
 }

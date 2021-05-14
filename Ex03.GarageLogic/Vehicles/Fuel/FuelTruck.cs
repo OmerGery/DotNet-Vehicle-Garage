@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -15,6 +14,7 @@ namespace Ex03.GarageLogic
         {
             m_Truck = new Truck(i_Parameters);
         }
+
         public static List<VehicleParam> GetParams()
         {
             List<VehicleParam> parmatersList = new List<VehicleParam>();
@@ -23,6 +23,7 @@ namespace Ex03.GarageLogic
             parmatersList.AddRange(Truck.GetParams());
             return parmatersList;
         }
+
         public override string ToString()
         {
             string baseDetails = base.ToString();
@@ -30,6 +31,5 @@ namespace Ex03.GarageLogic
             string details = baseDetails + truckDetails;
             return details;
         }
-
     }
 }

@@ -17,6 +17,7 @@ namespace Ex03.GarageLogic
         {
             m_Bike = new Bike(i_Parameters);
         }
+
         public static List<VehicleParam> GetParams()
         {
             List<VehicleParam> parmatersList = new List<VehicleParam>();

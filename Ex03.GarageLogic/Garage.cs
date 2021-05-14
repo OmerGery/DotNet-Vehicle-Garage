@@ -9,13 +9,14 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private Dictionary <string,GarageVehicle> m_GarageVehicles;
+        private Dictionary <string, GarageVehicle> m_GarageVehicles;
 
         public Garage()
         {
             m_GarageVehicles = new Dictionary<string, GarageVehicle>();
         }
-        public void AddVehicle(string i_OwnerPhone,string i_OwnerName,Vehicle i_NewVehicle)
+
+        public void AddVehicle(string i_OwnerPhone, string i_OwnerName, Vehicle i_NewVehicle)
         {
             string newVehicleLicenseNumber = i_NewVehicle.LicenseNumber;
             if(m_GarageVehicles.ContainsKey(newVehicleLicenseNumber))
@@ -23,6 +24,7 @@ namespace Ex03.GarageLogic
                 m_GarageVehicles[newVehicleLicenseNumber].FixState = GarageEnums.eFixState.BeingFixed;
                 throw new ArgumentException("Vehicle Already exist - Moved the vehicle to being fixed state.");
             }
+
             GarageVehicle newVehicle = new GarageVehicle(i_OwnerName, i_OwnerPhone, i_NewVehicle);
             m_GarageVehicles.Add(i_NewVehicle.LicenseNumber, newVehicle);
         }
@@ -40,6 +42,7 @@ namespace Ex03.GarageLogic
 
             return vechilesWithRequestedFixState;
         }
+
         public List<GarageVehicle> GetAllGarageVehicles()
         {
             List<GarageVehicle> vechilesWithRequestedFixState = new List<GarageVehicle>();
@@ -47,10 +50,11 @@ namespace Ex03.GarageLogic
             {
                 vechilesWithRequestedFixState.Add(garageVehicle.Value);
             }
+
             return vechilesWithRequestedFixState;
         }
 
-        public void ChangeVehicleState(string i_LicenseNumber , GarageEnums.eFixState i_FixState)
+        public void ChangeVehicleState(string i_LicenseNumber, GarageEnums.eFixState i_FixState)
         {
             checkLicenseNumberValidity(i_LicenseNumber);
             m_GarageVehicles[i_LicenseNumber].FixState = i_FixState;
@@ -67,13 +71,14 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void RefuelVehicle(string i_LicenseNumber,GarageEnums.eFuelType i_FuelType,float i_LitersOfFuelToAdd)
+        public void RefuelVehicle(string i_LicenseNumber, GarageEnums.eFuelType i_FuelType, float i_LitersOfFuelToAdd)
         {
             checkLicenseNumberValidity(i_LicenseNumber);
             if (!(m_GarageVehicles[i_LicenseNumber].VehicleInGarage is FuelVehicle))
             {
                 throw new ArgumentException("This is not a fuel vehicle.");
             }
+
             FuelVehicle vehicleToRefuel = m_GarageVehicles[i_LicenseNumber].VehicleInGarage as FuelVehicle;
             if(vehicleToRefuel.FuelType != i_FuelType)
             {
@@ -82,13 +87,15 @@ namespace Ex03.GarageLogic
 
             vehicleToRefuel.LitersOfFuelLeft += i_LitersOfFuelToAdd;
         }
-        public void ChargeVehicle(string i_LicenseNumber,float i_HoursToCharge)
+
+        public void ChargeVehicle(string i_LicenseNumber, float i_HoursToCharge)
         {
             checkLicenseNumberValidity(i_LicenseNumber);
             if (!(m_GarageVehicles[i_LicenseNumber].VehicleInGarage is ElectricVehicle))
             {
                 throw new ArgumentException("This is not an electric vehicle.");
             }
+
             ElectricVehicle vehicleToChrage = m_GarageVehicles[i_LicenseNumber].VehicleInGarage as ElectricVehicle;
             vehicleToChrage.CurrentHoursOfBatteryLeft += i_HoursToCharge;
         }
