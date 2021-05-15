@@ -8,6 +8,14 @@ namespace Ex03.GarageLogic
         private float m_MaxFuelLitersCapacity;
         private GarageEnums.eFuelType m_FuelType;
 
+        public float MaxFuelLitersCapacity
+        {
+            get
+            {
+                return m_MaxFuelLitersCapacity;
+            }
+        }
+
         public float LitersOfFuelLeft
         {
             get

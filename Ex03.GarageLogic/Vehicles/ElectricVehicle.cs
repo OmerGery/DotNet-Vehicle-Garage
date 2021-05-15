@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
             {
                 if (value > m_MaxHoursOfBattery || value < 0)
                 {
-                    throw new ValueOutOfRangeException(0, m_MaxHoursOfBattery - m_CurrentHoursOfBatteryLeft, "Battery Amount");
+                    throw new ValueOutOfRangeException(0, m_MaxHoursOfBattery - m_CurrentHoursOfBatteryLeft, "Battery Amount Hours");
                 }
 
                 m_CurrentHoursOfBatteryLeft = value;
