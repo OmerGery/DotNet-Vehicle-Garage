@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -11,7 +8,6 @@ namespace Ex03.GarageLogic
         private const int k_MaxPsiOfWheels = 32;   
         private const float k_MaxFuelTankInLiters = 45;
         private const GarageEnums.eFuelType k_FuelType = GarageEnums.eFuelType.Octan95;
-
         private Car m_Car;
 
         public FuelCar(Dictionary<string, VehicleParam> i_Parameters) :

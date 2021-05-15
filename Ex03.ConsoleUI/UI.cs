@@ -8,7 +8,7 @@ namespace Ex03.ConsoleUI
     public class UI
     {
         private const int k_SleepTime = 3000;
-        private bool m_quitFlag;
+        private bool m_QuitFlag;
         private Garage m_Garage;
 
         private enum eMainMenuOptions
@@ -178,7 +178,7 @@ namespace Ex03.ConsoleUI
 
         public void DisplayMainMenu()
         {
-            while(!m_quitFlag)
+            while(!m_QuitFlag)
             {
                 Console.Clear();
                 Console.WriteLine(@"Please choose an option from the menu");
@@ -213,7 +213,7 @@ namespace Ex03.ConsoleUI
                             Thread.Sleep(k_SleepTime);
                             break;
                         case eMainMenuOptions.Quit:
-                            m_quitFlag = true;
+                            m_QuitFlag = true;
                             break;
                     }
                 }

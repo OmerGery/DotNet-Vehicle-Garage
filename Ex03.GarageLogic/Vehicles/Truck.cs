@@ -4,8 +4,8 @@ namespace Ex03.GarageLogic
 {
     public class Truck
     {
-        protected bool m_ContainsToxic;
-        protected float m_MaxCarryWeight;
+        private bool m_ContainsToxic;
+        private float m_MaxCarryWeight;
 
         public Truck(Dictionary<string, VehicleParam> i_Parameters)
         {
