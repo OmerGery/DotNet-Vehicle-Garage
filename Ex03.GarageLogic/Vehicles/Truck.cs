@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -20,7 +17,7 @@ namespace Ex03.GarageLogic
         {
             return new List<VehicleParam>()
                        {
-                           new VehicleParam("m_ContainsToxic", "Does it contain toxic?", typeof(bool)),
+                           new VehicleParam("m_ContainsToxic", "Does it contain toxic? (True/False)", typeof(bool)),
                            new VehicleParam("m_MaxCarryWeight", "The max carry weight", typeof(float))
                        };
         }
