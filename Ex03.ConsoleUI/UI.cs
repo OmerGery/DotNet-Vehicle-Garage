@@ -213,13 +213,14 @@ namespace Ex03.ConsoleUI
                             Thread.Sleep(k_SleepTime);
                             break;
                         case eMainMenuOptions.Quit:
+                            Console.WriteLine("Bye Bye :-)");
                             m_QuitFlag = true;
                             break;
                     }
                 }
                 catch (FormatException formatException)
                 {
-                    Console.WriteLine("Please select a valid option");
+                    Console.WriteLine(formatException.Message);
                 }
                 catch (ArgumentException argumentException)
                 {
