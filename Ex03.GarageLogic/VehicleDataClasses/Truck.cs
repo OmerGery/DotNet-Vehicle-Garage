@@ -4,9 +4,9 @@ namespace Ex03.GarageLogic
 {
     public class Truck
     {
-        private bool m_ContainsToxic;
         private readonly float r_MaxCarryWeight;
-
+        private bool m_ContainsToxic;
+        
         public Truck(Dictionary<string, VehicleParam> i_Parameters)
         {
              m_ContainsToxic = (bool)i_Parameters["m_ContainsToxic"].Value;

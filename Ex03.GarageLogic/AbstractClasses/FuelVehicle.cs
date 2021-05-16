@@ -4,9 +4,9 @@ namespace Ex03.GarageLogic
 {
     public abstract class FuelVehicle : Vehicle
     {
-        private float m_LitersOfFuelLeft;
         private readonly float r_MaxFuelLitersCapacity;
         private readonly GarageEnums.eFuelType r_FuelType;
+        private float m_LitersOfFuelLeft;
 
         public float MaxFuelLitersCapacity
         {

@@ -4,8 +4,16 @@ namespace Ex03.GarageLogic
 {
     public abstract class ElectricVehicle : Vehicle
     {
-        private float m_CurrentHoursOfBatteryLeft;
         private readonly float r_MaxHoursOfBattery;
+        private float m_CurrentHoursOfBatteryLeft;
+
+        public static new List<VehicleParam> GetParams()
+        {
+            return new List<VehicleParam>()
+                       {
+                           new VehicleParam("m_CurrentHoursOfBatteryLeft", "Hours of Battery Left", typeof(float))
+                       };
+        }
 
         public float CurrentHoursOfBatteryLeft
         {
@@ -23,14 +31,6 @@ namespace Ex03.GarageLogic
 
                 m_CurrentHoursOfBatteryLeft = value;
             }
-        }
-
-        public static new List<VehicleParam> GetParams()
-        {
-            return new List<VehicleParam>()
-                       {
-                           new VehicleParam("m_CurrentHoursOfBatteryLeft", "Hours of Battery Left", typeof(float))
-                       };
         }
 
         public void ChargeBattery(float i_HoursOfBatteryToCharge)

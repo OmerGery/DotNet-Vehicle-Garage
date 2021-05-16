@@ -4,8 +4,8 @@ namespace Ex03.GarageLogic
 {
     public class Car
     {
-        private GarageEnums.eColor m_CarColor;
         private readonly GarageEnums.eNumberOfDoors r_NumberOfDoors;
+        private GarageEnums.eColor m_CarColor;
 
         public Car(Dictionary<string, VehicleParam> i_Parameters)
         {
