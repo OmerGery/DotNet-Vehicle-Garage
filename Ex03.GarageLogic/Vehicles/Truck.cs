@@ -5,12 +5,12 @@ namespace Ex03.GarageLogic
     public class Truck
     {
         private bool m_ContainsToxic;
-        private float m_MaxCarryWeight;
+        private readonly float r_MaxCarryWeight;
 
         public Truck(Dictionary<string, VehicleParam> i_Parameters)
         {
              m_ContainsToxic = (bool)i_Parameters["m_ContainsToxic"].Value;
-             m_MaxCarryWeight = (float)i_Parameters["m_MaxCarryWeight"].Value;
+             r_MaxCarryWeight = (float)i_Parameters["m_MaxCarryWeight"].Value;
         }
 
         public static List<VehicleParam> GetParams()
@@ -28,7 +28,7 @@ namespace Ex03.GarageLogic
 @"Toxic Contents: {0}
 Maximum Carry Weight: {1}",
 m_ContainsToxic,
-m_MaxCarryWeight);
+r_MaxCarryWeight);
 
             return details;
         }

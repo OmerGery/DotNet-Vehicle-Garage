@@ -5,14 +5,14 @@ namespace Ex03.GarageLogic
     public abstract class FuelVehicle : Vehicle
     {
         private float m_LitersOfFuelLeft;
-        private float m_MaxFuelLitersCapacity;
-        private GarageEnums.eFuelType m_FuelType;
+        private readonly float r_MaxFuelLitersCapacity;
+        private readonly GarageEnums.eFuelType r_FuelType;
 
         public float MaxFuelLitersCapacity
         {
             get
             {
-                return m_MaxFuelLitersCapacity;
+                return r_MaxFuelLitersCapacity;
             }
         }
 
@@ -25,9 +25,9 @@ namespace Ex03.GarageLogic
 
             set
             {
-                if(value > m_MaxFuelLitersCapacity || value < 0)
+                if(value > r_MaxFuelLitersCapacity || value < 0)
                 {
-                    throw new ValueOutOfRangeException(0, m_MaxFuelLitersCapacity, "Fuel's liters capacity");
+                    throw new ValueOutOfRangeException(0, r_MaxFuelLitersCapacity, "Fuel's liters capacity");
                 }
 
                 m_LitersOfFuelLeft = value;
@@ -38,23 +38,23 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_FuelType;
+                return r_FuelType;
             }
         }
 
         public FuelVehicle(Dictionary<string, VehicleParam> i_Parameters, float i_MaxLitersOfFuel, int i_MaxTirePressure, int i_AmountOfWheels, GarageEnums.eFuelType i_FuelType) : 
             base(i_Parameters, i_MaxTirePressure, i_AmountOfWheels)
         {
-            m_MaxFuelLitersCapacity = i_MaxLitersOfFuel;
+            r_MaxFuelLitersCapacity = i_MaxLitersOfFuel;
             LitersOfFuelLeft = (float)i_Parameters["m_LitersOfFuelLeft"].Value;
-            m_FuelType = i_FuelType;
+            r_FuelType = i_FuelType;
         }
 
         public override float EnergyOfPrecentageLeft
         {
             get
             {
-                return m_LitersOfFuelLeft * 100 / m_MaxFuelLitersCapacity;
+                return m_LitersOfFuelLeft * 100 / r_MaxFuelLitersCapacity;
             }
         }
 
@@ -74,7 +74,7 @@ namespace Ex03.GarageLogic
 Liters of Fuel Maximum capacity: {1}
 ",
                 m_LitersOfFuelLeft,
-                m_MaxFuelLitersCapacity);
+                r_MaxFuelLitersCapacity);
             return baseDetails + details;
         }
 

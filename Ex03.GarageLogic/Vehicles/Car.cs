@@ -5,12 +5,12 @@ namespace Ex03.GarageLogic
     public class Car
     {
         private GarageEnums.eColor m_CarColor;
-        private GarageEnums.eNumberOfDoors m_NumberOfDoors;
+        private readonly GarageEnums.eNumberOfDoors r_NumberOfDoors;
 
         public Car(Dictionary<string, VehicleParam> i_Parameters)
         {
             m_CarColor = (GarageEnums.eColor)i_Parameters["m_CarColor"].Value;
-            m_NumberOfDoors = (GarageEnums.eNumberOfDoors)i_Parameters["m_NumberOfDoors"].Value;
+            r_NumberOfDoors = (GarageEnums.eNumberOfDoors)i_Parameters["m_NumberOfDoors"].Value;
         }
 
         public static List<VehicleParam> GetParams()
@@ -28,7 +28,7 @@ namespace Ex03.GarageLogic
 @"Car Color: {0}
 Number of Doors: {1}",
 m_CarColor,
-m_NumberOfDoors);
+r_NumberOfDoors);
             return details;
         }
     }

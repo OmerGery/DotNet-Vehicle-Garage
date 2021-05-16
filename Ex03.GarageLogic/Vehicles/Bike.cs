@@ -4,13 +4,13 @@ namespace Ex03.GarageLogic
 {
     public class Bike
     {
-        private GarageEnums.eBikeLicenceType m_LicenseType;
-        private int m_EngineCcVolume;
+        private readonly GarageEnums.eBikeLicenceType r_LicenseType;
+        private int r_EngineCcVolume;
 
         public Bike(Dictionary<string, VehicleParam> i_Parameters)
         {
-            m_LicenseType = (GarageEnums.eBikeLicenceType)i_Parameters["m_LicenseType"].Value;
-            m_EngineCcVolume = (int)i_Parameters["m_EngineCcVolume"].Value;
+            r_LicenseType = (GarageEnums.eBikeLicenceType)i_Parameters["m_LicenseType"].Value;
+            r_EngineCcVolume = (int)i_Parameters["m_EngineCcVolume"].Value;
         }
 
         public static List<VehicleParam> GetParams()
@@ -27,8 +27,8 @@ namespace Ex03.GarageLogic
             string details = string.Format(
 @"Engine Volume: {0}cc
 License Type: {1}",
-m_EngineCcVolume,
-m_LicenseType);
+r_EngineCcVolume,
+r_LicenseType);
             return details;
         }
     }

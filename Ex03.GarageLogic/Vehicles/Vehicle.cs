@@ -4,8 +4,8 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        private string m_ModelName;
-        private string m_LicenseNumber;
+        private readonly string r_ModelName;
+        private readonly string r_LicenseNumber;
         private List<Tire> m_Tires;
 
         public Vehicle(Dictionary<string, VehicleParam> i_Parameters, int i_MaxTirePressure, int i_AmountOfTires)
@@ -19,8 +19,8 @@ namespace Ex03.GarageLogic
                 m_Tires.Add(tireToAdd);
             }
 
-            m_ModelName = (string)i_Parameters["m_ModelName"].Value;
-            m_LicenseNumber = (string)i_Parameters["m_LicenseNumber"].Value;
+            r_ModelName = (string)i_Parameters["m_ModelName"].Value;
+            r_LicenseNumber = (string)i_Parameters["m_LicenseNumber"].Value;
         }
 
         public abstract float EnergyOfPrecentageLeft
@@ -32,7 +32,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_LicenseNumber;
+                return r_LicenseNumber;
             }
         }
 
@@ -62,8 +62,8 @@ namespace Ex03.GarageLogic
 License Number: {1}
 Amount Of Wheels: {2} 
 ",
-m_ModelName,
-m_LicenseNumber,
+r_ModelName,
+r_LicenseNumber,
 m_Tires.Count);
             details += m_Tires[0].ToString();
             return details;
