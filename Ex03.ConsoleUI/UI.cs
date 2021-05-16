@@ -92,7 +92,11 @@ namespace Ex03.ConsoleUI
         public int GetEnumChoiceFromUser<T>()
         {
             int amountOfOptions = Enum.GetNames(typeof(T)).Length;
-            int.TryParse(Console.ReadLine(), out int userRequestedFuelType);
+            if(!int.TryParse(Console.ReadLine(), out int userRequestedFuelType))
+            {
+                throw new FormatException("You must enter a number for the requested fuel type.");
+            }
+
             if (userRequestedFuelType < 1 || userRequestedFuelType > amountOfOptions)
             {
                 throw new ValueOutOfRangeException(1, amountOfOptions, "options");
@@ -107,18 +111,25 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Please choose fuel type out of the following options");
             DisplayEnumOptions<GarageEnums.eFuelType>();
             GarageEnums.eFuelType userRequestedFuelType = (GarageEnums.eFuelType) GetEnumChoiceFromUser<GarageEnums.eFuelType>();
-
             Console.WriteLine("Please enter how many liters of fuel you would like to add");
-            float.TryParse(Console.ReadLine(), out float litersOfFuelToAdd);
+            if (!float.TryParse(Console.ReadLine(), out float litersOfFuelToAdd))
+            {
+                throw new FormatException("You must enter a number for the liters amount.");
+            }
+
             m_Garage.RefuelVehicle(licenseNumber, userRequestedFuelType, litersOfFuelToAdd);
-            Console.WriteLine("Vehicle has been refuled");
+            Console.WriteLine("Vehicle has been refueled");
         }
 
         public void ChargeVehicle()
         {
             string licenseNumber = GetVehicleLicenseNumber();
             Console.WriteLine("Please enter how many minutes to charge:");
-            float.TryParse(Console.ReadLine(), out float minutesToCharge);
+            if(!float.TryParse(Console.ReadLine(), out float minutesToCharge))
+            {
+                throw new FormatException("You must enter a number for the minutes amount.");
+            }
+
             m_Garage.ChargeVehicle(licenseNumber, minutesToCharge / 60);
             Console.WriteLine("Vehicle has been recharged");
         }
