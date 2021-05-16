@@ -35,24 +35,24 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GarageEnums.cs" />
+    <Compile Include="Garage\GarageEnums.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />
-    <Compile Include="VehicleOwner.cs" />
+    <Compile Include="Garage\VehicleOwner.cs" />
     <Compile Include="VehicleParam.cs" />
-    <Compile Include="Vehicles\Bike.cs" />
-    <Compile Include="Vehicles\Car.cs" />
+    <Compile Include="VehicleDataClasses\Bike.cs" />
+    <Compile Include="VehicleDataClasses\Car.cs" />
     <Compile Include="Vehicles\Electric\ElectricBike.cs" />
     <Compile Include="Vehicles\Electric\ElectricCar.cs" />
-    <Compile Include="Vehicles\ElectricVehicle.cs" />
+    <Compile Include="AbstractClasses\ElectricVehicle.cs" />
     <Compile Include="Vehicles\Fuel\FuelBike.cs" />
     <Compile Include="Vehicles\Fuel\FuelCar.cs" />
     <Compile Include="Vehicles\Fuel\FuelTruck.cs" />
-    <Compile Include="Vehicles\FuelVehicle.cs" />
-    <Compile Include="Garage.cs" />
-    <Compile Include="Vehicles\GarageVehicle.cs" />
+    <Compile Include="AbstractClasses\FuelVehicle.cs" />
+    <Compile Include="Garage\Garage.cs" />
+    <Compile Include="Garage\GarageVehicle.cs" />
     <Compile Include="Tire.cs" />
-    <Compile Include="Vehicles\Truck.cs" />
-    <Compile Include="Vehicles\Vehicle.cs" />
+    <Compile Include="VehicleDataClasses\Truck.cs" />
+    <Compile Include="AbstractClasses\Vehicle.cs" />
     <Compile Include="VehicleBuilder.cs" />
   </ItemGroup>
   <ItemGroup />
