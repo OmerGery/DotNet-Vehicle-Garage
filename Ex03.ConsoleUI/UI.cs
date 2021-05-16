@@ -34,7 +34,7 @@ namespace Ex03.ConsoleUI
             m_Garage = new Garage();
         }
 
-        public static void DisplayEnumOptions<T>()
+        private static void displayEnumOptions<T>()
         {
             foreach (string options in Enum.GetNames(typeof(T)))
             {
@@ -42,7 +42,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public void GetOwnerDetails(out string o_OwnerPhone, out string o_OwnerName)
+        private void getOwnerDetails(out string o_OwnerPhone, out string o_OwnerName)
         {
             Console.WriteLine("Please enter the owner phone number:");
             o_OwnerPhone = Console.ReadLine();
@@ -50,7 +50,7 @@ namespace Ex03.ConsoleUI
             o_OwnerName = Console.ReadLine();
         }
 
-        public string GetVehicleLicenseNumber()
+        private string getVehicleLicenseNumber()
         {
             Console.WriteLine("Please Enter the vehicle's license number");
             string licenseNumber = Console.ReadLine();
@@ -58,12 +58,12 @@ namespace Ex03.ConsoleUI
             return licenseNumber;
         }
 
-        public void AddVehicle()
+        private void addVehicle()
         {
-            GetOwnerDetails(out string ownerPhone, out string ownerName);
+            getOwnerDetails(out string ownerPhone, out string ownerName);
             Console.WriteLine("Please choose the vehicle type out of the following options");
-            DisplayEnumOptions<VehicleBuilder.eVehicleType>();
-            VehicleBuilder.eVehicleType userRequestedVehicleType = (VehicleBuilder.eVehicleType)GetEnumChoiceFromUser<VehicleBuilder.eVehicleType>();
+            displayEnumOptions<VehicleBuilder.eVehicleType>();
+            VehicleBuilder.eVehicleType userRequestedVehicleType = (VehicleBuilder.eVehicleType)getEnumChoiceFromUser<VehicleBuilder.eVehicleType>();
             List<VehicleParam> parametersList = VehicleBuilder.GetParams(userRequestedVehicleType);
             Dictionary<string, VehicleParam> paramsDictionary = new Dictionary<string, VehicleParam>();
             foreach (VehicleParam param in parametersList)
@@ -89,12 +89,12 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Vehicle was added to the garage");
         }
 
-        public int GetEnumChoiceFromUser<T>()
+        private int getEnumChoiceFromUser<T>()
         {
             int amountOfOptions = Enum.GetNames(typeof(T)).Length;
             if(!int.TryParse(Console.ReadLine(), out int userRequestedFuelType))
             {
-                throw new FormatException("You must enter a number for the requested fuel type.");
+                throw new FormatException("You must enter a number for the selection of the requested option.");
             }
 
             if (userRequestedFuelType < 1 || userRequestedFuelType > amountOfOptions)
@@ -105,12 +105,12 @@ namespace Ex03.ConsoleUI
             return userRequestedFuelType;
         }
 
-        public void RefuelVehicle()
+        private void refuelVehicle()
         {
-            string licenseNumber = GetVehicleLicenseNumber();
+            string licenseNumber = getVehicleLicenseNumber();
             Console.WriteLine("Please choose fuel type out of the following options");
-            DisplayEnumOptions<GarageEnums.eFuelType>();
-            GarageEnums.eFuelType userRequestedFuelType = (GarageEnums.eFuelType) GetEnumChoiceFromUser<GarageEnums.eFuelType>();
+            displayEnumOptions<GarageEnums.eFuelType>();
+            GarageEnums.eFuelType userRequestedFuelType = (GarageEnums.eFuelType) getEnumChoiceFromUser<GarageEnums.eFuelType>();
             Console.WriteLine("Please enter how many liters of fuel you would like to add");
             if (!float.TryParse(Console.ReadLine(), out float litersOfFuelToAdd))
             {
@@ -121,9 +121,9 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Vehicle has been refueled");
         }
 
-        public void ChargeVehicle()
+        private void chargeVehicle()
         {
-            string licenseNumber = GetVehicleLicenseNumber();
+            string licenseNumber = getVehicleLicenseNumber();
             Console.WriteLine("Please enter how many minutes to charge:");
             if(!float.TryParse(Console.ReadLine(), out float minutesToCharge))
             {
@@ -134,45 +134,45 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Vehicle has been recharged");
         }
 
-        private void ChangeVehicleStatus()
+        private void changeVehicleStatus()
         {
-            string licenseNumber = GetVehicleLicenseNumber();
+            string licenseNumber = getVehicleLicenseNumber();
             Console.WriteLine("Please Enter the vehicle's new fix state out of the following options");
-            DisplayEnumOptions<GarageEnums.eFixState>();
-            GarageEnums.eFixState newFixState = (GarageEnums.eFixState)GetEnumChoiceFromUser<GarageEnums.eFixState>();
+            displayEnumOptions<GarageEnums.eFixState>();
+            GarageEnums.eFixState newFixState = (GarageEnums.eFixState)getEnumChoiceFromUser<GarageEnums.eFixState>();
             m_Garage.ChangeVehicleState(licenseNumber, newFixState);
             Console.WriteLine("Vehicle status was changed");
         }
 
-        private void PumpVehicleTires()
+        private void pumpVehicleTires()
         {
-            string licenseNumber = GetVehicleLicenseNumber();
+            string licenseNumber = getVehicleLicenseNumber();
             m_Garage.PumpVehicle(licenseNumber);
             Console.WriteLine("All vehicle tires were inflated");
         }
 
-        public void DisplayVehiclesLicenseNumbers()
+        private void displayVehiclesLicenseNumbers()
         {
             List<GarageVehicle> garageVehiclesToDisplay = new List<GarageVehicle>();
             Console.WriteLine(@"Do you want to filter the license numbers by fix state?");
-            DisplayEnumOptions<eVehicleDisplayOptions>();
-            eVehicleDisplayOptions userSelection = (eVehicleDisplayOptions)GetEnumChoiceFromUser<eVehicleDisplayOptions>();
+            displayEnumOptions<eVehicleDisplayOptions>();
+            eVehicleDisplayOptions userSelection = (eVehicleDisplayOptions)getEnumChoiceFromUser<eVehicleDisplayOptions>();
             switch(userSelection)
             {
                 case eVehicleDisplayOptions.NoFilter:
                     garageVehiclesToDisplay = m_Garage.GetAllGarageVehicles();
                     break;
                 case eVehicleDisplayOptions.WithFilter:
-                    DisplayEnumOptions<GarageEnums.eFixState>();
-                    GarageEnums.eFixState fixState = (GarageEnums.eFixState)GetEnumChoiceFromUser<GarageEnums.eFixState>();
+                    displayEnumOptions<GarageEnums.eFixState>();
+                    GarageEnums.eFixState fixState = (GarageEnums.eFixState)getEnumChoiceFromUser<GarageEnums.eFixState>();
                     garageVehiclesToDisplay = m_Garage.GetGarageVehiclesByFixState(fixState);
                     break;
             }
 
-            PrintGarageVechilesLicenseNumbers(garageVehiclesToDisplay);
+            printGarageVechilesLicenseNumbers(garageVehiclesToDisplay);
         }
 
-        private void PrintGarageVechilesLicenseNumbers(List<GarageVehicle> i_GarageGarageVehicles)
+        private void printGarageVechilesLicenseNumbers(List<GarageVehicle> i_GarageGarageVehicles)
         {
             foreach (GarageVehicle garageVehicle in i_GarageGarageVehicles)
             {
@@ -180,47 +180,47 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public void DisplayCertainVehicle()
+        private void displayCertainVehicle()
         {
-            string licenseNumber = GetVehicleLicenseNumber();
+            string licenseNumber = getVehicleLicenseNumber();
             GarageVehicle vehicle = m_Garage.GetVehicleDetails(licenseNumber);
             Console.WriteLine(vehicle.ToString());
         }
 
         public void DisplayMainMenu()
         {
-            while(!m_QuitFlag)
+            while (!m_QuitFlag)
             {
                 Console.Clear();
                 Console.WriteLine(@"Please choose an option from the menu");
                 try
                 {
-                    DisplayEnumOptions<eMainMenuOptions>();
-                    eMainMenuOptions userSelection = (eMainMenuOptions)GetEnumChoiceFromUser<eMainMenuOptions>();
+                    displayEnumOptions<eMainMenuOptions>();
+                    eMainMenuOptions userSelection = (eMainMenuOptions)getEnumChoiceFromUser<eMainMenuOptions>();
                     Console.Clear();
 
                     switch (userSelection)
                     {
                         case eMainMenuOptions.AddVehicle:
-                            AddVehicle();
+                            addVehicle();
                             break;
                         case eMainMenuOptions.DisplayVehiclesLicenseNumbers:
-                            DisplayVehiclesLicenseNumbers();
+                            displayVehiclesLicenseNumbers();
                             break;
                         case eMainMenuOptions.ChangeVehicleStatus:
-                            ChangeVehicleStatus();
+                            changeVehicleStatus();
                             break;
                         case eMainMenuOptions.PumpVehicleTires:
-                            PumpVehicleTires();
+                            pumpVehicleTires();
                             break;
                         case eMainMenuOptions.RefuelVehicle:
-                            RefuelVehicle();
+                            refuelVehicle();
                             break;
                         case eMainMenuOptions.ChargeVehicle:
-                            ChargeVehicle();
+                            chargeVehicle();
                             break;
                         case eMainMenuOptions.DisplayCertainVehicle:
-                            DisplayCertainVehicle();
+                            displayCertainVehicle();
                             Thread.Sleep(k_SleepTime);
                             break;
                         case eMainMenuOptions.Quit:
@@ -231,15 +231,15 @@ namespace Ex03.ConsoleUI
                 }
                 catch (FormatException formatException)
                 {
-                    Console.WriteLine(formatException.Message);
+                    Console.WriteLine("There was an error with the input format.{0}{1}", Environment.NewLine, formatException.Message);
                 }
-                catch (ArgumentException argumentException)
+                catch (ArgumentException argumentExceptionException)
                 {
-                    Console.WriteLine(argumentException.Message);
+                    Console.WriteLine("There was a logic error with the selected input.{0}{1}", Environment.NewLine, argumentExceptionException.Message);
                 }
-                catch (ValueOutOfRangeException valueOutOfRangeException)
+                catch (ValueOutOfRangeException outOfRangeException)
                 {
-                    Console.WriteLine(valueOutOfRangeException.Message);
+                    Console.WriteLine("There selected input was out of range.{0}{1}", Environment.NewLine, outOfRangeException.Message);
                 }
 
                 Thread.Sleep(k_SleepTime);

@@ -25,7 +25,7 @@ namespace Ex03.GarageLogic
 
             set
             {
-                if(value > r_MaxFuelLitersCapacity || value < 0)
+                if(value > r_MaxFuelLitersCapacity)
                 {
                     throw new ValueOutOfRangeException(0, r_MaxFuelLitersCapacity, "Fuel's liters capacity");
                 }
@@ -72,14 +72,21 @@ namespace Ex03.GarageLogic
             string details = string.Format(
 @"Liters of Fuel Left: {0}
 Liters of Fuel Maximum capacity: {1}
+Fuel Type: {2}
 ",
                 m_LitersOfFuelLeft,
-                r_MaxFuelLitersCapacity);
+                r_MaxFuelLitersCapacity,
+                r_FuelType);
             return baseDetails + details;
         }
 
         public void Refuel(float i_LitersOfFuelToAdd)
         {
+            if(i_LitersOfFuelToAdd + m_LitersOfFuelLeft > r_MaxFuelLitersCapacity || i_LitersOfFuelToAdd <= 0)
+            {
+                throw new ValueOutOfRangeException(0, r_MaxFuelLitersCapacity - m_LitersOfFuelLeft, "Fuel liters to add");
+            }
+            
             LitersOfFuelLeft += i_LitersOfFuelToAdd;
         }
     }

@@ -35,6 +35,11 @@ namespace Ex03.GarageLogic
 
         public void ChargeBattery(float i_HoursOfBatteryToCharge)
         {
+            if(i_HoursOfBatteryToCharge + m_CurrentHoursOfBatteryLeft > r_MaxHoursOfBattery || i_HoursOfBatteryToCharge <= 0)
+            {
+                throw new ValueOutOfRangeException(0, r_MaxHoursOfBattery - m_CurrentHoursOfBatteryLeft, "Battery hours to add");
+            }
+
             CurrentHoursOfBatteryLeft += i_HoursOfBatteryToCharge;
         }
 
