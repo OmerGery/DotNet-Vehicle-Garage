@@ -4,11 +4,26 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        private readonly string r_ModelName;
-        private readonly string r_LicenseNumber;
+        private string m_ModelName;
+        private string m_LicenseNumber;
         private List<Tire> m_Tires;
 
-        public Vehicle(Dictionary<string, VehicleParam> i_Parameters, int i_MaxTirePressure, int i_AmountOfTires)
+        public static List<VehicleParam> GetParams()
+        {
+            return new List<VehicleParam>()
+                       {
+                           new VehicleParam("m_ModelName", "Model Name", typeof(string)),
+                           new VehicleParam("m_LicenseNumber", "License Number", typeof(string)),
+                           new VehicleParam("m_TireManufacturerName", "Name of The Tires Manufacturer", typeof(string)),
+                           new VehicleParam("m_CurrentPsiTirePressure", "Current PSI pressure of tires", typeof(float)),
+                       };
+        }
+
+        public abstract void InitNewVehicle(Dictionary<string, VehicleParam> i_Parameters);
+
+        public abstract List<VehicleParam> GetNewVehicleParams();
+
+        public void Init(Dictionary<string, VehicleParam> i_Parameters, int i_MaxTirePressure, int i_AmountOfTires)
         {
             m_Tires = new List<Tire>(i_AmountOfTires);
 
@@ -19,8 +34,8 @@ namespace Ex03.GarageLogic
                 m_Tires.Add(tireToAdd);
             }
 
-            r_ModelName = (string)i_Parameters["m_ModelName"].Value;
-            r_LicenseNumber = (string)i_Parameters["m_LicenseNumber"].Value;
+            m_ModelName = (string)i_Parameters["m_ModelName"].Value;
+            m_LicenseNumber = (string)i_Parameters["m_LicenseNumber"].Value;
         }
 
         public abstract float EnergyOfPrecentageLeft
@@ -32,7 +47,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_LicenseNumber;
+                return m_LicenseNumber;
             }
         }
 
@@ -44,17 +59,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public static List<VehicleParam> GetParams()
-        {
-            return new List<VehicleParam>()
-           {
-               new VehicleParam("m_ModelName", "Model Name", typeof(string)),
-               new VehicleParam("m_LicenseNumber", "License Number", typeof(string)),
-               new VehicleParam("m_TireManufacturerName", "Name of The Tires Manufacturer", typeof(string)),
-               new VehicleParam("m_CurrentPsiTirePressure", "Current PSI pressure of tires", typeof(float)),
-           };
-        }
-
         public override string ToString()
         {
             string details = string.Format(
@@ -62,8 +66,8 @@ namespace Ex03.GarageLogic
 License Number: {1}
 Amount Of Wheels: {2} 
 ",
-r_ModelName,
-r_LicenseNumber,
+m_ModelName,
+m_LicenseNumber,
 m_Tires.Count);
             details += m_Tires[0].ToString();
             return details;

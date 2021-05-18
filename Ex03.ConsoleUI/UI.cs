@@ -63,13 +63,15 @@ namespace Ex03.ConsoleUI
             getOwnerDetails(out string ownerPhone, out string ownerName);
             Console.WriteLine("Please choose the vehicle type out of the following options");
             displayEnumOptions<VehicleBuilder.eVehicleType>();
-            VehicleBuilder.eVehicleType userRequestedVehicleType = (VehicleBuilder.eVehicleType)getEnumChoiceFromUser<VehicleBuilder.eVehicleType>();
-            List<VehicleParam> parametersList = VehicleBuilder.GetParams(userRequestedVehicleType);
+            VehicleBuilder.eVehicleType userRequestedVehicleType =
+                (VehicleBuilder.eVehicleType)getEnumChoiceFromUser<VehicleBuilder.eVehicleType>();
             Dictionary<string, VehicleParam> paramsDictionary = new Dictionary<string, VehicleParam>();
-            foreach (VehicleParam param in parametersList)
+            Vehicle vehicleToAdd = VehicleBuilder.BuildVehicle(userRequestedVehicleType);
+            List<VehicleParam> parametersList = vehicleToAdd.GetNewVehicleParams();
+            foreach(VehicleParam param in parametersList)
             {
                 Console.WriteLine("Please enter {0}", param.FriendlyName);
-                if (param.Type.IsEnum)
+                if(param.Type.IsEnum)
                 {
                     Console.WriteLine("Options: " + string.Join(",", Enum.GetNames(param.Type)));
                     string userInput = Console.ReadLine();
@@ -84,7 +86,7 @@ namespace Ex03.ConsoleUI
                 paramsDictionary.Add(param.Name, param);
             }
 
-            Vehicle vehicleToAdd = VehicleBuilder.BuildVehicle(userRequestedVehicleType, paramsDictionary);
+            vehicleToAdd.InitNewVehicle(paramsDictionary);
             m_Garage.AddVehicle(ownerPhone, ownerName, vehicleToAdd);
             Console.WriteLine("Vehicle was added to the garage");
         }

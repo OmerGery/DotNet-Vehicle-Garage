@@ -4,7 +4,7 @@ namespace Ex03.GarageLogic
 {
     public abstract class ElectricVehicle : Vehicle
     {
-        private readonly float r_MaxHoursOfBattery;
+        private float m_MaxHoursOfBattery;
         private float m_CurrentHoursOfBatteryLeft;
 
         public static new List<VehicleParam> GetParams()
@@ -24,9 +24,9 @@ namespace Ex03.GarageLogic
 
             set
             {
-                if (value > r_MaxHoursOfBattery || value < 0)
+                if (value > m_MaxHoursOfBattery || value < 0)
                 {
-                    throw new ValueOutOfRangeException(0, r_MaxHoursOfBattery - m_CurrentHoursOfBatteryLeft, "Battery Amount Hours");
+                    throw new ValueOutOfRangeException(0, m_MaxHoursOfBattery - m_CurrentHoursOfBatteryLeft, "Battery Amount Hours");
                 }
 
                 m_CurrentHoursOfBatteryLeft = value;
@@ -35,9 +35,9 @@ namespace Ex03.GarageLogic
 
         public void ChargeBattery(float i_HoursOfBatteryToCharge)
         {
-            if(i_HoursOfBatteryToCharge + m_CurrentHoursOfBatteryLeft > r_MaxHoursOfBattery || i_HoursOfBatteryToCharge <= 0)
+            if(i_HoursOfBatteryToCharge + m_CurrentHoursOfBatteryLeft > m_MaxHoursOfBattery || i_HoursOfBatteryToCharge <= 0)
             {
-                throw new ValueOutOfRangeException(0, r_MaxHoursOfBattery - m_CurrentHoursOfBatteryLeft, "Battery hours to add");
+                throw new ValueOutOfRangeException(0, m_MaxHoursOfBattery - m_CurrentHoursOfBatteryLeft, "Battery hours to add");
             }
 
             CurrentHoursOfBatteryLeft += i_HoursOfBatteryToCharge;
@@ -51,7 +51,7 @@ namespace Ex03.GarageLogic
 Max Hours Of Battery: {1}
 ",
 m_CurrentHoursOfBatteryLeft,
-r_MaxHoursOfBattery);
+m_MaxHoursOfBattery);
             return baseDetails + details;
         }
 
@@ -59,14 +59,14 @@ r_MaxHoursOfBattery);
         {
             get
             {
-                return m_CurrentHoursOfBatteryLeft * 100 / r_MaxHoursOfBattery;
+                return m_CurrentHoursOfBatteryLeft * 100 / m_MaxHoursOfBattery;
             }
         }
 
-        public ElectricVehicle(Dictionary<string, VehicleParam> i_Parameters, float i_MaxHoursOfBattery, int i_MaxTirePressure, int i_AmountOfTire) : 
-            base(i_Parameters, i_MaxTirePressure, i_AmountOfTire)
+        public void Init(Dictionary<string, VehicleParam> i_Parameters, float i_MaxHoursOfBattery, int i_MaxTirePressure, int i_AmountOfTire)
         {
-            r_MaxHoursOfBattery = i_MaxHoursOfBattery;
+            (this as Vehicle).Init(i_Parameters, i_MaxTirePressure, i_AmountOfTire);
+            m_MaxHoursOfBattery = i_MaxHoursOfBattery;
             CurrentHoursOfBatteryLeft = (float)i_Parameters["m_CurrentHoursOfBatteryLeft"].Value;
         }
     }

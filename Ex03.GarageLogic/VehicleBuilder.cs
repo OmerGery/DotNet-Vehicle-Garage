@@ -13,54 +13,29 @@ namespace Ex03.GarageLogic
             FuelTruck
         }
 
-        public static Vehicle BuildVehicle(eVehicleType i_SelectedType, Dictionary<string, VehicleParam> i_Parameters)
+        public static Vehicle BuildVehicle(eVehicleType i_SelectedType)
         {
             Vehicle newVehicle = null;
             switch(i_SelectedType)
             {
                 case eVehicleType.FuelTruck:
-                    newVehicle = new FuelTruck(i_Parameters);
+                    newVehicle = new FuelTruck();
                     break;
                 case eVehicleType.ElectricCar:
-                    newVehicle = new ElectricCar(i_Parameters);
+                    newVehicle = new ElectricCar();
                     break;
                 case eVehicleType.ElectricBike:
-                    newVehicle = new ElectricBike(i_Parameters);
+                    newVehicle = new ElectricBike();
                     break;
                 case eVehicleType.FuelBike:
-                    newVehicle = new FuelBike(i_Parameters);
+                    newVehicle = new FuelBike();
                     break;
                 case eVehicleType.FuelCar:
-                    newVehicle = new FuelCar(i_Parameters);
+                    newVehicle = new FuelCar();
                     break;
             }
 
             return newVehicle;
-        }
-
-        public static List<VehicleParam> GetParams(eVehicleType i_SelectedType)
-        {
-            List<VehicleParam> paramaters = new List<VehicleParam>(); 
-            switch (i_SelectedType)
-            {
-                case eVehicleType.ElectricCar:
-                    paramaters = ElectricCar.GetParams();
-                    break;
-                case eVehicleType.ElectricBike:
-                    paramaters = ElectricBike.GetParams();
-                    break;
-                case eVehicleType.FuelTruck:
-                    paramaters = FuelTruck.GetParams();
-                    break;
-                case eVehicleType.FuelBike:
-                    paramaters = FuelBike.GetParams();
-                    break;
-                case eVehicleType.FuelCar:
-                    paramaters = FuelCar.GetParams();
-                    break;
-            }
-
-            return paramaters;
         }
     }
 }

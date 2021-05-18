@@ -10,17 +10,17 @@ namespace Ex03.GarageLogic
         private const GarageEnums.eFuelType k_FuelType = GarageEnums.eFuelType.Octan95;
         private Car m_Car;
 
-        public FuelCar(Dictionary<string, VehicleParam> i_Parameters) :
-            base(i_Parameters, k_MaxFuelTankInLiters, k_MaxPsiOfWheels, k_AmountOfWheels, k_FuelType)
+        public override void InitNewVehicle(Dictionary<string, VehicleParam> i_Parameters)
         {
+            Init(i_Parameters, k_MaxFuelTankInLiters, k_MaxPsiOfWheels, k_AmountOfWheels, k_FuelType);
             m_Car = new Car(i_Parameters);
         }
 
-        public static new List<VehicleParam> GetParams()
+        public override List<VehicleParam> GetNewVehicleParams()
         {
             List<VehicleParam> parmatersList = new List<VehicleParam>();
             parmatersList.AddRange(Vehicle.GetParams());
-            parmatersList.AddRange(FuelVehicle.GetParams());
+            parmatersList.AddRange(GetParams());
             parmatersList.AddRange(Car.GetParams());
 
             return parmatersList;

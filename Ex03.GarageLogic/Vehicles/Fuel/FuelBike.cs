@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -10,19 +11,18 @@ namespace Ex03.GarageLogic
         private const GarageEnums.eFuelType k_FuelType = GarageEnums.eFuelType.Octan98;
         private Bike m_Bike;
 
-        public FuelBike(Dictionary<string, VehicleParam> i_Parameters) :
-            base(i_Parameters, k_MaxFuelTankInLiters, k_MaxPsiOfWheels, k_AmountOfWheels, k_FuelType)
+        public override void InitNewVehicle(Dictionary<string, VehicleParam> i_Parameters)
         {
+            Init(i_Parameters, k_MaxFuelTankInLiters, k_MaxPsiOfWheels, k_AmountOfWheels, k_FuelType);
             m_Bike = new Bike(i_Parameters);
         }
 
-        public static new List<VehicleParam> GetParams()
+        public override List<VehicleParam> GetNewVehicleParams()
         {
             List<VehicleParam> parmatersList = new List<VehicleParam>();
             parmatersList.AddRange(Vehicle.GetParams());
             parmatersList.AddRange(FuelVehicle.GetParams());
             parmatersList.AddRange(Bike.GetParams());
-
             return parmatersList;
         }
 
