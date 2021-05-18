@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -34,7 +33,7 @@ namespace Ex03.GarageLogic
 
             set
             {
-                if(value > m_MaxFuelLitersCapacity)
+                if(value > m_MaxFuelLitersCapacity || value < 0)
                 {
                     throw new ValueOutOfRangeException(0, m_MaxFuelLitersCapacity, "Fuel's liters capacity");
                 }

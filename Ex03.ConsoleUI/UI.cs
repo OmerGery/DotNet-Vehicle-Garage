@@ -156,7 +156,7 @@ namespace Ex03.ConsoleUI
         private void displayVehiclesLicenseNumbers()
         {
             List<GarageVehicle> garageVehiclesToDisplay = new List<GarageVehicle>();
-            Console.WriteLine(@"Do you want to filter the license numbers by fix state?");
+            Console.WriteLine("Do you want to filter the license numbers by fix state?");
             displayEnumOptions<eVehicleDisplayOptions>();
             eVehicleDisplayOptions userSelection = (eVehicleDisplayOptions)getEnumChoiceFromUser<eVehicleDisplayOptions>();
             switch(userSelection)
@@ -176,9 +176,16 @@ namespace Ex03.ConsoleUI
 
         private void printGarageVechilesLicenseNumbers(List<GarageVehicle> i_GarageGarageVehicles)
         {
-            foreach (GarageVehicle garageVehicle in i_GarageGarageVehicles)
+            if(i_GarageGarageVehicles.Count == 0)
             {
-                Console.WriteLine(garageVehicle.VehicleInGarage.LicenseNumber);
+                Console.WriteLine("There are no vehicles in the selected state in the garage.");
+            }
+            else
+            {
+                foreach(GarageVehicle garageVehicle in i_GarageGarageVehicles)
+                {
+                    Console.WriteLine(garageVehicle.VehicleInGarage.LicenseNumber);
+                }
             }
         }
 
