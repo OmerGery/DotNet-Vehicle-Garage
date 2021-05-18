@@ -65,7 +65,7 @@ m_MaxHoursOfBattery);
 
         public void Init(Dictionary<string, VehicleParam> i_Parameters, float i_MaxHoursOfBattery, int i_MaxTirePressure, int i_AmountOfTire)
         {
-            (this as Vehicle).Init(i_Parameters, i_MaxTirePressure, i_AmountOfTire);
+            Init(i_Parameters, i_MaxTirePressure, i_AmountOfTire);
             m_MaxHoursOfBattery = i_MaxHoursOfBattery;
             CurrentHoursOfBatteryLeft = (float)i_Parameters["m_CurrentHoursOfBatteryLeft"].Value;
         }
